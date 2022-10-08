@@ -45,6 +45,10 @@ Route::get('/tracking', function () {
     return view('client/tracking');
 });
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
+
+//Seach
+Route::get('/search',[ClientController::class,'search'] )->name('search');
+
 // admin
 Route::prefix('admin')->middleware('checkAdmin')->group(function () {
     Route::prefix('products')->group(function () {
