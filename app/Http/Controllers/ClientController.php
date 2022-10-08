@@ -50,4 +50,21 @@ class ClientController extends Controller
         $cateItems=CateItems::where('cate_id','=',$id)->get();
         return $cateItems;
     }
+
+    // Tìm kiếm
+    public function search(){
+        $listPro=CateItems::all();
+        $cti_bar=Categories::all();
+        $keywords = $_GET['keywords'];
+        $listSearch=Products::where('name','LIKE', '%'.$keywords.'%')
+        ->orWhere('detail','LIKE', '%'.$keywords.'%')->get();
+        if(count($listSearch)==0){
+            $listSearch = Products::all();
+            $MesSearch = 'Không tìm thấy kết quả của từ khóa: '.$keywords.'. Hiển thị danh sách sản phẩm:';
+            return view('client.pages.search')->with(compact('listPro','cti_bar','keywords','listSearch', 'MesSearch'));
+        }else{
+            $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
+            return view('client.pages.search')->with(compact('listPro','cti_bar','keywords','listSearch', 'MesSearch'));
+        }
+    }
 }
