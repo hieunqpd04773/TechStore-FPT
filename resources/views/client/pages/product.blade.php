@@ -61,7 +61,8 @@
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
               <h3>{{$pro->name}}</h3>
-              <h2>{{$pro->price-$pro->discount}}  đ</h2>
+              
+              <h2 style="before: content:'$';">{{$pro->price-$pro->discount}}  đ</h2>
               <ul class="list">
                 <li>
                   <a class="active" href="{{route('getProByCateItem',$pro->cate_id)}}">
@@ -136,7 +137,7 @@
               role="tab"
               aria-controls="home"
               aria-selected="true"
-              >Description</a
+              >Mô tả</a
             >
           </li>
           <li class="nav-item">
@@ -148,7 +149,7 @@
               role="tab"
               aria-controls="profile"
               aria-selected="false"
-              >Specification</a
+              >Thông tin chi tiết</a
             >
           </li>
           <li class="nav-item">
@@ -160,7 +161,7 @@
               role="tab"
               aria-controls="review"
               aria-selected="false"
-              >Reviews</a
+              >Nhận xét</a
             >
           </li>
         </ul>
@@ -271,18 +272,18 @@
                 <div class="row total_rate">
                   <div class="col-6">
                     <div class="box_total">
-                      <h5>Overall</h5>
+                      <h5>Tổng thể</h5>
                       <h4>4.0</h4>
-                      <h6>(03 Reviews)</h6>
+                      <h6>(03 Nhận xét)</h6>
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="rating_list">
-                      <h3>Based on 3 Reviews</h3>
+                      <h3>Dựa trên 3 nhận xét</h3>
                       <ul class="list">
                         <li>
                           <a href="#"
-                            >5 Star
+                            >5 sao
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -292,7 +293,7 @@
                         </li>
                         <li>
                           <a href="#"
-                            >4 Star
+                            >4 sao
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -302,7 +303,7 @@
                         </li>
                         <li>
                           <a href="#"
-                            >3 Star
+                            >3 sao
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -312,7 +313,7 @@
                         </li>
                         <li>
                           <a href="#"
-                            >2 Star
+                            >2 sao
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -322,7 +323,7 @@
                         </li>
                         <li>
                           <a href="#"
-                            >1 Star
+                            >1 sao
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -335,6 +336,7 @@
                   </div>
                 </div>
                 <div class="review_list">
+                @foreach ($comm as $com)
                   <div class="review_item">
                     <div class="media">
                       <div class="d-flex">
@@ -344,7 +346,8 @@
                         />
                       </div>
                       <div class="media-body">
-                        <h4>Blake Ruiz</h4>
+                        <h4>{{$com->name}} {{$com->created_at}}</h4> 
+                        
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -353,13 +356,11 @@
                       </div>
                     </div>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
+                    {{$com->content}}
                     </p>
                   </div>
-                  <div class="review_item">
+                  @endforeach
+                  <!-- <div class="review_item">
                     <div class="media">
                       <div class="d-flex">
                         <img
@@ -406,13 +407,14 @@
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                       ullamco laboris nisi ut aliquip ex ea commodo
                     </p>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="review_box">
-                  <h4>Add a Review</h4>
-                  <p>Your Rating:</p>
+                  <h4>Thêm bài đánh giá</h4>
+                  <!-- Đánh giá sao -->
+                  <p>Đánh giá của bạn:</p>
                   <ul class="list">
                     <li>
                       <a href="#">
@@ -440,55 +442,54 @@
                       </a>
                     </li>
                   </ul>
-                  <p>Outstanding</p>
-                  <form
-                    class="row contact_form"
-                    action="contact_process.php"
-                    method="post"
-                    id="contactForm"
-                    novalidate="novalidate"
-                  >
-                    <div class="col-md-12">
+                  <p>Vượt trội</p>
+
+                  <!--Bình luận-->
+                  
+                  @if(isset($user))
+                  <form class="row contact_form" action="/product/comment/{{$pro->id}}" method="post" id="contactForm" novalidate="novalidate">
+                    @csrf
+                    <!-- <div class="col-md-12">
                       <div class="form-group">
                         <input
                           type="text"
                           class="form-control"
                           id="name"
                           name="name"
-                          placeholder="Your Full name"
+                          placeholder="Họ và tên:"
                         />
                       </div>
-                    </div>
-                    <div class="col-md-12">
+                    </div> -->
+                    <!-- <div class="col-md-12">
                       <div class="form-group">
                         <input
                           type="email"
                           class="form-control"
                           id="email"
                           name="email"
-                          placeholder="Email Address"
+                          placeholder="Địa chỉ email:"
                         />
                       </div>
-                    </div>
-                    <div class="col-md-12">
+                    </div> -->
+                    <!-- <div class="col-md-12">
                       <div class="form-group">
                         <input
                           type="text"
                           class="form-control"
                           id="number"
                           name="number"
-                          placeholder="Phone Number"
+                          placeholder="Số điện thoại:"
                         />
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
                       <div class="form-group">
                         <textarea
                           class="form-control"
-                          name="message"
-                          id="message"
-                          rows="1"
-                          placeholder="Review"
+                          name="content"
+                          id="content"
+                          rows="5"
+                          placeholder="Nội dung"
                         ></textarea>
                       </div>
                     </div>
@@ -498,10 +499,21 @@
                         value="submit"
                         class="btn submit_btn"
                       >
-                        Submit Now
+                        Gửi đánh giá
                       </button>
                     </div>
                   </form>
+                  <br>
+                  @else
+                    <div>
+                      <br>
+                      <h4>Đăng cần nhập để bình luận</h4><br>
+                      <a class="btn submit_btn" href="">Đăng nhập </a>...<a class="btn submit_btn" href=""> Đăng kí</a>
+                    </div>
+                    
+                  @endif
+                 
+                  
                 </div>
               </div>
             </div>

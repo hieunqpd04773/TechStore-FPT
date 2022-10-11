@@ -7,6 +7,8 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\Comments;
+use App\Models\User;
+use DB;
 
 class ClientController extends Controller
 {
@@ -42,7 +44,12 @@ class ClientController extends Controller
     {
         $pro=Products::find($id);
         $images=Products::find($id)->Images;
-        return view('client.pages.product',['pro'=>$pro,'images'=>$images]);
+
+        $com=Comments::all()->where('pro_id','=',$pro->id);
+
+        $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
+
+        return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'com'=>$com, 'comm'=>$comm]);
     }
 
     public function getCateItemByCate($id)
@@ -67,4 +74,20 @@ class ClientController extends Controller
             return view('client.pages.search')->with(compact('listPro','cti_bar','keywords','listSearch', 'MesSearch'));
         }
     }
+
+    //binh luan
+
+    public function store($id, Request $request)
+    {
+        $pro_id = $id;
+        $comment = new Comments();
+        $product = Products::find($id);
+        $comment->pro_id = $pro_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->content = $request->content;
+        $comment->save();
+
+        return redirect()->back();
+    }
+
 }

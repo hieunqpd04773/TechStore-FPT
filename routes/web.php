@@ -49,6 +49,8 @@ Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateIte
 //Seach
 Route::get('/search',[ClientController::class,'search'] )->name('search');
 
+Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');
+
 // admin
 Route::prefix('admin')->middleware('checkAdmin')->group(function () {
     Route::prefix('products')->group(function () {
