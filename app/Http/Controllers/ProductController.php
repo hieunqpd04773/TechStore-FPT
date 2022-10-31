@@ -202,21 +202,20 @@ class ProductController extends Controller
     // }
     public function createVariant(Request $request)
     {
-        dd($request->color);
         $pro_var= new ProVariants();
-        if($r->has('file_upload_var')){
-            $file=$r->file_upload_var;
+        if($request->has('file_upload_var')){
+            $file=$request->file_upload_var;
             $file_name= date('YmdHi').$file->getClientOriginalName();
             //dd($file_name);
             $file->move(public_path('images/products'),$file_name);
         }
-        $r->merge(['image'=>$file_name]);
+        $request->merge(['image'=>$file_name]);
 
         $pro_var->pro_id=$request->id;
         $pro_var->color=$request->color;
         $pro_var->memory=$request->memory;
         $pro_var->price=$request->price;
-        $pro_var->image=$request->file_name;
+        $pro_var->image=$request->image;
         $pro_var->width=$request->width;
         $pro_var->hight=$request->hight;
         $pro_var->weight=$request->weight;

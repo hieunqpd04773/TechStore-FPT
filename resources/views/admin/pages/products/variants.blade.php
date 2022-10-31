@@ -9,7 +9,6 @@
             <p class="card-description">
               Nhập thông tin
             </p>
-              @csrf
               <input type="hidden" name="id" value="{{$pro->id}}" id="">
               <input type="hidden" name="image1" value="{{$pro->image}}" id="">
               <div class="form-group">
@@ -156,8 +155,9 @@
     <div class="col">
       <div class="col-12 grid-margin stretch-card">
         <form method="post" action="{{route('createVariant')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
+          @csrf
+          <input type="hidden" name="id" value="{{$pro->id}}" id="">
         <div class="card card-body">
-          
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -185,7 +185,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Hình Ảnh</label>
-                <input type="file" name="file_upload_variants" class="form-control avatar">
+                <input type="file" name="file_upload_var" class="form-control avatar">
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
               </div>
             </div>
