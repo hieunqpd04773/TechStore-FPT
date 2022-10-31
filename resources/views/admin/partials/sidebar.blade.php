@@ -44,6 +44,37 @@
           <span class="menu-title">Bình luận</span>
         </a>
       </li>
+
+      <div class="collapse" id="ui-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('loadDiscount_code')}}">Thêm mới</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('listDiscount')}}">Danh sách</a></li>
+          </ul>
+      </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="mdi mdi-emoticon menu-icon"></i>
+          <span class="menu-title">Đơn hàng</span>
+        </a>
+      </li>
+      <div class="collapse" id="ui-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('loadDiscount_code')}}">Thêm mới</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('listOrder')}}">Danh sách</a></li>
+            
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('listCom')}}">
+          <i class="mdi mdi-emoticon menu-icon"></i>
+          <span class="menu-title">Đơn hàng chit tiết</span>
+        </a>
+      </li>
+
+
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
           <i class="mdi mdi-account menu-icon"></i>

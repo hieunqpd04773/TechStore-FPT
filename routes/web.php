@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiscountsCodeController;
-
+use App\Http\Controllers\OrderController;
 
 
 Route::prefix('/')->group(function () {
@@ -121,6 +121,12 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
 
     });
 
+    Route::prefix('orders')->group(function () {
+        Route::get('index',[OrderController::class,'index'])->name('listOrder');
+    }); 
+    Route::prefix('orderdetailt')->group(function () {
+        Route::get('index',[OrderdetailtController::class,'index'])->name('listPro');
+    }); 
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
