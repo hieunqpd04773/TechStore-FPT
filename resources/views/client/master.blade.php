@@ -19,12 +19,18 @@
   <link rel="stylesheet" href="{{ URL::asset('vendors/animate-css/animate.css')}}" />
   <link rel="stylesheet" href="{{ URL::asset('vendors/jquery-ui/jquery-ui.css')}}" />
   <!-- main css -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
   <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}" />
-  <link rel="stylesheet" href="{{ URL::asset('css/responsive.css')}}" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<link rel="stylesheet" href="{{ URL::asset('css/temp.css')}}" />
+  <style>
+    
+  </style>
 </head>
 
 <body>

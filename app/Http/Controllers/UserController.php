@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\CateItems;
 use App\Models\Categories;
@@ -15,6 +14,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        $allCate=Categories::all();
+        view()->share('allCate', $allCate);
         $allUser=User::all();
         view()->share('allUser', $allUser);
     }
@@ -200,7 +201,38 @@ class UserController extends Controller
         toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
         return redirect(route('listUser'));
     }
-
+    // update client
+    public function edit_profile()
+    {
+        return view('client.pages.edit_profile');
+    }
+    public function updateAccount(Request $request)
+    {
+      $id = Auth::user()->id;
+      $user = User::find($id);
+      if($request->file_upload==''){
+          $image=$request->input('image1');
+      }
+      else if($request->has('file_upload')){
+          $file=$request->file_upload;
+          $file_name= $file->getClientoriginalName();
+          $file->move(public_path('images/users'),$file_name);
+          $image=$file_name;
+      }
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->image = $image;
+      $user->address = $request->address;
+      $user->phone = $request->phone;
+      $user->status = $request->status;
+      $user->role = $request->role;
+      $user->save();
+      toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
+      return redirect(route('manager'));
+      // return view('client.pages.manager');
+    }
+    // end update client
     /**
      * Remove the specified resource from storage.
      *

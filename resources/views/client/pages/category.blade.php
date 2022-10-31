@@ -55,9 +55,24 @@
                       </a>
                       <div class="mt-3">
                         <span class="mr-4">{{$pro->price-$pro->discount}} đ</span>
-                        <del>{{$pro->price}} đ</del>
+                        @if($pro->discount > 0)
+                          <del>{{$pro->discount}} đ</del>
+                        @endif
                       </div>
                     </div>
+                    @if($pro->discount != 0)
+                    <div class="product-item">
+                        <div class="product-item_sale">
+                            <div>Giảm giá</div>
+                        </div>
+                    </div>
+                    @endif 
+
+                    @if($pro->hot == 1)
+                    <div class="product-top">
+                        <span class="product-top--text">HOT</span>
+                    </div>
+                    @endif
                   </div>
                 </div>
                 @endforeach
@@ -69,7 +84,7 @@
             <div class="left_sidebar_area">
               <aside class="left_widgets p_filter_widgets">
                 <div class="l_w_title">
-                  <h3>Duyệt qua danh mục</h3>
+                  <h3>Danh mục</h3>
                 </div>
                 <div class="widgets_inner">
                   <form action="" method="post">

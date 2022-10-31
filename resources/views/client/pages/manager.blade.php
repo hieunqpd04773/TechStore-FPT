@@ -10,11 +10,12 @@
                 <div class="row g-0">
                   <div class="col-md-3 gradient-custom text-center text-white"
                     style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                      alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                    <h5>Trần Hữu Hoà</h5>
-                    <p class="text-dark">Thiết kế web</p>
-                    <a class="text-dark" href="edit_profile"><i class="far fa-edit mb-5"></i></a>
+                    <img src="{{asset('images/users')}}/{{Auth::user()->image}}"
+                      alt="Avatar" class="img-fluid m-auto pt-4" style="width: 150px;" />
+                      <p class="text-dark m-0">ID: {{Auth::user()->id}}</p>
+                    <h5>{{Auth::user()->name}}</h5>
+                    <a class="text-dark" href="edit_profile"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
                   </div>
                   <div class="col-md-9">
                     <div class="card-body p-4">
@@ -23,11 +24,11 @@
                       <div class="row pt-1">
                         <div class="col-6 mb-3">
                           <h6>Email</h6>
-                          <p class="text-muted">hoatran@gmail.com</p>
+                          <p class="text-muted">{{Auth::user()->email}}</p>
                         </div>
                         <div class="col-6 mb-3">
                           <h6>Số điện thoại</h6>
-                          <p class="text-muted">0919901493</p>
+                          <p class="text-muted">{{Auth::user()->phone}}</p>
                         </div>
                       </div>
                       <h6>Chi tiết</h6>
@@ -35,17 +36,17 @@
                       <div class="row pt-1">
                         <div class="col-6 mb-3">
                           <h6>Địa chỉ</h6>
-                          <p class="text-muted">Hà Tĩnh</p>
+                          <p class="text-muted">{{Auth::user()->address}}</p>
                         </div>
                         <div class="col-6 mb-3">
                           <h6>Vai trò</h6>
-                          <p class="text-muted">Thành viên</p>
+                          <p class="text-muted">{{Auth::user()->role}}</p>
                         </div>
                       </div>
                       <div class="d-flex justify-content-start">
-                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a class="text-dark" href="#!"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <a class="text-dark" href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a class="text-dark" href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                       </div>
                     </div>
                   </div>
