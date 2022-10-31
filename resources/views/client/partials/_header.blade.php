@@ -63,7 +63,7 @@
             <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
             <div class="row w-100 mr-0">
                 <div class="col-lg-7 pr-0">
-                    <ul class="nav navbar-nav center_nav pull-right">
+                    <ul class="nav navbar-nav center_nav pull-left" style="padding-left: 50px;">
                         @foreach ($allCate as $cate)
                         <li class="nav-item submenu dropdown">
                         <a href="{{route('getProByCate',$cate->id)}}" class="nav-link dropdown-toggle">{{$cate->name}}</a>
