@@ -40,7 +40,11 @@
                         </div>
                         <div class="col-6 mb-3">
                           <h6>Vai trò</h6>
-                          <p class="text-muted">{{Auth::user()->role}}</p>
+                          <p class="text-muted">@if (Auth::user()->role == 1)
+                            Quản trị viên
+                            @else
+                            Thành viên
+                            @endif </p>
                         </div>
                       </div>
                       <div class="d-flex justify-content-start">
