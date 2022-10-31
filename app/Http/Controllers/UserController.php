@@ -221,12 +221,11 @@ class UserController extends Controller
       }
       $user->name = $request->name;
       $user->email = $request->email;
-      $user->password = $request->password;
+    //   $user->password = $request->password;
       $user->image = $image;
       $user->address = $request->address;
       $user->phone = $request->phone;
-      $user->status = $request->status;
-      $user->role = $request->role;
+    //   $user->role = $request->role;
       $user->save();
       toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
       return redirect(route('manager'));

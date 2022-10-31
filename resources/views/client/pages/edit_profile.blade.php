@@ -56,16 +56,16 @@
                             <input type="text" class="form-control" name="email" value="{{Auth::user()->email}}" placeholder="Địa chỉ email">
                         </div> 
                     </div> 
-                    <div class="row mt-3"> 
+                    {{-- <div class="row mt-3"> 
                         <div class="col-md-6">
                             <label class="labels">Mật khẩu</label>
-                            <input type="password" class="form-control" placeholder="Mật khẩu" value="{{Auth::user()->password}}" name="password">
+                            <input type="password" class="form-control" placeholder="Mật khẩu" value="" name="password">
                         </div> 
                         <div class="col-md-6">
                             <label class="labels">Xác nhận mật khẩu</label>
-                            <input type="password" class="form-control" value="{{Auth::user()->password}}" placeholder="Xác nhận mật khẩu" name="password">
+                            <input type="password" class="form-control" value="" placeholder="Xác nhận mật khẩu" name="password">
                         </div> 
-                    </div>  
+                    </div>   --}}
                     
                     <div class="row mt-3"> 
                         <div class="col-md-6">
@@ -80,11 +80,15 @@
                     <div class="row mt-3"> 
                         <div class="col-md-6">
                             <label class="labels">Trạng thái</label>
-                            <input type="text"  class="form-control" placeholder="Trạng thái" name="status" value="{{Auth::user()->status}}">
+                            <input type="text" disabled class="form-control" placeholder="Trạng thái" name="" value="@if (Auth::user()->status == 1)Chưa kích hoạt
+                            @else Kích hoạt
+                            @endif ">
                         </div> 
                         <div class="col-md-6">
                             <label class="labels">Vai trò</label>
-                            <input type="text"  class="form-control" value="{{Auth::user()->role}}" name="role" placeholder="Vai trò">
+                            <input type="text" disabled  class="form-control" value="@if (Auth::user()->role == 1)Quản trị viên
+                            @else Thành viên
+                            @endif " name="" placeholder="Vai trò">
                         </div> 
                         <!-- <div class="col-md-12">
                             <label class="labels">Hình ảnh</label>
