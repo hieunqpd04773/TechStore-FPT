@@ -214,7 +214,7 @@ class ProductController extends Controller
         $pro_var->pro_id=$request->id;
         $pro_var->color=$request->color;
         $pro_var->memory=$request->memory;
-        $pro_var->price=$request->price;
+        $pro_var->price=$request->price_var;
         $pro_var->image=$request->image;
         $pro_var->width=$request->width;
         $pro_var->hight=$request->hight;
@@ -223,7 +223,7 @@ class ProductController extends Controller
         $pro_var->save();
 
         toastr()->success('Thành công', 'Thêm biến sản phẩm thành công');
-        return redirect(route('listPro'));
+        return back();
     }
 
     public function deleteVar($id)
@@ -231,12 +231,13 @@ class ProductController extends Controller
         $pro_var=ProVariants::find($id);
         $pro_id=$pro_var->pro_id;
         $pro_var->delete();
-
         $pro=Products::find($pro_id);
         $allCate=Categories::all();
         $pro_vars=ProVariants::where('pro_id','=',$pro_id)->get();
 
-        return view('admin.pages.products.variants',['pro'=>$pro,'allCate'=>$allCate,'pro_vars'=>$pro_vars]);
+        toastr()->success('Thành công', 'Xóa biến sản phẩm thành công');
+        return back();
+
         
     }
     public function loadEdit($id)
