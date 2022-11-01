@@ -63,7 +63,7 @@ Route::prefix('/')->group(function () {
                     : back()->withErrors(['email' => [__($status)]]);
     })->middleware('guest')->name('password.update');
     Route::get('forgotpassword',[ClientController::class,'forgotpassword'] )->name('forgotpassword');
-    Route::get('manager',[ClientController::class,'manager'] )->name('manager');
+    Route::get('/manager',[ClientController::class,'manager'] )->name('manager');
 
 
     Route::get('edit_profile',[UserController::class,'edit_profile'] )->name('edit_profile');

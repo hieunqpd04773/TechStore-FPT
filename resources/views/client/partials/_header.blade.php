@@ -118,7 +118,7 @@
                             <i class="ti-user" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="manager"><i class="fa fa-info" aria-hidden="true"></i>   Quản lý tài khoản</a>
+                            <a class="dropdown-item" href="{{route('manager')}}"><i class="fa fa-info" aria-hidden="true"></i>   Quản lý tài khoản</a>
                             <form action="/logout" method="post">
                                 @csrf
                                 <button class="dropdown-item btn-none"><i class="fa fa-sign-out" aria-hidden="true"></i>
