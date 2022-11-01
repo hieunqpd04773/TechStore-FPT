@@ -10,7 +10,7 @@ class Discounts_code extends Model
     use HasFactory;
     protected $table = 'discount_code';
     protected $primary = 'id';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $attributes = [
         
     ];

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
+use App\Models\ProVariants;
 use App\Models\Comments;
 use App\Models\User;
 use DB;
@@ -73,6 +74,11 @@ class ClientController extends Controller
     {
         $cateItems=CateItems::where('cate_id','=',$r->id_cate)->get();
         return response()->json($cateItems);
+    }
+    public function getVarItemByid(Request $r)
+    {
+        $pro_var=ProVariants::find($r->pv_id);
+        return response()->json($pro_var);
     }
     public function signup()
     {

@@ -14,44 +14,34 @@
                 data-ride="carousel"
               >
                 <ol class="carousel-indicators">
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    class="active"
-                  >
-                    <img
-                      src="{{asset('images/products/'.$pro->image)}}"
-                      alt=""style="width:100%"
-                    />
+                  <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
+                    <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
                   </li>
+                  @for ($i = 0; $i < count($pro_vars); $i++)
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
+                  <img src="{{asset('images/products/'.$pro_vars[$i]->image)}}"
+                    alt="" style="width:100%"/>
+                </li>
+                @endfor
                   @for ($i = 0; $i < count($images); $i++)
-                    <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="{{$i+1}}"
-                  >
-                    <img
-                      src="{{asset('images/products/'.$images[$i]->image)}}"
-                      alt="" style="width:100%"
-                    />
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
+                    <img src="{{asset('images/products/'.$images[$i]->image)}}"
+                      alt="" style="width:100%"/>
                   </li>
                   @endfor
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img
-                      class="d-block w-100"
-                      src="{{asset('images/products/'.$pro->image)}}"
-                      alt="First slide"
-                    />
+                    <img id="pro_img" class="d-block w-100" src="{{asset('images/products/'.$pro->image)}}" alt="First slide" />
                   </div>
-                  
+                  @foreach ($pro_vars as $pv)
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="{{asset('images/products/'.$pv->image)}}"alt="Second slide" />
+                  </div>
+                  @endforeach
                   @foreach ($images as $img)
                   <div class="carousel-item">
-                    <img
-                      class="d-block w-100"
-                      src="{{asset('images/products/'.$img->image)}}"
-                      alt="Second slide"
-                    />
+                    <img class="d-block w-100" src="{{asset('images/products/'.$img->image)}}"alt="Second slide" />
                   </div>
                   @endforeach
                 </div>
@@ -60,8 +50,8 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
-              <h3 id='pro_name'>{{$pro->name}}</h3>
-              <h2>{{$pro->price-$pro->discount}}  đ</h2>
+              <h3 id='pro_name'>{{$pro->name}} </h3>
+              <h2 id='pro_price'>{{$pro->price-$pro->discount}}  đ</h2>
               <ul class="list">
                 <li>
                   <a class="active" href="{{route('getProByCateItem',$pro->cate_id)}}">
@@ -77,12 +67,10 @@
               </ul>
               <p>
                 Chọn biến thể <br>
-              @foreach ($pro_vars as $pv)
-                  <span onclick="changeVar({{$pv->id}})" style="border: 1px solid #FFD600; padding: 5px; background: #FFD600">{{$pv->color}} - {{$pv->memory}} GB</span> 
-              @endforeach
-              <script>
                 
-              </script>
+              @foreach ($pro_vars as $pv)
+                  <span class="pro_var" data-pvid="{{$pv->id}}">{{$pv->color}} - {{$pv->memory}} GB</span> 
+              @endforeach
               </p>
               <div class="product_count">
                 <label for="qty">Số lượng:</label>
@@ -186,71 +174,56 @@
           >
             <div class="table-responsive">
               <table class="table">
-                <tbody>
+                <tbody id="var_info">
                   <tr>
                     <td>
-                      <h5>Width</h5>
+                      <h5>Màu</h5>
                     </td>
                     <td>
-                      <h5>128mm</h5>
+                      <h5 id="pro_color">128mm</h5>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h5>Height</h5>
+                      <h5>Rộng</h5>
                     </td>
                     <td>
-                      <h5>508mm</h5>
+                      <h5 id="pro_width">128mm</h5>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h5>Depth</h5>
+                      <h5 >Cao</h5>
                     </td>
                     <td>
-                      <h5>85mm</h5>
+                      <h5 id="pro_hight">508mm</h5>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h5>Weight</h5>
+                      <h5>Dày</h5>
                     </td>
                     <td>
-                      <h5>52gm</h5>
+                      <h5 id="pro_depth">85mm</h5>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h5>Quality checking</h5>
+                      <h5>Trọng Lượng</h5>
                     </td>
                     <td>
-                      <h5>yes</h5>
+                      <h5 id="pro_weight">52gm</h5>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h5>Freshness Duration</h5>
+                      <h5>Bộ nhớ</h5>
                     </td>
                     <td>
-                      <h5>03days</h5>
+                      <h5 id="pro_memory">GB</h5>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <h5>When packeting</h5>
-                    </td>
-                    <td>
-                      <h5>Without touch of hand</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5>Each Box contains</h5>
-                    </td>
-                    <td>
-                      <h5>60pcs</h5>
-                    </td>
-                  </tr>
+                 
                 </tbody>
               </table>
             </div>
@@ -594,6 +567,48 @@
         </div>
       </div>
     </section>
+
+    <script type="text/javascript">
+      $(document).ready(function(){  
+        const pro_name= $('#pro_name').html();
+        const pro_price= $('#pro_price').html();
+        const pro_img= $('#pro_img');
+        const pro_color= $('#pro_color').html();
+        const pro_width= $('#pro_width').html();
+        const pro_hight= $('#pro_hight').html();
+        const pro_depth= $('#pro_depth').html();
+        const pro_weight= $('#pro_weight').html();
+        const pro_memoryt= $('#pro_memory').html();
+        $('.pro_var').click(function(){
+          
+          var pv_id=$(this).data('pvid');
+          
+          $.ajax({
+            url: '{{route('getVarItemByid')}}',
+            method: 'post',
+            data:{
+              _token: "{{ csrf_token() }}",
+              pv_id:pv_id
+            },
+            success:function(data){
+              console.log(data.color);
+              
+              $("#pro_name").html(pro_name +  data.color +" - " +data.memory +"GB");
+              $("#pro_price").html(data.price );
+              $("#pro_color").html(data.color );
+              $("#pro_width").html(data.width );
+              $("#pro_hight").html(data.hight );
+              $("#pro_depth").html(data.depth );
+              $("#pro_weight").html(data.weight );
+              $("#pro_memory").html(data.memory );
+
+
+
+            }
+          })
+        });
+      });
+    </script> 
     <!--================End Product Description Area =================-->
 
 @endsection

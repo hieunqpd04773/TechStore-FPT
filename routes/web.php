@@ -19,6 +19,7 @@ Route::prefix('/')->group(function () {
     Route::get('/cateitem/{id}',[ClientController::class,'getProByCateItem'])->name('getProByCateItem');
     Route::post('/getcateitem',[ClientController::class,'getCateItemByCate'])->name('getCateItemByCate');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
+    Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     Route::get('/forgot-password', function () {

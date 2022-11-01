@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputName1">Mã giảm giá</label>
-                        <input type="number" name="code" class="form-control code" id="exampleInputName1" placeholder="Nhập mã giảm giá">
+                        <input type="text" name="code" class="form-control code" id="exampleInputName1" placeholder="Nhập mã giảm giá">
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
