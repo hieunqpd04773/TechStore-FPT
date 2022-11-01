@@ -48,6 +48,7 @@ class ClientController extends Controller
         $pro->view=$pro->view+1;
         $pro->save();
         $images=Products::find($id)->Images;
+        $pro_vars=Products::find($id)->ProVariants;
         $coutall = DB::table('comments')->where('pro_id','=',$pro->id)->count();
         $cout5 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 5)->count();
         $cout4 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 4)->count();
@@ -59,11 +60,11 @@ class ClientController extends Controller
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
         }
         
     }

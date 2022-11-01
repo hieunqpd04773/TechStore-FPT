@@ -60,7 +60,7 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
-              <h3>{{$pro->name}}</h3>
+              <h3 id='pro_name'>{{$pro->name}}</h3>
               <h2>{{$pro->price-$pro->discount}}  đ</h2>
               <ul class="list">
                 <li>
@@ -76,10 +76,13 @@
                 </li>
               </ul>
               <p>
-              Dầu Mill là một bộ tản nhiệt đầy dầu cải tiến với hầu hết các
-                công nghệ hiện đại. Nếu bạn đang tìm kiếm thứ gì đó có thể
-                làm cho nội thất của bạn trông tuyệt vời, đồng thời cung cấp cho bạn
-                cảm giác ấm áp dễ chịu trong mùa đông.
+                Chọn biến thể <br>
+              @foreach ($pro_vars as $pv)
+                  <span onclick="changeVar({{$pv->id}})" style="border: 1px solid #FFD600; padding: 5px; background: #FFD600">{{$pv->color}} - {{$pv->memory}} GB</span> 
+              @endforeach
+              <script>
+                
+              </script>
               </p>
               <div class="product_count">
                 <label for="qty">Số lượng:</label>

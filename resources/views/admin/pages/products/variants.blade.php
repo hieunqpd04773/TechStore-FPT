@@ -105,7 +105,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Hình Ảnh</label>
-                <img src="{{asset('images/products/'.$pro->image)}}" width="30%" alt="ko cos anh">
+                <img src="{{asset('images/products/'.$pv->image)}}" width="30%" alt="ko cos anh">
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
               </div>
             </div>
