@@ -601,9 +601,6 @@
               $("#pro_depth").html(data.depth );
               $("#pro_weight").html(data.weight );
               $("#pro_memory").html(data.memory );
-
-
-
             }
           })
         });
