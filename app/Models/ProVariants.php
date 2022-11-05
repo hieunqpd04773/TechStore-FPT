@@ -14,10 +14,10 @@ class ProVariants extends Model
         'color'=>'',
         'memory'=>'',
         'image'=>'',
-        'price'=>''
+        'price'=>0
     ];
     protected $fillable = [
-        'pro_id','color','memory','image','price','hight','width','depth','weight'
+        'pro_id','color','memory','image','price'
     ];
     public function Products()
     {
