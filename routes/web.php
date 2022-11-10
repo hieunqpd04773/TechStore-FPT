@@ -22,6 +22,9 @@ Route::prefix('/')->group(function () {
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    Route::get('cart', [ClientController::class,'viewCart'] )->name('viewCart');
+    Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
+
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
@@ -45,7 +48,6 @@ Route::prefix('/')->group(function () {
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
-     
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {

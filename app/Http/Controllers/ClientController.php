@@ -7,11 +7,15 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\ProVariants;
+use App\Models\ProMemory;
+use App\Models\ProColors;
+use App\Models\ProDetails;
 use App\Models\Comments;
 use App\Models\User;
 use App\Models\UserAddress;
 use DB;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Session;
 
 
 class ClientController extends Controller
@@ -51,6 +55,10 @@ class ClientController extends Controller
         $pro->save();
         $images=Products::find($id)->Images;
         $pro_vars=Products::find($id)->ProVariants;
+        $pro_details=Products::find($id)->ProDetails;
+        $pro_colors=Products::find($id)->ProColors;
+        $pro_memory=Products::find($id)->ProMemory;
+        
         $coutall = DB::table('comments')->where('pro_id','=',$pro->id)->count();
         $cout5 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 5)->count();
         $cout4 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 4)->count();
@@ -62,13 +70,12 @@ class ClientController extends Controller
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
         }
-        
     }
 
     public function getCateItemByCate(Request $r)
@@ -171,17 +178,13 @@ class ClientController extends Controller
         $product = Products::find($id);
         $comment->pro_id = $pro_id;
         $comment->user_id = Auth::user()->id;
-
-
         $comment->content = $request->content;
-
         if($request->rating_status > 0){
             $comment->status = $request->rating_status;
         }
         else{
             $comment->status = 5;
         }
-
         $comment->save();
 
         return redirect()->back();
@@ -190,6 +193,47 @@ class ClientController extends Controller
     {
         $allusern = User::where('id', '=', )->get;
         return redirect()->back();
+    }
+    public function addCart(Request $request)
+    {
+        $pro_id=$request->pro_id;
+        $name=$request->name;
+        $price=$request->price;
+        $qty=$request->qty;
+
+        $cart = session()->get('cart', []);
+        if(isset($cart[$name])  ){
+            $cart[$name]=[
+                'id'=>$pro_id,
+                'name'=>$name,
+                'price'=>$price,
+                'qty'=>$cart[$name]['qty']+=$qty,
+                'total'=>$cart[$name]['qty']*$cart[$name]['price']
+            ];
+            
+
+
+        }   
+        else{
+            $cart['name']=$name;
+            $cart[$name]=[
+                'id'=>$pro_id,
+                'name'=>$name,
+                'price'=>$price,
+                'qty'=>$qty,
+                'total'=>$price*$qty
+            ];
+
+        }
+        session()->put('cart', $cart); 
+        $cart=session()->get('cart', []);
+        return response()->json($cart);
+        // return Response::json(['success' => true, 'cart_items' => count(Session::get('cart')), 'message' => 'Cart updated.']);
+    }
+
+    public function viewCart()
+    {
+        return view('client.pages.cart');
     }
     
 }

@@ -109,41 +109,20 @@
 
               <div class="form-group">
                 <p>
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Thêm chi tiết sản phẩm</a>
-
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Thêm biển bộ nhớ</a>
-
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Thêm biển thể màu sắc</a>
+                  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Thêm biển thể</a>
                 </p>
-                <!-- Thêm Chi tiết-->
                 <div class="row">
                   <div class="col">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
-                      <br>
-                      <h4 class="card-title">
-                      <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Thêm chi tiết sản phẩm</a>
-                      <hr></h4>
                       <div class="card card-body">
-
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">CPU</label>
-                              <input type="text" name="cpu" class="form-control cpu" id="exampleInputName1" placeholder="Nhập CPU">                         
+                              <label for="exampleSelectGender">Màu sắc</label>
+                              <input type="text" name="color" class="form-control amount" id="exampleInputName1" placeholder="Nhập màu sắc">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Hệ điều hành</label>
-                              <input type="text" name="os" class="form-control os" id="exampleInputName1" placeholder="Nhập hệ điều hành">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="exampleInputName1">Bộ nhớ</label>
@@ -151,47 +130,20 @@
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Dung lượng Ram</label>
-                              <input type="number" name="ram" class="form-control ram" id="exampleInputName1" placeholder="Nhập dung lượng ram(GB)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
                         </div>
 
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">Màn hình</label>
-                              <input type="text" name="display" class="form-control display" id="exampleInputName1" placeholder="Nhập thông số màn hình">                         
+                              <label for="exampleSelectGender">Gía</label>
+                              <input type="number" name="price_var" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">Dung lượng pin</label>
-                              <input type="number" name="batery" class="form-control batery" id="exampleInputName1" placeholder="Nhập dung lượng pin">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Camera chính</label>
-                              <input type="text" name="camera" class="form-control camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera chính(MP)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Camera phụ</label>
-                              <input type="number" name="sub_camera" class="form-control sub_camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera phụ(MP)">                         
+                              <label>Hình Ảnh</label>
+                              <input type="file" name="file_upload_variants" class="form-control avatar">
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
@@ -227,93 +179,12 @@
                             </div>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- Thêm biến thể bộ nhớ-->
-                <div class="row">
-                  <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                      <br>
-                      <h4 class="card-title">
-                        <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Thêm biển bộ nhớ</a>
-                      <hr></h4>
-                      <div class="card card-body">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleSelectGender">Dung lượng bộ nhớ</label>
-                                <input type="text" name="memory_var" class="form-control memory" id="exampleInputName1" placeholder="Nhập Dung lượng bộ nhớ(GB)">                         
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleInputName1">Dung lượng Ram</label>
-                                <input type="number" name="ram_var" class="form-control ram" id="exampleInputName1" placeholder="Nhập Dung lượng ram(GB)">
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleSelectGender">Gía thêm</label>
-                                <input type="number" name="price_memory" class="form-control price_memory" id="exampleInputName1" placeholder="Nhập giá bán thêm">                         
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Thêm biến thể màu sắc-->
-                <div class="row">
-                  <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample3">
-                      <br>
-                      <h4 class="card-title">
-                        <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Thêm biển thể màu sắc</a>
-                      <hr></h4>
-                      
-                      <div class="card card-body">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Màu sắc</label>
-                              <input type="text" name="color" class="form-control color" id="exampleInputName1" placeholder="Nhập Dung lượng bộ nhớ(GB)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleInputName1">Hình ảnh</label>
-                              <input type="file" name="file_image_color" class="form-control avatar">
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Gía thêm</label>
-                              <input type="number" name="price_color" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>      
-
+              </div>           
               <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
               <button type="button" class="btn btn-light">Cancel</button>
             </form>

@@ -10,7 +10,7 @@ class ProColors extends Model
     use HasFactory;
     protected $table = 'pro_colors';
     protected $primary = 'id';
-    protected $timestamps= false;
+    public $timestamps= false;
     protected $attributes=[
         'price'=>null
     ];

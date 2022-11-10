@@ -7,6 +7,9 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\ProVariants;
+use App\Models\ProDetails;
+use App\Models\ProMemory;
+use App\Models\ProColors;
 
 class ProductController extends Controller
 {
@@ -159,26 +162,49 @@ class ProductController extends Controller
         $pro->status=$r->status;
         $pro->save();
 
-        if(isset($r->color)){
-            $pro_var= new ProVariants();
-            if($r->has('file_upload_variants')){
-                $file=$r->file_upload_variants;
-                $file_upload_variants= date('YmdHi').$file->getClientOriginalName();
-                //dd($file_name);
-                $file->move(public_path('images/products'),$file_upload_variants);
-            }
-            $r->merge(['image'=>$file_upload_variants]);
+        $id_pro=$pro->id;
 
-            $pro_var->pro_id=$pro->id;
-            $pro_var->color=$r->color;
-            $pro_var->memory=$r->memory;
-            $pro_var->image=$r->file_upload_variants;
-            $pro_var->price=$r->price;
-            $pro_var->width=$r->width;
-            $pro_var->hight=$r->hight;
-            $pro_var->depth=$r->depth;
-            $pro_var->weight=$r->weight;
-            $pro_var->save();
+        if(isset($r->cpu)){
+            $pro_details= new ProDetails();
+            $pro_details->pro_id=$id_pro;
+            $pro_details->memory=$r->memory;
+            $pro_details->camera=$r->camera;
+            $pro_details->display=$r->display;
+            $pro_details->batery=$r->batery;
+            $pro_details->os=$r->os;
+            $pro_details->sub_camera=$r->sub_camera;
+            $pro_details->cpu=$r->cpu;
+            $pro_details->ram=$r->ram;
+            $pro_details->hight=$r->hight;
+            $pro_details->width=$r->width;
+            $pro_details->depth=$r->depth;
+            $pro_details->weight=$r->weight;
+            $pro_details->save();
+        }
+
+        if(isset($r->memory_var)){
+            $pro_memory= new ProMemory();
+            $pro_memory->pro_id=$id_pro;
+            $pro_memory->memory=$r->memory_var;
+            $pro_memory->ram=$r->ram_var;
+            $pro_memory->price=$r->price_memory;
+            $pro_memory->save();
+        }
+        if(isset($r->color)){
+            $pro_color= new ProColors();
+            if($r->has('file_image_color')){
+                $file=$r->file_image_color;
+                $file_image_color= date('YmdHi').$file->getClientOriginalName();
+                //dd($file_name);
+                $file->move(public_path('images/products'),$file_image_color);
+            }
+            $r->merge(['image_color'=>$file_image_color]);
+
+            $pro_color->pro_id=$id_pro;
+            $pro_color->color=$r->color;
+            $pro_color->image=$file_image_color;
+            $pro_color->price=$r->price_color;
+            $pro_color->save();
         }
 
         toastr()->success('Thành công', 'Thêm sản phẩm thành công');
