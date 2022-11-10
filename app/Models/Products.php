@@ -37,7 +37,15 @@ class Products extends Model
     }
     public function ProDetails()
     {
-        return $this-> hasMany('App\Models\ProDetails','pro_id','id');
+        return $this-> hasOne('App\Models\ProDetails','pro_id','id');
+    }
+    public function ProColors()
+    {
+        return $this-> hasMany('App\Models\ProColors','pro_id','id');
+    }
+    public function ProMemory()
+    {
+        return $this-> hasMany('App\Models\ProMemory','pro_id','id');
     }
     public function ProVariants()
     {

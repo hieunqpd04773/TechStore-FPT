@@ -1,4 +1,4 @@
-.single-product{
+.single-product {
     position: relative;
     box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
     border-radius: 5px;
@@ -7,11 +7,13 @@
 .single-product .product-btm {
     border-top: 1px solid #f0f2f1;
 }
-.img-fluid{
+
+.img-fluid {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.product-item_sale{
+
+.product-item_sale {
     position: absolute;
     top: 0px;
     left: -6px;
@@ -37,16 +39,17 @@
     border-left: 6px solid transparent;
 }
 
-.product-item_sale--left{
+.product-item_sale--left {
     position: absolute;
     top: -2px;
     left: -6px;
     height: 25px;
     width: 7px;
     border-top-left-radius: 2px;
-    
+
 }
-.product-item_sale--right{
+
+.product-item_sale--right {
     position: absolute;
     top: -2px;
     right: -6px;
@@ -54,7 +57,7 @@
     width: 7px;
 }
 
-.product-top{
+.product-top {
     position: absolute;
     right: 0;
     top: 0;
@@ -67,7 +70,7 @@
     margin-right: 10px;
 }
 
-.product-top::after{   
+.product-top::after {
     content: "";
     position: absolute;
     left: 0px;
@@ -84,7 +87,8 @@
     text-align: center;
     color: #fff;
 }
-.pro_var{
+
+.pro_var {
     background-color: white;
     border: 2px solid #71cd14;
     border-radius: 7px;
@@ -93,10 +97,65 @@
     font-size: 14px;
     font-weight: bold;
 }
-.pro_var:hover{
+
+.pro_var:hover {
     background-color: rgb(255, 255, 255);
     cursor: pointer;
 }
+
+.var_title {
+    margin: 6px 0px !important;
+    padding: 6px 0px !important;
+}
+
+#var_info tr td {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    width: 50%;
+}
+
+.table-responsive {
+    box-shadow: 0px 0px 2px grey;
+    border-radius: 1em;
+}
+
+.tb_details {
+    border: 1px solid #f2f2f2;
+    border-radius: 1em;
+
+}
+
+.tb_details tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.dt_value h5 {
+    color: black !important;
+    font-weight: normal !important;
+
+}
+
+.detail-content {
+    box-shadow: 0px 0px 2px grey;
+    border-radius: 1em;
+    min-height: 600px;
+    padding: 25px 20px;
+}
+
+.detail-content h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.s_product_text {
+    margin-top: 5px;
+}
+
+.product_count {
+    margin-top: 24px;
+}
+
 /* .single-product .product-btm{
     border-top: 1px solid #f0f2f1;
 } */
