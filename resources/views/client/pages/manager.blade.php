@@ -16,6 +16,11 @@
                     <h5>{{Auth::user()->name}}</h5>
                     <a class="text-dark" href="edit_profile"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </a>
+                    <div class="d-flex justify-content-center">
+                      <a class="text-dark" href="#!"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                      <a class="text-dark" href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                      <a class="text-dark" href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
                   </div>
                   <div class="col-md-9">
                     <div class="card-body p-4">
@@ -47,11 +52,16 @@
                             @endif </p>
                         </div>
                       </div>
-                      <div class="d-flex justify-content-start">
-                        <a class="text-dark" href="#!"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                        <a class="text-dark" href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a class="text-dark" href="#!"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                      <h6>Thông tin giao hàng</h6>
+                      <hr class="mt-0 mb-4">
+                      <div class="row pt-1">
+                        <div class="col-6 mb-3">
+                          <h6>Địa chỉ <a class="text-dark mx-2" href="useraddress"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h6>
+                          <p class="text-muted">398 Hoàng Văn Thái</p>
+                        </div>
+                        
                       </div>
+
                     </div>
                   </div>
                 </div>

@@ -65,10 +65,13 @@ Route::prefix('/')->group(function () {
     })->middleware('guest')->name('password.update');
     Route::get('forgotpassword',[ClientController::class,'forgotpassword'] )->name('forgotpassword');
     Route::get('/manager',[ClientController::class,'manager'] )->name('manager');
-
-
     Route::get('edit_profile',[UserController::class,'edit_profile'] )->name('edit_profile');
     Route::post('updateAccount',[UserController::class,'updateAccount'] )->name('updateAccount');
+    Route::get('/useraddress',[ClientController::class,'useraddress'] )->name('useraddress');
+    Route::post('/addAddress',[ClientController::class,'addAddress'] )->name('addAddress');
+    Route::get('/editaddress/{id}',[ClientController::class,'geteditAddress'] )->name('geteditAddress');
+    Route::post('/editaddress',[ClientController::class,'editAddress'] )->name('editAddress');
+    Route::get('deleteAddress/{id}', [ClientController::class,'deleteAddress'])->name('deleteAddress');
 
     Route::get('/search',[ClientController::class,'search'] )->name('search');
     Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');

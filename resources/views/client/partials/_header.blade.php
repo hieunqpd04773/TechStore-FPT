@@ -146,12 +146,12 @@
                                     <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                        <label for="exampleInputEmail1">Tài khoản</label>
-                                        <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                        <label for="">Tài khoản</label>
+                                        <input type="text" class="form-control" name="email" id="" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
                                         </div>
                                         <div class="form-group">
-                                        <label for="exampleInputPassword1">Mật khẩu</label>
-                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu">
+                                        <label for="">Mật khẩu</label>
+                                        <input type="password" name="password" class="form-control" id="" placeholder="Nhập mật khẩu">
                                         </div>
                                         <div class="form-check align-items-center">
                                         <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">

@@ -9,6 +9,7 @@ use App\Models\Products;
 use App\Models\ProVariants;
 use App\Models\Comments;
 use App\Models\User;
+use App\Models\UserAddress;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,6 +92,55 @@ class ClientController extends Controller
     public function manager()
     {
         return view('client.pages.manager');
+    }
+    public function useraddress()
+    {
+        $listAdr = UserAddress::all();
+        return view('client.pages.useraddress')->with(compact('listAdr'));
+    }
+    public function addAddress(Request $r)
+    {
+        $adr = new UserAddress();
+        $adr->user_id = $r->user_id;
+        $adr->name = $r->name;
+        $adr->phone = $r->phone;
+        $adr->address = $r->address;
+        $adr->role = $r->role;
+        DB::update('update user_address set role = ?',[0]);
+
+        $adr -> save();
+        
+        toastr()->success('Thành công', 'Thêm địa chỉ thành công');
+        return redirect(route('useraddress'));
+    }
+    public function geteditAddress($id)
+    {
+        $adr=UserAddress::find($id);
+
+        return view('client.pages.editaddress',['adr'=>$adr]);
+    }
+    public function editAddress(Request $r)
+    {
+        $adr=UserAddress::find($r->id);
+        $adr->user_id = $r->user_id;
+        $adr->name = $r->name;
+        $adr->phone = $r->phone;
+        $adr->address = $r->address;
+
+        $adr->role = $r->role;
+        DB::update('update user_address set role = ?',[0]);
+
+        $adr -> save();
+        
+        toastr()->success('Thành công', 'Chỉnh sửa địa chỉ thành công');
+        return redirect(route('useraddress'));
+    }
+    public function deleteAddress($id){
+        $adr = UserAddress::find($id);
+        $id =$adr->id;
+        $adr->delete();
+        toastr()->success('Thành công', 'Xoá địa chỉ thành công');
+        return redirect('useraddress');
     }
     public function edit_profile()
     {
