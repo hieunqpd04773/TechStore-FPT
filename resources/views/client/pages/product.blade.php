@@ -52,6 +52,7 @@
             <div class="s_product_text">
               <h3 id='pro_name'>{{$pro->name}} </h3>
               <input type="hidden" value="{{$pro->id}}" id="pro_id">
+              <input type="hidden" value="{{$pro->image}}" id="pro_image">
               <h2 ><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{$pro->price-$pro->discount}}</span> <span>VND</span></h2>
               <ul class="list">
                 <li>
@@ -69,7 +70,7 @@
               @if(isset($pro_colors))
                <p class="var_title">Chọn màu sắc: </p>  
                 @foreach ($pro_colors as $pc)
-                  <span class="pro_color pro_var" data-price="{{$pc->price}}">{{$pc->color}}</span> 
+                  <span class="pro_color pro_var" data-price="{{$pc->price}}" data-image="{{$pc->image}}">{{$pc->color}}</span>
                 @endforeach
               @endif
               @if(isset($pro_memory))
@@ -486,43 +487,6 @@
       </div>
     </section>
 
-    {{-- <script type="text/javascript">
-      $(document).ready(function(){  
-        const pro_name= $('#pro_name').html();
-        const pro_price= $('#pro_price').html();
-        const pro_img= $('#pro_img');
-        const pro_color= $('#pro_color').html();
-        const pro_width= $('#pro_width').html();
-        const pro_hight= $('#pro_hight').html();
-        const pro_depth= $('#pro_depth').html();
-        const pro_weight= $('#pro_weight').html();
-        const pro_memoryt= $('#pro_memory').html();
-        $('.pro_var').click(function(){
-          var pv_id=$(this).data('pvid');
-          
-          $.ajax({
-            url: '{{route('getVarItemByid')}}',
-            method: 'post',
-            data:{
-              _token: "{{ csrf_token() }}",
-              pv_id:pv_id
-            },
-            success:function(data){
-              console.log(data.color);
-              
-              $("#pro_name").html(pro_name +  data.color +" - " +data.memory +"GB");
-              $("#pro_price").html(data.price );
-              $("#pro_color").html(data.color );
-              $("#pro_width").html(data.width );
-              $("#pro_hight").html(data.hight );
-              $("#pro_depth").html(data.depth );
-              $("#pro_weight").html(data.weight );
-              $("#pro_memory").html(data.memory );
-            }
-          })
-        });
-      });
-    </script>  --}}
 
     <!--================End Product Description Area =================-->
     {{-- bien the --}}
@@ -535,8 +499,10 @@
         let pro_var_price=""
         $('.pro_color').click(function(){
             var color=$(this).html();
+            var image=$(this).data('image')
             var color_price=$(this).data('price')
             $('#pro_name').html(pro_name +color)
+            $('#pro_image').val(image)
              pro_var_name= $('#pro_name').html();
               $('#pro_price').html(pro_price+color_price);
              pro_var_price= pro_price+color_price;
@@ -561,6 +527,7 @@
 
         $('#addCart').click(function(){
             const pro_name_cart=$('#pro_name').html()
+            const pro_image_cart=$('#pro_image').val()
             const pro_price_cart=$('#pro_price').html()
             const pro_qty_cart=$('#sst').val()
 
@@ -571,13 +538,14 @@
               _token: "{{ csrf_token() }}",
               pro_id:pro_id,
               name:pro_name_cart,
+              image: pro_image_cart,
               price:pro_price_cart,
               qty:pro_qty_cart,
               _method : "post"
               
             },
             success:function(data){
-              alert('ok')
+              console.log(data);
             }
              
         });

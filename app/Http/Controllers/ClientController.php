@@ -198,6 +198,7 @@ class ClientController extends Controller
     {
         $pro_id=$request->pro_id;
         $name=$request->name;
+        $image=$request->image;
         $price=$request->price;
         $qty=$request->qty;
 
@@ -206,19 +207,17 @@ class ClientController extends Controller
             $cart[$name]=[
                 'id'=>$pro_id,
                 'name'=>$name,
+                'image'=>$image,
                 'price'=>$price,
                 'qty'=>$cart[$name]['qty']+=$qty,
                 'total'=>$cart[$name]['qty']*$cart[$name]['price']
             ];
-            
-
-
         }   
         else{
-            $cart['name']=$name;
             $cart[$name]=[
                 'id'=>$pro_id,
                 'name'=>$name,
+                'image'=>$image,
                 'price'=>$price,
                 'qty'=>$qty,
                 'total'=>$price*$qty
@@ -233,7 +232,10 @@ class ClientController extends Controller
 
     public function viewCart()
     {
-        return view('client.pages.cart');
+        $allProCart=session()->get('cart');
+        // dd($allProCart);
+        return view('client.pages.cart')->with(compact('allProCart'));
+        // echo $allProCart['iPhone 13']['name'];
     }
     
 }

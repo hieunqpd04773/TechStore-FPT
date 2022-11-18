@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{ URL::asset('vendors/jquery-ui/jquery-ui.css')}}" />
   <!-- main css -->
   <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}" />
+    <link rel="stylesheet" href="{{ URL::asset('css/cart.css')}}" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

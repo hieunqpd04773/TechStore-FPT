@@ -7,32 +7,34 @@
       <div class="container">
         <div class="cart_inner">
           <div class="table-responsive">
-            <table class="table">
+            <table class="table cart-table">
               <thead>
                 <tr>
-                  <th scope="col">Sản phẩm</th>
-                  <th scope="col">Giá</th>
-                  <th scope="col">Số lượng</th>
-                  <th scope="col">Tổng cộng</th>
+                  <th class="col-md-5" scope="col">Sản phẩm</th>
+                  <th class="col-md-2" scope="col">Giá</th>
+                  <th class="col-md-2" scope="col">Số lượng</th>
+                  <th class="col-md-2" scope="col">Tổng cộng</th>
+                  <th class="col-md-1" scope="col">Hành động</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($allProCart as $pro)
                 <tr>
                   <td>
                     <div class="media">
                       <div class="d-flex">
-                        <img
-                          src="img/product/single-product/cart-1.jpg"
+                        <img width="100px"
+                          src="{{asset('images/products/'.$pro['image'])}}"
                           alt=""
                         />
                       </div>
-                      <div class="media-body">
-                        <p>Cửa hàng tối giản để sử dụng đa năng</p>
+                      <div class="media-body cart-pro-name">
+                        <p>{{$pro['name']}}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <h5>$360.00</h5>
+                    <h5>{{$pro['price']}} VNĐ</h5>
                   </td>
                   <td>
                     <div class="product_count">
@@ -41,7 +43,7 @@
                         name="qty"
                         id="sst"
                         maxlength="12"
-                        value="1"
+                        value={{$pro['qty']}}
                         title="Quantity:"
                         class="input-text qty"
                       />
@@ -62,104 +64,12 @@
                     </div>
                   </td>
                   <td>
-                    <h5>$720.00</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/cart-1.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <p>Cửa hàng tối giản để sử dụng đa năng</p>
-                      </div>
-                    </div>
+                    <h5 class="cart-total">{{$pro['total']}} VNĐ</h5>
                   </td>
                   <td>
-                    <h5>$360.00</h5>
+                    <a href="" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </td>
-                  <td>
-                    <div class="product_count">
-                      <input
-                        type="text"
-                        name="qty"
-                        id="sst"
-                        maxlength="12"
-                        value="1"
-                        title="Quantity:"
-                        class="input-text qty"
-                      />
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                        class="increase items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-up"></i>
-                      </button>
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                        class="reduced items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-down"></i>
-                      </button>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$720.00</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/cart-1.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <p>Cửa hàng tối giản để sử dụng đa năng</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$360.00</h5>
-                  </td>
-                  <td>
-                    <div class="product_count">
-                      <input
-                        type="text"
-                        name="qty"
-                        id="sst"
-                        maxlength="12"
-                        value="1"
-                        title="Quantity:"
-                        class="input-text qty"
-                      />
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                        class="increase items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-up"></i>
-                      </button>
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                        class="reduced items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-down"></i>
-                      </button>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$720.00</h5>
-                  </td>
+                  @endforeach
                 </tr>
                 <tr class="bottom_button">
                   <td>
