@@ -1,0 +1,22 @@
+.delete-cart{
+    padding: 0px 15px;
+    font-size: 18px;
+}
+.cart_area{
+    padding-top: 70px;
+}
+.cart-pro-name{
+    font-size: 16px;
+    color: black;
+}
+.cart-total{
+    color: #f8b600 !important; 
+    font-weight: 600;
+}
+.cart-table thead{
+    background-color: #f6f6f6;
+}
+.cart-table tbody td{
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}

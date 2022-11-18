@@ -22,7 +22,7 @@ Route::prefix('/')->group(function () {
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
-    Route::get('cart', [ClientController::class,'viewCart'] )->name('viewCart');
+    
     Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
 
     Route::get('/forgot-password', function () {
@@ -78,21 +78,11 @@ Route::prefix('/')->group(function () {
     Route::get('/checkout', function () {
         return view('client/checkout');
     });
-    Route::get('/cart', function () {
-        return view('client/cart');
-    });
-    Route::get('/single-blog', function () {
-        return view('client/single-blog');
-    });
-    Route::get('/single-product', function () {
-        return view('client/product');
-    });
+    Route::get('cart', [ClientController::class,'viewCart'] )->name('viewCarttt');
     Route::get('/dk', function () {
         return view('client/pages/register');
     });
-    Route::get('/tracking', function () {
-        return view('client/tracking');
-    });
+
 });
 
 
