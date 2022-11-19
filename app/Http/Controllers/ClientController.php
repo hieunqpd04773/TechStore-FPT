@@ -176,8 +176,7 @@ class ClientController extends Controller
         }
         session()->put('cart', $cart); 
         $cart=session()->get('cart', []);
-        return response()->json($cart);
-        // return Response::json(['success' => true, 'cart_items' => count(Session::get('cart')), 'message' => 'Cart updated.']);
+        return response()->json(['success' => 'Setting successfully updated']);
     }
 
     public function viewCart()
@@ -186,6 +185,18 @@ class ClientController extends Controller
         // dd($allProCart);
         return view('client.pages.cart')->with(compact('allProCart'));
         // echo $allProCart['iPhone 13']['name'];
+    }
+
+    public function deleteItemCart($name)
+    {
+       $cart = session()->get('cart', []);
+       if(isset($cart[$name])  ){
+        unset($cart[$name]);
+        session()->put('cart', $cart);
+       }
+       $allProCart=session()->get('cart');
+       toastr()->success('Thành công', 'Đã xóa sản phẩm khỏi giỏ hàng');
+       return redirect()->back();
     }
     
 }

@@ -108,7 +108,7 @@
                     </li>
     
                     <li class="nav-item">
-                    <a href="{{route('viewCarttt')}}" class="icons">
+                    <a href="{{route('viewCart')}}" class="icons">
                         <i class="ti-shopping-cart"></i>
                     </a>
                     </li>

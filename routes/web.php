@@ -23,7 +23,6 @@ Route::prefix('/')->group(function () {
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     
-    Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
 
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
@@ -78,9 +77,15 @@ Route::prefix('/')->group(function () {
     Route::get('/checkout', function () {
         return view('client/checkout');
     });
-    Route::get('cart', [ClientController::class,'viewCart'] )->name('viewCarttt');
+    
     Route::get('/dk', function () {
         return view('client/pages/register');
+    });
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/index', [ClientController::class,'viewCart'] )->name('viewCart');
+        Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
+        Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
     });
 
 });

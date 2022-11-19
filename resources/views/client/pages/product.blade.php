@@ -545,7 +545,7 @@
               
             },
             success:function(data){
-              console.log(data);
+              alert("Đã thêm sản phẩm vào giỏ hàng")
             }
              
         });
