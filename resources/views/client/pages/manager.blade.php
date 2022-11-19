@@ -57,7 +57,7 @@
                       <div class="row pt-1">
                         <div class="col-6 mb-3">
                           <h6>Địa chỉ <a class="text-dark mx-2" href="useraddress"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h6>
-                          <p class="text-muted">398 Hoàng Văn Thái</p>
+                          <p class="text-muted">Xem địa chỉ giao hàng</p>
                         </div>
                         
                       </div>
