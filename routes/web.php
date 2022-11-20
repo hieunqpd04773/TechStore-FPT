@@ -22,6 +22,8 @@ Route::prefix('/')->group(function () {
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    
+
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
@@ -45,7 +47,6 @@ Route::prefix('/')->group(function () {
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
-     
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
@@ -79,21 +80,17 @@ Route::prefix('/')->group(function () {
     Route::get('/checkout', function () {
         return view('client/checkout');
     });
-    Route::get('/cart', function () {
-        return view('client/cart');
-    });
-    Route::get('/single-blog', function () {
-        return view('client/single-blog');
-    });
-    Route::get('/single-product', function () {
-        return view('client/product');
-    });
+    
     Route::get('/dk', function () {
         return view('client/pages/register');
     });
-    Route::get('/tracking', function () {
-        return view('client/tracking');
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/index', [ClientController::class,'viewCart'] )->name('viewCart');
+        Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
+        Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
     });
+
 });
 
 

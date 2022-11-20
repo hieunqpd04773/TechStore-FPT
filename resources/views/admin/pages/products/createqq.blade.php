@@ -5,31 +5,26 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Sửa Sản Phẩm</h4>
+            <h4 class="card-title">Thêm Sản Phẩm</h4>
             <p class="card-description">
               Nhập thông tin
             </p>
-            <form method="POST" action="{{route('editPro')}}" enctype="multipart/form-data" id="form-edit-product" class="forms-sample">
+            <form method="POST" action="{{route('createPro')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
               @csrf
-              <input type="hidden" name="id" value="{{$pro->id}}" id="">
-              <input type="hidden" name="image1" value="{{$pro->image}}" id="">
               <div class="form-group">
                 <label for="exampleInputName1">Tên Sản Phẩm</label>
-                <input type="text" name="name" value="{{$pro->name}}" class="form-control fullname" id="exampleInputName1" placeholder="Nhập tên sản phẩm">
+                <input type="text" name="name" class="form-control fullname" id="exampleInputName1" placeholder="Nhập tên sản phẩm">
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
               </div>
+
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Danh Mục</label>
-                      <select class="form-control show-cti list" name="categories" id="cate">
+                      <select class="form-control show-cti form-select list"  name="danhMuc_id" id="cate">
+                        <option value="">Chọn danh mục</option>
                         @foreach ($allCate as $cate)
-                            @if ($cate->id==$pro->Categories->id)
-                              <option data-id="{{$cate->id}}" selected value="{{$cate->id}}">{{$cate->name}}</option>
-                            @else
-                              <option data-id="{{$cate->id}}" value="{{$cate->id}}">{{$cate->name}}</option>
-                            @endif
-                            
+                            <option data-id="{{$cate->id}}" value="{{$cate->id}}">{{$cate->name}}</option>
                         @endforeach
                       </select>
                       <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
@@ -38,7 +33,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Hãng</label>
-                    <select class="form-control show-cti firm" name="cate_id">
+                    <select class="form-control show-cti firm" name="cate_id" id="cate">
                     </select>
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
@@ -48,14 +43,14 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputName1">Giá</label>
-                    <input type="number" value="{{$pro->price}}" name="price" class="form-control price" id="exampleInputName1" placeholder="Nhập Giá Sản Phẩm">
+                    <input type="number" name="price" class="form-control price" id="exampleInputName1" placeholder="Nhập Giá Sản Phẩm">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputName1">Giảm Giá</label>
-                    <input type="number" value="{{$pro->discount}}" name="discount" class="form-control discount" id="exampleInputName1" placeholder="Nhập % Giảm giá">
+                    <input type="number" name="discount" class="form-control discount" id="exampleInputName1" placeholder="Nhập % Giảm giá">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -64,14 +59,14 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Ngày Đăng</label>
-                    <input type="date" value="{{$pro->created_at}}" name="date" class="form-control date" id="exampleInputEmail3" placeholder="Nhập ngày đăng">
+                    <input type="date" name="date" class="form-control date" id="exampleInputEmail3" placeholder="Nhập ngày đăng">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputName1">Số lượng</label>
-                    <input type="number" value="{{$pro->quantity}}" name="quantity" class="form-control amount" id="exampleInputName1" placeholder="Nhập số lượng">
+                    <input type="number" name="quantity" class="form-control amount" id="exampleInputName1" placeholder="Nhập số lượng">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -81,88 +76,53 @@
                   <div class="form-group">
                     <label for="exampleSelectGender">Hot</label>
                       <select class="form-control" name="hot" id="exampleSelectGender">
-                        @if ($pro->hot==0)
-                          <option value="0" selected>Bình Thường</option>
-                          <option value="1">Hot</option>
-                        @else
-                          <option value="0" >Bình Thường</option>
-                          <option value="1" selected>Hot</option>
-                        @endif
-                        
+                        <option value="0" selected>Bình Thường</option>
+                        <option value="1">Hot</option>
                       </select>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Trạng thái</label>
-                      <select class="form-control status" name="status" id="exampleSelectGender">
-                        @if ($pro->status==0)
-                          <option value="0" selected>Hiển thị</option>
-                          <option value="1">Ẩn</option>
-                        @else
-                          <option value="0" >Hiển thị</option>
-                          <option value="1" selected>Ẩn</option>
-                        @endif
+                      <select class="form-control status" name="status"  id="exampleSelectGender">
+                        <option value="">Chon</option>
+                        <option value="0" selected>Hiển thị</option>
+                        <option value="1">Ẩn</option>
                       </select>
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label>Hình Ảnh</label>
-                    <input type="file" name="file_upload" class="form-control ">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <img src="{{asset('images/products/'.$pro->image)}}" width="30%" alt="ko cos anh">
-                </div>
-              </div>
-          
+
               <div class="form-group">
-                <label for="exampleInputEmail3">Mô tả sản phẩm</label>
-                <textarea class="form-control describe" name="detail" id="exampleTextarea1" cols="10" rows="25">{{$pro->detail}}</textarea>
+                <label>Hình Ảnh</label>
+                <input type="file" name="file_upload" class="form-control avatar">
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>    
+              </div>
+              
               
               <div class="form-group">
+                <label for="exampleInputEmail3">Mô tả sản phẩm</label>
+                <textarea class="form-control describe" name="detail" id="exampleTextarea1" cols="10" rows="25"></textarea>
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div> 
+
+              <div class="form-group">
                 <p>
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Sửa chi tiết sản phẩm</a>
-
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Sửa biển bộ nhớ</a>
-
-                  <a class="btn btn-primary col-sm-3" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Sửa biển thể màu sắc</a>
+                  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Thêm biển thể</a>
                 </p>
-                <!-- Thêm biến thể-->
                 <div class="row">
                   <div class="col">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
-                      <br>
-                      <h4 class="card-title">
-                      <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Sửa chi tiết sản phẩm</a>
-                      <hr></h4>
                       <div class="card card-body">
-
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">CPU</label>
-                              <input type="text" name="cpu" class="form-control cpu" id="exampleInputName1" placeholder="Nhập CPU">                         
+                              <label for="exampleSelectGender">Màu sắc</label>
+                              <input type="text" name="color" class="form-control amount" id="exampleInputName1" placeholder="Nhập màu sắc">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Hệ điều hành</label>
-                              <input type="text" name="os" class="form-control os" id="exampleInputName1" placeholder="Nhập hệ điều hành">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="exampleInputName1">Bộ nhớ</label>
@@ -170,47 +130,20 @@
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Dung ram</label>
-                              <input type="number" name="ram" class="form-control ram" id="exampleInputName1" placeholder="Nhập dung lượng ram(GB)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
                         </div>
 
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">Màn hình</label>
-                              <input type="text" name="display" class="form-control display" id="exampleInputName1" placeholder="Nhập thông số màn hình">                         
+                              <label for="exampleSelectGender">Gía</label>
+                              <input type="number" name="price_var" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="exampleSelectGender">Dung lượng pin</label>
-                              <input type="number" name="batery" class="form-control batery" id="exampleInputName1" placeholder="Nhập dung lượng pin">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Camera chính</label>
-                              <input type="number" name="camera" class="form-control camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera chính(MP)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Camera phụ</label>
-                              <input type="number" name="sub_camera" class="form-control sub_camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera phụ(MP)">                         
+                              <label>Hình Ảnh</label>
+                              <input type="file" name="file_upload_variants" class="form-control avatar">
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
@@ -251,92 +184,8 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- Thêm biến thể bộ nhớ-->
-                <div class="row">
-                  <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                      <br>
-                      <h4 class="card-title">
-                        <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-right: 1%">Sủa biển bộ nhớ</a>
-                      <hr></h4>
-                      <div class="card card-body">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleSelectGender">Dung lượng bộ nhớ</label>
-                                <input type="text" name="memory" class="form-control memory" id="exampleInputName1" placeholder="Nhập Dung lượng bộ nhớ(GB)">                         
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleInputName1">Dung lượng ram</label>
-                                <input type="number" name="ram" class="form-control ram" id="exampleInputName1" placeholder="Nhập Dung lượng ram(GB)">
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <label for="exampleSelectGender">Gía thêm</label>
-                                <input type="number" name="price_memory" class="form-control price_memory" id="exampleInputName1" placeholder="Nhập giá bán thêm">                         
-                                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Thêm biến thể màu sắc-->
-                <div class="row">
-                  <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample3">
-                      <br>
-                      <h4 class="card-title">
-                        <a class="col-sm-3" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Sửa biển thể màu sắc</a>
-                      <hr></h4>
-                      
-                      <div class="card card-body">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Màu sắc</label>
-                              <input type="text" name="color" class="form-control color" id="exampleInputName1" placeholder="Nhập Dung lượng bộ nhớ(GB)">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleInputName1">Hình ảnh</label>
-                              <input type="file" name="file_image" class="form-control avatar">
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleSelectGender">Gía thêm</label>
-                              <input type="number" name="price_color" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
-                              <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>  
-              
-              <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
+              </div>           
+              <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
               <button type="button" class="btn btn-light">Cancel</button>
             </form>
           </div>
@@ -368,7 +217,6 @@
     });
   });
 </script>
-
 
 <script>
 
@@ -526,17 +374,17 @@ Validator.isDescribe = function (selector) {
   }
 }
 
-// Validator.isAvatar = function (selector) {
-//   return {
-//     selector,
-//     test(value) {
-//       return value ? undefined : 'Vui lòng chọn ảnh'
-//     }
-//   }
-// }
+Validator.isAvatar = function (selector) {
+  return {
+    selector,
+    test(value) {
+      return value ? undefined : 'Vui lòng chọn ảnh'
+    }
+  }
+}
 
    Validator({
-    form: '#form-edit-product',
+    form: '#form-product',
     errorSelector: '.form-message',
     rules: [
       Validator.isRequired('.fullname'),
@@ -548,7 +396,7 @@ Validator.isDescribe = function (selector) {
       Validator.isAmount('.amount'),
       Validator.isStatus('.status'),
       Validator.isDescribe('.describe'),
-      // Validator.isAvatar('.avatar')
+      Validator.isAvatar('.avatar')
     ],
   })
 </script>
