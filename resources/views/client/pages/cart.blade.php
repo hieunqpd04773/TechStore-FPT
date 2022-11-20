@@ -43,7 +43,7 @@
                     </div>
                   </td>
                   <td>
-                    <h5>{{$pro['price']}} VNĐ</h5>
+                    <h5>{{ number_format($pro['price'], 0, '.', '.');}} VNĐ</h5>
                   </td>
                   <td>
                     <div class="product_count">
@@ -73,7 +73,7 @@
                     </div>
                   </td>
                   <td>
-                    <h5 class="cart-total">{{$pro['total']}} VNĐ</h5>
+                    <h5 class="cart-total">{{ number_format($pro['total'], 0, '.', '.');}} VNĐ</h5>
                   </td>
                   <td>
                     <a href="{{route('deleteItemCart',$pro['name'])}}" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -109,7 +109,7 @@
             </div>
             <br>
             <div class="payment_item">
-              <p>Giỏ hàng: <span id="cart_total" data-total="{{$cart_total}}">{{$cart_total}} VND</span></p>
+              <p>Giỏ hàng: <span>VNĐ</span> <span id="cart_total" data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
               <p>Shipping: <span>VNĐ</span> <span id="ship_price"></span> </p>
               <select id="ship_select" class="ship_select">
                 <option selected value="30000">Chuyển phát nhanh</option>
@@ -120,7 +120,7 @@
               <p style="margin-bottom: 20px"></p>
             </div>
             <div class="payment_item payment_total">
-              <p>Tổng tiền <span>VNĐ</span><span id="payment_total" data-payment_total="0">{{$cart_total + 30000}} </span></p>
+              <p>Tổng tiền <span>VNĐ</span><span id="payment_total" data-payment_total="0"> </span></p>
             </div>
             <a href="" class="btn_pay">Tiến hành thanh toán</a>
           </div>
@@ -131,18 +131,25 @@
 
 
   <script type="text/javascript">
+      function format_currency(number){
+          return number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
    window.onload = function()
       {
-        document.getElementById('ship_price').innerHTML= document.getElementById('ship_select').value;   
+        document.getElementById('ship_price').innerHTML= format_currency(document.getElementById('ship_select').value); 
+        document.getElementById('payment_total').innerHTML = format_currency(Number( document.getElementById('cart_total').innerHTML) + Number( document.getElementById('ship_select').value))
       };
     $(document).ready(function(){ 
       $('#ship_select').change(function( e){
+        
+        
+
         e.preventDefault();
         var ship_select= $('#ship_select').val();
         const cart_total= $('#cart_total').data('total');
         let payment_total= $('#payment_total').data('payment_total')
-        $('#ship_price').html(ship_select)
-        $('#payment_total').html(Number(cart_total) + Number( ship_select)  )
+        $('#ship_price').html(format_currency(ship_select) )
+        $('#payment_total').html(format_currency(Number(cart_total) + Number( ship_select)  ))
       })
 
       $('.update-cart').change(function (e) {

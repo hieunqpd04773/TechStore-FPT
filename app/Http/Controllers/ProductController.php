@@ -220,12 +220,6 @@ class ProductController extends Controller
         $pro_vars=ProVariants::where('pro_id','=',$id)->get();
         return view('admin.pages.products.variants',['pro'=>$pro,'allCate'=>$allCate,'pro_vars'=>$pro_vars]);
     }
-    // public function loadAddVariant($id)
-    // {
-    //     $pro=Products::find($id);
-    //     $allCate=Categories::all();
-    //     return view('admin.pages.products.addvariant',['pro'=>$pro,'allCate'=>$allCate]);
-    // }
     public function createVariant(Request $request)
     {
         $pro_var= new ProVariants();
