@@ -120,9 +120,12 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('variants/{id}',[ProductController::class,'showVariants'])->name('showVariants');
         // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
-        Route::get('deleteVar/{id}',[ProductController::class,'deleteVar'])->name('deleteVar');
 
+        Route::post('createColor',[ProductController::class,'createColor'])->name('createColor');
+        Route::get('deleteColor/{id}',[ProductController::class,'deleteColor'])->name('deleteColor');
 
+        Route::post('createMemory',[ProductController::class,'createMemory'])->name('createMemory');
+        Route::get('deleteMemory/{id}',[ProductController::class,'deleteMemory'])->name('deleteMemory');
     }); 
     Route::prefix('categories')->group(function () {
         Route::get('index', [CategoryController::class,'index'])->name('listCate');

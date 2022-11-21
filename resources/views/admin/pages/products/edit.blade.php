@@ -211,7 +211,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="exampleSelectGender">Camera chính</label>
-                              <input type="number" name="camera" value="{{$pro_details->camera}}" class="form-control camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera chính(MP)">                         
+                              <input type="text" name="camera" value="{{$pro_details->camera}}" class="form-control camera" id="exampleInputName1" placeholder="Nhập độ phân giải cammera chính(MP)">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
