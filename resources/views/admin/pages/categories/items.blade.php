@@ -5,11 +5,11 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Thêm mới danh mục con của {{$cateItems[0]->Categories->name}}</h4>
+                <h4 class="card-title">Thêm mới danh mục con của {{$cate->name}}</h4>
                 <form method="POST" action="{{route('createCateItem')}}" enctype="multipart/form-data" id="form-add-item" class="form-inline">
                   @csrf
                 <div>
-                  <input type="hidden" value="{{$cateItems[0]->Categories->id}}" name="cate_id">
+                  <input type="hidden" value="{{$cate->id}}" name="cate_id">
                   <label class="sr-only" for="inlineFormInputName2">Tên Danh Mục</label>
                   <input type="text" name="name" class="form-control mb-2 mr-sm-2" id="fullname" placeholder="Tên Danh Mục">
                   <span style="font-size: 15px; color: #f33a58; line-height: 3px;   display: block;" class="form-message"></span>
@@ -27,7 +27,9 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">{{$cateItems[0]->Categories->name}}</h4>
+                <h4 class="card-title">
+                  {{$cate->name}}
+                </h4>
                 <div class="table-responsive pt-3">
                   <table id="recent-purchases-listing" class="table table-bordered">
                     <thead>

@@ -263,8 +263,10 @@ class ProductController extends Controller
     public function loadEdit($id)
     {
         $pro=Products::find($id);
+        $pro_details=Products::find($id)->ProDetails;
         $allCate=Categories::all();
-        return view('admin.pages.products.edit',['pro'=>$pro,'allCate'=>$allCate]);
+        $allCateItems=CateItems::all();
+        return view('admin.pages.products.edit')->with(compact('pro', 'allCate','pro_details','allCateItems'));
     }
     public function edit(Request $request)
     {

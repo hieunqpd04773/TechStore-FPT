@@ -11,7 +11,8 @@ class CateItemController extends Controller
     public function index($id)
     {
         $cateItems=CateItems::where('cate_id','=',$id)->get();
-        return view('admin.pages.categories.items',['cateItems'=>$cateItems]);
+        $cate=Categories::find($id);
+        return view('admin.pages.categories.items')->with(compact('cateItems','cate'));
     }
     public function create(Request $request)
     {
