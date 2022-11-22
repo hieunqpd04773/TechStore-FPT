@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiscountsCodeController;
+use App\Http\Controllers\SlideController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 
 
 
@@ -20,6 +23,10 @@ Route::prefix('/')->group(function () {
     Route::post('/getcateitem',[ClientController::class,'getCateItemByCate'])->name('getCateItemByCate');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
+    Route::get('wishlist', [ClientController::class,'wishlist'])->name('listWish');
+    Route::get('/add/{id}', [ClientController::class,'add'])->name('addWish');
+    Route::get('delete/{id}', [ClientController::class,'delete'])->name('deleteWish');
+    Route::get('wishcount', [ClientController::class,'showcount'])->name('wishlistcount');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     
@@ -168,6 +175,22 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::post('update', [DiscountsCodeController::class,'update'])->name('updateDiscount_code');
         Route::get('delete/{id}',[DiscountsCodeController::class,'destroy'])->name('deleteDiscount_code');
 
+    });
+    Route::prefix('slider')->group(function () {
+        Route::get('index', [SLideController::class,'index'])->name('listSlide');
+        Route::get('create', [SLideController::class,'loadCreate'])->name('loadCreateSlide');
+        Route::post('create',[SLideController::class,'create'])->name('createSlide');
+        Route::get('edit/{id}',[SLideController::class,'loadEdit'])->name('loadEditSlide');
+        Route::post('edit', [SLideController::class,'edit'])->name('editSlide');
+        Route::get('delete/{id}', [SLideController::class,'delete'])->name('deleteSlide');
+        Route::get('unactive/{id}', [SLideController::class,'unactive'])->name('off');
+        Route::get('active/{id}', [SLideController::class,'active'])->name('on');
+    });
+    Route::prefix('order')->group(function () {
+        Route::get('list', [OrderController::class,'index'])->name('orders');
+        Route::get('detail/{id}', [OrderDetailController::class,'show'])->name('details');
+        Route::get('edit/{id}', [OrderController::class,'edit'])->name('edit');
+        Route::put('/update/{id}', [OrderController::class,'update'])->name('update');
     });
 
 });

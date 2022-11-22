@@ -9,8 +9,8 @@ class OrderDetails extends Model
 {
     use HasFactory;
     protected $table = 'order_details';
-    // protected $primary = 'id';
-    protected $dates = 'date';
+    protected $primary = 'id';
+    // protected $dates = 'date';
     public $timestamps = false;
     protected $fillable = [
         'order_id','product_id ','product_name','number','price'
@@ -19,5 +19,14 @@ class OrderDetails extends Model
     public function Orders()
     {
         return $this->belongsTo('App\Models\Orders','order_id','id');
+    }
+    public function Products()
+    {
+        return $this->hasMany('App\Models\Products','pro_id', 'id');
+    } 
+
+    public function User()
+    {
+        return $this->belongsTo('App\Models\User','user_id', 'id');
     }
 }

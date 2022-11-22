@@ -30,6 +30,26 @@
     z-index: 1;
 }
 
+.shopee-cart-number-badge, .shopee-notification-number-badge {
+  position: relative;
+  border-radius: 2.75rem;
+  min-width: 1.6875rem;
+  /* line-height: 1.2em; */
+  padding: 0 0.3125rem;
+  text-align: center;
+  height: 1.3rem;
+  /* border: 0.125rem solid var(--brand-primary-color,#ee4d2d); */
+  /* color: var(--brand-primary-color,#ee4d2d); */
+  background-color: #228f2f;
+  left: 0.875rem;
+  top: -3.7rem;
+  /* margin-right: -0.875rem; */
+  /* border-radius: 40px
+px
+; */
+  display: block;
+}
+
 .btn-facebook {
     background-color: #405D9D;
     color: #fff;

@@ -10,7 +10,6 @@ class Orders extends Model
     use HasFactory;
     protected $table = 'orders';
     protected $primary = 'id';
-    protected $dates = 'date';
     public $timestamps = true;
     protected $attributes = [
         'status'=>0,
@@ -28,8 +27,8 @@ class Orders extends Model
     {
         return $this->hasMany('App\Models\Products','pro_id', 'id');
     }
-    public function Users()
+    public function User()
     {
-        return $this->belongsTo('App\Models\Users','user_id','id');
+        return $this->belongsTo('App\Models\User','user_id','id');
     }
 }

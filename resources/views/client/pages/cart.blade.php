@@ -13,7 +13,7 @@
            <div class="table-responsive">
             <table class="table cart-table">
               <thead>
-                <tr>
+                <tr>    
                   <th class="col-md-5" scope="col">Sản phẩm</th>
                   <th class="col-md-2" scope="col">Giá</th>
                   <th class="col-md-2" scope="col">Số lượng</th>

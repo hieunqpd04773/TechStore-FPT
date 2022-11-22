@@ -13,6 +13,8 @@ use App\Models\ProDetails;
 use App\Models\Comments;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Models\Slider;
+use App\Models\Wishlist;
 use DB;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Session;
@@ -24,6 +26,11 @@ class ClientController extends Controller
     {
         $allCate=Categories::all();
         view()->share('allCate', $allCate);
+        //slider
+        $allslide = Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
+        view()->share('allslide', $allslide);
+        $slider = Slider::orderBy('id','DESC')->where('slide_status',1)->take(3)->get();
+        view()->share('slider', $slider);
     }
     public function index()
     {
@@ -248,5 +255,39 @@ class ClientController extends Controller
        toastr()->success('Thành công', 'Đã xóa sản phẩm khỏi giỏ hàng');
        return redirect()->back();
     }
+    // Danh sách yêu thích
+    public function wishlist()
+    {
+        $wishlist = Wishlist::where('user_id','=', Auth::user()->id)->get();
+        return view('client.pages.wishlist', compact('wishlist'));
+    }
+    public function add($pro_id) 
+    {
+        if(isset($wish)){
+            toastr()->success('Thành công', 'Thêm vào yêu thích thành công');
+            return view('listWish'); 
+        }else{
+            Wishlist::insert([
+                'user_id' => Auth::id(),
+                'pro_id' => $pro_id
+            ]);
+        }
+        toastr()->success('Thành công', 'Thêm vào yêu thích thành công');
+        return redirect(route('listWish'));
+    }
+    public function delete($id)
+    {
+        
+        $wishlist = Wishlist::find($id);
+        $wishlist -> delete();
+        toastr()->success('Thành công', 'Đã xóa sản phẩm khỏi yêu thích');
+        return redirect(route('listWish'));
+    }
+    public function showcount($id)
+    {
+        $wishlistcount = Wishlist::count($id);
+        return view('client.pages',compact('wishlistcount'));
+    }
+    //end wishlist
     
 }

@@ -50,7 +50,7 @@
                         <a href="{{route('getProById',$pro->id)}}">
                           <i class="ti-eye"></i>
                         </a>
-                        <a href="#">
+                        <a href="{{route('addWish',$pro->id)}}">
                           <i class="ti-heart"></i>
                         </a>
                         <a href="#">

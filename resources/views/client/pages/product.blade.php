@@ -111,7 +111,7 @@
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-diamond"></i>
                 </a>
-                <a class="icon_btn" href="#">
+                <a class="icon_btn" href="{{route('addWish',$pro->id)}}">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
               </div>

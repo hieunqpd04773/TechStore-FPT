@@ -2,20 +2,33 @@
 @section('title','TechStore')
 @section('content')
 <!--================Home Banner Area =================-->
-<section class="home_banner_area mb-40">
-    <div class="banner_inner d-flex align-items-center">
-        <div class="container">
-            <div class="banner_content row">
-                <div class="col-lg-12">
-                    <p class="sub text-uppercase">Bộ sưu tập đàn ông</p>
-                    <h3><span>Thể hiện</span> phong cách <br />Personal <span>của bạn</span></h3>
-                    <h4>Fowl thấy khô mà ở trên cùng một chỗ.</h4>
-                    <a class="main_btn mt-40" href="#">Xem bộ sưu tập</a>
-                </div>
-            </div>
+<section id="slider"><!--slider-->
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            @foreach ($allslide as $key =>$slide)
+          <div class="carousel-item {{ $key == 0 ? 'active':''}}">
+            @if ($slide->image)
+            <img src="{{asset('images/slider/'.$slide->image)}}" alt="slide1" width="110%" height="200px">
+            @endif 
+            <div class="carousel-caption">
+                <a class="main_btn mt-40" href="#">Xem ngay</a>
+            </div>   
+          </div>
+        @endforeach
         </div>
-    </div>
-</section>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+</section><!--/slider-->
 <!--================End Home Banner Area =================-->
 
 <!-- Start feature Area -->
@@ -86,7 +99,7 @@
                             <a href="#">
                                 <i class="ti-eye"></i>
                             </a>
-                            <a href="#">
+                            <a href="{{route('addWish',$pro->id)}}">
                                 <i class="ti-heart"></i>
                             </a>
                             <a href="#">
