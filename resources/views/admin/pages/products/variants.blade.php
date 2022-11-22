@@ -68,7 +68,7 @@
   <div class="row">
     {{-- Màu Sắc --}}
     <div class="col-6 grid-margin stretch-card" id="">
-    @if(isset($pro_color))
+    @if($pro_color)
        <div class="row">
       @php
           $i=0;   
@@ -145,7 +145,7 @@
 {{-- Bo Nho --}}
     <div class="col-6 grid-margin stretch-card" id="">
        <div class="row">
-      @if(isset($pro_memory))
+      @if($pro_memory)
       @php
           $i=0;   
       @endphp
@@ -181,7 +181,7 @@
               </div>
             </div>
           </div>
-          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteColor',$pc->id)}}">Xóa</a></td>
+          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteColor',$pm->id)}}">Xóa</a></td>
         </div>
          </div>
        @endforeach

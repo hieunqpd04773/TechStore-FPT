@@ -218,6 +218,7 @@ class ProductController extends Controller
         $pro=Products::find($id);
         $allCate=Categories::all();
         $pro_color=ProColors::where('pro_id','=',$id)->get();
+        // dd($pro_color);
         $pro_memory=ProMemory::where('pro_id','=',$id)->get();
         return view('admin.pages.products.variants')->with(compact('pro','allCate','pro_color','pro_memory'));
     }
