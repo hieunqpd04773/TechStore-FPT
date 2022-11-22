@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     <li class="nav-item"  role="presentation">
-                        <a style="border: none; width: 100%; height: 100%; margin: 15% 0% 0% 0%; " class="icons" data-toggle="collapse" href="#collapseExample" role="right" aria-expanded="false" aria-controls="collapseExample">
+                        <a style="border: none; width: 100%;  margin: 15% 0% 0% 0%; " class="icons" data-toggle="collapse" href="#collapseExample" role="right" aria-expanded="false" aria-controls="collapseExample">
                             <i class="ti-search" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -177,7 +177,7 @@
                         @php
                         $wishlistcount = (App\Models\Wishlist::count());
                         @endphp
-                        <a href="{{route('listWish')}}" class="icons">
+                        <a href="{{route('listWish')}}" class="icons" style="height: 50%">
                             <i class="ti-heart" aria-hidden="true">
                                 <div class="shopee-cart-number-badge">
                                     <span style="display: block; line-height: normal; color: rgb(243, 235, 235);">{{$wishlistcount}}</span>

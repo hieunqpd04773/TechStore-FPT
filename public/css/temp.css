@@ -204,3 +204,7 @@
     height: 90vh;
     object-fit: cover;
 }
+
+.nav-item{
+    height: 80px !important;
+}
