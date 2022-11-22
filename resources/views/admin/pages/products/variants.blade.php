@@ -181,7 +181,7 @@
               </div>
             </div>
           </div>
-          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteColor',$pm->id)}}">Xóa</a></td>
+          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteMemory',$pm->id)}}">Xóa</a></td>
         </div>
          </div>
        @endforeach
