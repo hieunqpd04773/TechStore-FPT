@@ -205,6 +205,6 @@
     object-fit: cover;
 }
 
-.nav-item{
+.navbar-right .nav-item{
     height: 80px !important;
 }
