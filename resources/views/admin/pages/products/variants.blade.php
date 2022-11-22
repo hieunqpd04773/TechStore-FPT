@@ -68,6 +68,7 @@
   <div class="row">
     {{-- Màu Sắc --}}
     <div class="col-6 grid-margin stretch-card" id="">
+    @if(isset($pro_color))
        <div class="row">
       @php
           $i=0;   
@@ -103,6 +104,7 @@
           </div>
         </div>
          @endforeach
+      @endif
 
          {{-- add color --}}
          <div class="col-12 mt-1">
@@ -143,6 +145,7 @@
 {{-- Bo Nho --}}
     <div class="col-6 grid-margin stretch-card" id="">
        <div class="row">
+      @if(isset($pro_memory))
       @php
           $i=0;   
       @endphp
@@ -182,7 +185,7 @@
         </div>
          </div>
        @endforeach
-
+        @endif
        <div class="col-md-12 mt-1">
         <form method="POST" action="{{route('createMemory')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
               @csrf
