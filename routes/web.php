@@ -25,7 +25,7 @@ Route::prefix('/')->group(function () {
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('wishlist', [ClientController::class,'wishlist'])->name('listWish');
     Route::get('/add/{id}', [ClientController::class,'add'])->name('addWish');
-    Route::get('delete/{id}', [ClientController::class,'delete'])->name('deleteWish');
+    Route::get('deleteWish/{id}', [ClientController::class,'delete'])->name('deleteWish');
     Route::get('wishcount', [ClientController::class,'showcount'])->name('wishlistcount');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');

@@ -23,7 +23,7 @@
                   <tr>
                     <td>{{$slide->id}}</td>
                     <td>{{$slide->name}}</td>
-                    <td><img src="{{asset('images/slider/'.$slide->image)}}" alt="" style="width:210px; height:70px"></td>
+                    <td><img src="{{asset('images/slider/'.$slide->image)}}" alt="" style="width:150px; height: 70px; border-radius: 5px;"></td>
                     <td>{{$slide->slide_desc}}</td>
                     <td><span class="text-ellipsis">
                       <?php

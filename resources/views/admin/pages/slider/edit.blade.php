@@ -31,15 +31,21 @@
                   <div class="form-group">
                     <label for="exampleSelectGender">Mô tả Slider</label>
                       <textarea style="resize: none" rows="8" class="form-control" name="slide_desc" id="
-                      exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
+                      exampleInputPassword1" placeholder="Mô tả danh mục">{{$slide->slide_desc}}</textarea>
                   </div>
                 </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Trạng Thái</label>
                   <select name="slide_status" class="form-control input-sm m-bot-15">
-                    <option value="0">Ẩn</option>
-                    <option value="1">HIển thị</option>
+                    @if ($slide->slide_status==0)
+                      <option selected value="0">Ẩn</option>
+                      <option value="1">HIển thị</option>
+                    @else
+                      <option value="0">Ẩn</option>
+                      <option selected value="1">HIển thị</option>
+                    @endif
+                    
                   </select>
                 </div>
               <div>

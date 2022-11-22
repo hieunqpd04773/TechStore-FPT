@@ -33,7 +33,7 @@
                   <label for="exampleInputPassword1">Trạng Thái</label>
                   <select name="slide_status" class="form-control input-sm m-bot-15">
                     <option value="0">Ẩn</option>
-                    <option value="1">HIển thị</option>
+                    <option value="1">Hiển thị</option>
                   </select>
                 </div>
                 <div>

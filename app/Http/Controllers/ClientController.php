@@ -263,9 +263,10 @@ class ClientController extends Controller
     }
     public function add($pro_id) 
     {
-        if(isset($wish)){
+        $pro_wish=Wishlist::where('pro_id','=',$pro_id,)->where('user_id', '=', Auth::id())->get();
+        if($pro_wish){
             toastr()->success('Thành công', 'Thêm vào yêu thích thành công');
-            return view('listWish'); 
+            return redirect(route('listWish')); 
         }else{
             Wishlist::insert([
                 'user_id' => Auth::id(),

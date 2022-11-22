@@ -28,8 +28,6 @@
             <tr>
               <th class="col-md-5" scope="col">Sản phẩm</th>
               <th class="col-md-2" scope="col">Giá</th>
-              <th class="col-md-2" scope="col">Số lượng</th>
-              <th class="col-md-2" scope="col">Tổng cộng</th>
               <th class="col-md-1" scope="col">Hành động</th>
               <th class="col-md-1" scope="col"></th>
             </tr>
@@ -46,7 +44,7 @@
                     />
                   </div>
                   <div class="media-body cart-pro-name">
-                    <p>{{$item->products->name}}</p>
+                    <a href="{{route('getProById',$item->products->id)}}"><p>{{$item->products->name}}</p></a>
                   </div>
                 </div>
               </td>
@@ -54,40 +52,10 @@
                 <h5>{{$item->products->price}} VNĐ</h5>
               </td>
               <td>
-                <div class="product_count">
-                  <input
-                    type="text"
-                    name="qty"
-                    id="sst"
-                    maxlength="12"
-                    value="1"
-                    title="Quantity:"
-                    class="input-text qty update-cart"
-                  />
-                  <button
-                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                    class="increase items-count"
-                    type="button"
-                  >
-                    <i class="lnr lnr-chevron-up"></i>
-                  </button>
-                  <button
-                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                    class="reduced items-count"
-                    type="button"
-                  >
-                    <i class="lnr lnr-chevron-down"></i>
-                  </button>
-                </div>
-              </td>
-              <td>
-                <h5 class="cart-total">{{$item->products->price}} VNĐ</h5>
-              </td>
-              <td>
                 <a href="{{route('deleteWish',$item->id)}}" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
               </td>
               <td>
-                <a href="{{route('deleteWish',$item->id)}}" class="main_btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                <a href="{{route('getProById',$item->products->id)}}" class="main_btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
               </td>
             </tr>
              @endforeach
