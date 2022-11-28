@@ -37,7 +37,9 @@
     border-radius: 15px;
     padding: 15px 25px;
     box-shadow: 0 0 2px gray;
-    height: 350px;
+    max-height: 300px;
+    position: sticky;
+    top: 90px;
 }
 .payment_item{
     padding-bottom: 12px;
@@ -65,9 +67,6 @@
     margin-right: 10px;
     font-weight: 600;
 }
-.ship_select{
-
-}
 .payment_total{
     padding-top: 20px;
     border: none;
@@ -89,4 +88,56 @@
     text-align: center;
     font-weight: bold;
     color: #f8b600;
+}
+
+.payment{
+    margin-top: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 8px #cccccc;
+}
+.payment .row{
+    padding: 0 30px 30px 30px;
+}
+.patment-title{
+    background-color: #f6f6f6;
+    border-radius: 15px 15px 0 0;
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+.patment-title h2{
+    padding: 15px;
+    font-size: 24px;
+    color: #797979;
+    font-weight: 600;
+    width: 100%;
+    
+}
+.mt-10 label, .mt-5 label{
+    font-weight: 600;
+}
+.payment .mt-5{
+    margin-top: 1.25rem !important;
+}
+.payment-money .col-3{
+    padding: 0 10px;
+}
+.payment-money .element{
+    background-color: #f6f6f6;
+    padding: 20px;
+}
+.payment-money .element h3{
+    font-weight: bold;
+    color: #f8b600;
+}
+.payment-money .element-total{
+    color: #f44a40 !important;
+}
+.payment .genric-btn.primary{
+    border-radius: 5px;
+    margin: 0px;
+    font-size: 16px;
+    padding: 8px 12px;
+}
+.order-total{
+    color: #f44a40;
+    font-weight: bold;
 }

@@ -110,6 +110,9 @@
                     <li class="nav-item">
                     <a href="{{route('viewCart')}}" class="icons">
                         <i class="ti-shopping-cart"></i>
+                        {{-- <div class="shopee-cart-number-badge">
+                            <span style="display: block; line-height: normal; color: rgb(243, 235, 235);">2</span>
+                        </div> --}}
                     </a>
                     </li>
                     @if (Auth::check())
@@ -129,7 +132,7 @@
                     @else
                     <li class="nav-item">
                         <a href="#" class="icons" data-toggle="modal" data-target="#myModal">
-                            <i class="ti-user" aria-hidden="true"></i>
+                            <i class="ti-user" aria-hidden="true"></i>  
                         </a>
                         <div class="container">
                         <!-- Modal -->
@@ -173,18 +176,22 @@
                       </div>
                     </li>
     @endif
+                @if (Auth::check())
                     <li class="nav-item">
                         @php
                         $wishlistcount = (App\Models\Wishlist::count());
                         @endphp
                         <a href="{{route('listWish')}}" class="icons" style="height: 50%">
                             <i class="ti-heart" aria-hidden="true">
+                                @if ($wishlistcount>0)
                                 <div class="shopee-cart-number-badge">
                                     <span style="display: block; line-height: normal; color: rgb(243, 235, 235);">{{$wishlistcount}}</span>
-                                </div>
+                                </div>    
+                                @endif
                             </i>
                         </a>
                     </li>
+                @endif
                 </ul>
                 </div>
             </div>

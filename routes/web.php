@@ -96,7 +96,12 @@ Route::prefix('/')->group(function () {
         Route::get('/index', [ClientController::class,'viewCart'] )->name('viewCart');
         Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
         Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
+        Route::post('/getAddressById',[ClientController::class,'getAddressById'])->name('getAddressById');
     });
+
+    Route::post('/paymentPage',[ClientController::class,'paymentPage'])->name('paymentPage');
+    Route::post('/insertOrder',[ClientController::class,'insertOrder'])->name('insertOrder');
+
 
 });
 
@@ -187,10 +192,11 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('active/{id}', [SLideController::class,'active'])->name('on');
     });
     Route::prefix('order')->group(function () {
-        Route::get('list', [OrderController::class,'index'])->name('orders');
-        Route::get('detail/{id}', [OrderDetailController::class,'show'])->name('details');
+        Route::get('index', [OrderController::class,'index'])->name('orders');
+        Route::get('detail/{id}', [OrderController::class,'detail'])->name('orderDetail');
         Route::get('edit/{id}', [OrderController::class,'edit'])->name('edit');
-        Route::put('/update/{id}', [OrderController::class,'update'])->name('update');
+        Route::get('delete/{id}', [OrderController::class,'delete'])->name('orderDelete');
+        Route::post('/update', [OrderController::class,'update'])->name('orderUpdate');
     });
 
 });

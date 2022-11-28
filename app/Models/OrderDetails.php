@@ -22,7 +22,7 @@ class OrderDetails extends Model
     }
     public function Products()
     {
-        return $this->hasMany('App\Models\Products','pro_id', 'id');
+        return $this->belongsTo('App\Models\Products','product_id', 'id');
     } 
 
     public function User()

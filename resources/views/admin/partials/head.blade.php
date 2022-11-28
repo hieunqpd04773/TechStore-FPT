@@ -17,6 +17,7 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ URL::asset('admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('admin/css/custom.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}" />
 

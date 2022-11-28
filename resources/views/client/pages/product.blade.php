@@ -53,7 +53,17 @@
               <h3 id='pro_name'>{{$pro->name}} </h3>
               <input type="hidden" value="{{$pro->id}}" id="pro_id">
               <input type="hidden" value="{{$pro->image}}" id="pro_image">
-              <h2 ><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{$pro->price-$pro->discount}}</span> <span>VND</span></h2>
+                <div class="d-flex">
+                  <h2 class="pr-2 "><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{ number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.');}}</span> <span>VND</span></h2>
+                  @if($pro->discount > 0)
+                    <del class="disnone">{{number_format($pro->price, 0, '.', '.')}} </span> <span>VND</span></h2></del>
+                  @endif
+                </div>
+                @if($pro->discount != 0)
+                  <div class="product-item-sale">
+                    <div>Giảm {{$pro->discount}}%</div>       
+                  </div>
+                @endif
               <ul class="list">
                 <li>
                   <a class="active" href="{{route('getProByCateItem',$pro->cate_id)}}">
@@ -111,7 +121,7 @@
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-diamond"></i>
                 </a>
-                <a class="icon_btn" href="{{route('addWish',$pro->id)}}">
+                <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
               </div>

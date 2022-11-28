@@ -16,7 +16,7 @@ class Orders extends Model
         'note'=>''
     ];
     protected $fillable = [
-        'user_id ','phone','address','date','total','status','note'
+        'user_id ','user_address','deli_id','discount','total','status','note'
     ];
 
     public function OrderDetails()
@@ -30,5 +30,13 @@ class Orders extends Model
     public function User()
     {
         return $this->belongsTo('App\Models\User','user_id','id');
+    }
+    public function UserAddress()
+    {
+        return $this->belongsTo('App\Models\User','user_id','id');
+    }
+    public function Delivery()
+    {
+        return $this->belongsTo('App\Models\Delivery','deli_id', 'id');
     }
 }

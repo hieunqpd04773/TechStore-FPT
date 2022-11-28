@@ -69,7 +69,6 @@
             </div>
 
             <div class="table-responsive">
-              
               <table id="recent-purchases-listing" class="table table-hover">
                 <thead>
                   <tr>
@@ -88,7 +87,7 @@
                     <td>{{$pro->id}}</td>
                     <td>{{$pro->Cate_items->name}}</td>
                     <td>{{$pro->name}}</td>
-                    <td><img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:100px; height:100px"></td>
+                    <td><img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:90px; max-height:90px"></td>
                     <td>{{$pro->price}} VND</td>
                     <td>{{$pro->created_at}}</td>
                     <td><a class="badge badge-info rounded" href="{{route('loadEditPro',$pro->id)}}">Sửa</a>

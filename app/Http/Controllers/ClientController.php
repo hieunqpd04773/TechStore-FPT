@@ -6,18 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
-use App\Models\ProVariants;
 use App\Models\ProMemory;
 use App\Models\ProColors;
 use App\Models\ProDetails;
 use App\Models\Comments;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Models\Delivery;
 use App\Models\Slider;
 use App\Models\Wishlist;
+use App\Models\Orders;
+use App\Models\OrderDetails;
 use DB;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Session;
 
 
 class ClientController extends Controller
@@ -34,7 +35,7 @@ class ClientController extends Controller
     }
     public function index()
     {
-        $homeTopPr = Products::where('hot','=','1')->limit(3)->get();
+        $homeTopPr = Products::where('hot','=','1')->limit(4)->get();
         $homeNewPr = Products::orderBy('id','desc')->limit(5)->get();
         $homeSalePr = Products::orderBy('discount','desc')->limit(6)->get();
         return view('client.pages.index',['homeTopPr'=>$homeTopPr,'homeNewPr'=>$homeNewPr,'homeSalePr'=>$homeSalePr]);
@@ -61,7 +62,6 @@ class ClientController extends Controller
         $pro->view=$pro->view+1;
         $pro->save();
         $images=Products::find($id)->Images;
-        $pro_vars=Products::find($id)->ProVariants;
         $pro_details=Products::find($id)->ProDetails;
         $pro_colors=Products::find($id)->ProColors;
         $pro_memory=Products::find($id)->ProMemory;
@@ -77,11 +77,11 @@ class ClientController extends Controller
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images,'pro_vars'=>$pro_vars, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
         }
     }
 
@@ -89,11 +89,6 @@ class ClientController extends Controller
     {
         $cateItems=CateItems::where('cate_id','=',$r->id_cate)->get();
         return response()->json($cateItems);
-    }
-    public function getVarItemByid(Request $r)
-    {
-        $pro_var=ProVariants::find($r->pv_id);
-        return response()->json($pro_var);
     }
     public function signup()
     {
@@ -109,7 +104,8 @@ class ClientController extends Controller
     }
     public function useraddress()
     {
-        $listAdr = UserAddress::all();
+        Auth::user()->id;
+        $listAdr = UserAddress::where('user_id','=',Auth::user()->id)->get();
         return view('client.pages.useraddress')->with(compact('listAdr'));
     }
     public function addAddress(Request $r)
@@ -201,6 +197,7 @@ class ClientController extends Controller
         $allusern = User::where('id', '=', )->get;
         return redirect()->back();
     }
+    // /// Cart and pay
     public function addCart(Request $request)
     {
         $pro_id=$request->pro_id;
@@ -238,10 +235,19 @@ class ClientController extends Controller
 
     public function viewCart()
     {
+        if (Auth::check()){
+            $userAddress=UserAddress::where('user_id','=', Auth::user()->id)->get();
+            view()->share('userAddress', $userAddress);
+        }
         $allProCart=session()->get('cart');
-        // dd($allProCart);
-        return view('client.pages.cart')->with(compact('allProCart'));
-        // echo $allProCart['iPhone 13']['name'];
+        $delivery=Delivery::all();
+        return view('client.pages.cart')->with(compact('allProCart','delivery'));
+    }
+
+    public function getAddressById(Request $r)
+    {
+        $address=UserAddress::find($r->id);
+        return response()->json($address);
     }
 
     public function deleteItemCart($name)
@@ -289,6 +295,41 @@ class ClientController extends Controller
         $wishlistcount = Wishlist::count($id);
         return view('client.pages',compact('wishlistcount'));
     }
-    //end wishlist
+
+    public function insertOrder(Request $r)
+    {
+        // INSERT ORDER
+        $order = new Orders();
+        $order->user_id=$r->user_id;
+        $order->user_address=$r->user_address;
+        $order->deli_id=$r->deli_id;
+        $order->total=$r->total;
+        $order->status=0;
+        $order->note=$r->note;
+        $order ->save();
+
+        $order_id= $order->id;
+        // INSERT ORDER_DETAIL
+        $allProCart=session()->get('cart');
+        foreach($allProCart as $pro){
+            $order_detail = new OrderDetails();
+            $order_detail->order_id=$order_id;
+            $order_detail->product_id=$pro['id'];
+            $order_detail->product_name=$pro['name'];
+            $order_detail->number=$pro['qty'];
+            $order_detail->price=$pro['price'];
+            $order_detail->save();
+        }
+        session()->forget(['cart']);
+        return redirect()->back()->with('success', 'Tạo đơn hàng thành công');;
+
+    }
+
+    public function orderTracking()
+    {
+        $order=Orders::find($id);
+        $details=OrderDetails::where('order_id','=', $id)->get();
+        return view('client.pages.myorder', compact('order','details'));
+    }
     
 }
