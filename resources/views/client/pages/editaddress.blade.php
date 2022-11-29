@@ -10,7 +10,6 @@
             <div class="col border-right"> 
                 <div class="p-3 py-5"> 
                     <div class="d-flex justify-content-between align-items-center mb-3"> 
-                        <p>{{$adr->role}}</p>
                         <h4 class="text-right">Chỉnh sửa địa chỉ</h4> 
                     </div> <div class="row mt-2"> 
                         <input type="hidden" class="form-control" placeholder="" name="id" value="{{$adr->id}}">

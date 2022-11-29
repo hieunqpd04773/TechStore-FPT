@@ -2,9 +2,7 @@
 @section('title','Giỏ hàng')
 @section('content')
 @include('client/partials/_nav')
-@php
-  $cart_total=0;
-@endphp
+
     <!--================Cart Area =================-->
     <section class="cart_area">
       <div class="container">
@@ -20,30 +18,27 @@
                 </tr>
               </thead>
               <tbody>
-                @if(isset($allProCart) && count($allProCart)>0)
-                @foreach ($allProCart as $pro)
-                  @php
-                      $cart_total+=$pro['total']
-                  @endphp
+                @if(isset($details) && count($details)>0)
+                @foreach ($details as $detail)
                 <tr>
                   <td>
                     <div class="media">
                       <div class="d-flex">
                         <img width="100px"
-                          src="{{asset('images/products/'.$pro['image'])}}"
+                          src="{{asset('images/products/'.$detail->Products->image)}}"
                           alt=""
                         />
                       </div>
                       <div class="media-body cart-pro-name">
-                        <p>{{$pro['name']}}</p>
+                        <p>{{$detail->product_name}}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <h5>{{ number_format($pro['price'], 0, '.', '.');}} VNĐ</h5>
+                    <p>{{$detail->number}}</p>
                   </td>
                   <td>
-                    <h5 class="cart-total">{{ number_format($pro['total'], 0, '.', '.');}} VNĐ</h5>
+                    <h5 class="cart-total">{{ number_format($detail->price, 0, '.', '.');}} VNĐ</h5>
                   </td>
                 </tr>
                  @endforeach
@@ -54,41 +49,45 @@
                   </td>
                 </tr>
                 @endif
-                <tr class="bottom_button">
-                  <td colspan="2">
-                    <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
-                  </td>
-
-                  <td colspan="3">
-                    <div class="cupon_text">
-                      <input type="text" placeholder="Coupon Code" />
-                      <a class="main_btn apply_btn" href="#">Áp dụng</a>
-                    </div>
-                  </td>
-                </tr>
               </tbody>
             </table>
            </div>
+          </div>
           
           {{-- Payment sidebar --}}
-          <div class="payment_info col-md-4">
+          <div class="payment_info info-order col-md-4">
             <div class="payment_item">
               <h3>Thông tin đơn hàng</h3>
             </div>
             <br>
             <div class="payment_item">
-              <p>Giỏ hàng: <span>VNĐ</span> <span data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
-              <p>Giảm Giá: <span>VNĐ</span> <span > 0 VNđ</span> </p>
+              <p>Mã ĐH: {{$order->id}}</p>
+              <p>Người nhận: {{$order->UserAddress->name}}</p>
+              <p>Địa chỉ: {{$order->UserAddress->address}}</p>
+              <p>SĐT:  {{$order->UserAddress->phone}}</p>
 
             </div>
-            <div class="payment_item payment_total">
-              <p>Tổng tiền <span>VNĐ</span ><span data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
+            <div class="payment_item">
+              <p>Ngày tạo: {{$order->created_at}}</p>
+              <p>PTGH: {{$order->Delivery->name}}</p>
+              <p>Trạng thái:  @if ($order->status==0)
+                  Đang xử lý
+              @elseif($order->status==1)
+                  Đã xác nhận
+              @elseif($order->status==2)
+                  Đang giao hàng
+              @elseif($order->status==3)
+                  Đã thanh toán
+              @elseif($order->status==4)
+                  Đã hủy
+              @endif</p>
+              <p>Ghi chú: {{$order->note}}</p>
             </div>
-            @if(Auth::check())
-            <a href="#" class="btn_pay">Tiến hành thanh toán</a>
-            @else
-            <a href="#" class="btn_pay">Đăng nhập để thanh toán</a>
-            @endif
+            <div class="payment_item payment_total">
+              <p>Giao hàng: {{ number_format($order->Delivery->value, 0, '.', '.');}} VNĐ</p>
+              <p>Giảm giá: {{ number_format($order->discount, 0, '.', '.');}} VNĐ</p>
+              <p>Tổng tiền:  {{ number_format($order->total, 0, '.', '.');}} VNĐ</p>
+            </div>
           </div>
         </div>
       </div>

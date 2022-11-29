@@ -74,6 +74,9 @@
             <p>PT Giao Hàng: <span>{{$order->Delivery->name}}</span></p>
           </div>
           <div class="info-user-content">
+            <p>Ngày tạo đơn: <span>{{$order->created_at}}</span></p>
+          </div>
+          <div class="info-user-content">
             <p>Trạng Thái: <span>
               @if ($order->status==0)
                   Đang xử lý

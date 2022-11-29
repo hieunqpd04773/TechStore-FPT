@@ -139,7 +139,7 @@
 <!--================ End Feature Product Area =================-->
 
 <!--================ Offer Area =================-->
-<section class="offer_area">
+{{-- <section class="offer_area">
     <div class="container">
         <div class="row justify-content-center">
             <div class="offset-lg-4 col-lg-6 text-center">
@@ -152,7 +152,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!--================ End Offer Area =================-->
 
 <!--================ New Product Area =================-->

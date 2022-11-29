@@ -101,6 +101,9 @@ Route::prefix('/')->group(function () {
 
     Route::post('/paymentPage',[ClientController::class,'paymentPage'])->name('paymentPage');
     Route::post('/insertOrder',[ClientController::class,'insertOrder'])->name('insertOrder');
+    Route::get('/orders',[ClientController::class,'orders'])->name('myOrders');
+    Route::get('/orderdetails/{id}',[ClientController::class,'orderdetails'])->name('myOrderDetails');
+    Route::get('/cancelOrders/{id}',[ClientController::class,'cancelOrders'])->name('cancelOrders');
 
 
 });

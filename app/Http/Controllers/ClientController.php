@@ -321,15 +321,27 @@ class ClientController extends Controller
             $order_detail->save();
         }
         session()->forget(['cart']);
-        return redirect()->back()->with('success', 'Tạo đơn hàng thành công');;
+        return redirect()->back()->with('success', 'Tạo đơn hàng thành công');
 
     }
 
-    public function orderTracking()
+    public function orders()
+    {
+        $orders=Orders::where('user_id','=',Auth::id() )->get();
+        return view('client.pages.orders',compact('orders'));
+    }
+    public function orderdetails($id)
     {
         $order=Orders::find($id);
         $details=OrderDetails::where('order_id','=', $id)->get();
-        return view('client.pages.myorder', compact('order','details'));
+        return view('client.pages.orderdetails', compact('order','details'));
+    }
+    public function cancelOrders($id)
+    {
+        $order=Orders::find($id);
+        $order->status=4;
+        $order->save();
+        return redirect()->back()->with('success', 'Hủy đơn hàng thành công');
     }
     
 }

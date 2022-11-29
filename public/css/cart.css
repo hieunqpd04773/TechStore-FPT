@@ -141,3 +141,8 @@
     color: #f44a40;
     font-weight: bold;
 }
+
+.info-order{
+    min-height: auto;
+    max-height: 800px !important;
+}

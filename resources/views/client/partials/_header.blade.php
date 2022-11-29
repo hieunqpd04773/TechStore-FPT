@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="tracking.html">
+                        <a href="{{Route('myOrders')}}">
                         Đơn Hàng
                         </a>
                     </li>
