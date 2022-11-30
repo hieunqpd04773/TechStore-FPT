@@ -17,9 +17,9 @@
                   <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
                     <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
                   </li>
-                  @for ($i = 0; $i < count($pro_vars); $i++)
+                  @for ($i = 0; $i < count($pro_colors); $i++)
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
-                  <img src="{{asset('images/products/'.$pro_vars[$i]->image)}}"
+                  <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
                     alt="" style="width:100%"/>
                 </li>
                 @endfor
@@ -34,9 +34,9 @@
                   <div class="carousel-item active">
                     <img id="pro_img" class="d-block w-100" src="{{asset('images/products/'.$pro->image)}}" alt="First slide" />
                   </div>
-                  @foreach ($pro_vars as $pv)
+                  @foreach ($pro_colors as $pc)
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('images/products/'.$pv->image)}}"alt="Second slide" />
+                    <img class="d-block w-100" src="{{asset('images/products/'.$pc->image)}}"alt="Second slide" />
                   </div>
                   @endforeach
                   @foreach ($images as $img)
@@ -51,7 +51,9 @@
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
               <h3 id='pro_name'>{{$pro->name}} </h3>
-              <h2 id='pro_price'>{{$pro->price-$pro->discount}}  đ</h2>
+              <input type="hidden" value="{{$pro->id}}" id="pro_id">
+              <input type="hidden" value="{{$pro->image}}" id="pro_image">
+              <h2 ><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{$pro->price-$pro->discount}}</span> <span>VND</span></h2>
               <ul class="list">
                 <li>
                   <a class="active" href="{{route('getProByCateItem',$pro->cate_id)}}">
@@ -65,13 +67,19 @@
                   <a href="#"> <span>Tình trạng</span> : còn {{$pro->quantity}} máy</a>
                 </li>
               </ul>
-              <p>
-                Chọn biến thể <br>
-                
-              @foreach ($pro_vars as $pv)
-                  <span class="pro_var" data-pvid="{{$pv->id}}">{{$pv->color}} - {{$pv->memory}} GB</span> 
-              @endforeach
-              </p>
+              @if(isset($pro_colors))
+               <p class="var_title">Chọn màu sắc: </p>  
+                @foreach ($pro_colors as $pc)
+                  <span class="pro_color pro_var" data-price="{{$pc->price}}" data-image="{{$pc->image}}">{{$pc->color}}</span>
+                @endforeach
+              @endif
+              @if(isset($pro_memory))
+               <p class="var_title">Chọn bộ nhớ: </p>  
+                @foreach ($pro_memory as $pm)
+                  <span class="pro_mem pro_var" data-price="{{$pm->price}}">{{$pm->memory}}-{{$pm->ram}} GB</span> 
+                @endforeach
+              @endif
+              <br>
               <div class="product_count">
                 <label for="qty">Số lượng:</label>
                 <input
@@ -99,7 +107,7 @@
                 </button>
               </div>
               <div class="card_area">
-                <a class="main_btn" href="#">Add to Cart</a>
+                <a class="main_btn" id="addCart">Add to Cart</a>
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-diamond"></i>
                 </a>
@@ -130,18 +138,7 @@
               >Mô tả</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="profile-tab"
-              data-toggle="tab"
-              href="#profile"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-              >Thông tin chi tiết</a
-            >
-          </li>
+          
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -162,9 +159,98 @@
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-            <p>
-              {{$pro->detail}}
-            </p>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="detail-content">
+                <h2>Mô tả sản phẩm:</h2>
+                <p>
+                {{$pro->detail}}
+              </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="table-responsive">
+        
+              <table class="table tb_details">
+                <tbody id="var_info">
+                  @if (isset($pro_details->memory))
+                  <tr>
+                    <td><h5>Bộ nhớ</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->memory}} GB</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->camera))
+                  <tr>
+                    <td><h5>Camera</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->camera}}</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->display))
+                  <tr>
+                    <td><h5>Màn hình</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->display}}</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->batery))
+                  <tr>
+                    <td><h5>Dung lượng Pin</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->batery}} mAh</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->os))
+                  <tr>
+                    <td><h5>Hệ Điều Hành</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->os}}</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->sub_camera))
+                  <tr>
+                    <td><h5>Camera Phụ</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->sub_camera}} MP</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->cpu))
+                  <tr>
+                    <td><h5>Chip xử lí</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->cpu}}</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->ram))
+                  <tr>
+                    <td><h5>Bộ nhớ Ram</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->ram}} GB</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->hight))
+                  <tr>
+                    <td><h5>Chiều cao</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->hight}} mm</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->width))
+                  <tr>
+                    <td><h5>Chiều rộng</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->width}} mm</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->depth))
+                  <tr>
+                    <td><h5>Độ dày</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->depth}} mm</h5></td>
+                  </tr>
+                  @endif
+                  @if (isset($pro_details->weight))
+                  <tr>
+                    <td><h5>Trọng lượng</h5> </td>
+                    <td class="dt_value"><h5 >{{$pro_details->weight}} gram</h5></td>
+                  </tr>
+                  @endif
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+            
           </div>
           <div
             class="tab-pane fade"
@@ -172,61 +258,7 @@
             role="tabpanel"
             aria-labelledby="profile-tab"
           >
-            <div class="table-responsive">
-              <table class="table">
-                <tbody id="var_info">
-                  <tr>
-                    <td>
-                      <h5>Màu</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_color">128mm</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5>Rộng</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_width">128mm</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5 >Cao</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_hight">508mm</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5>Dày</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_depth">85mm</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5>Trọng Lượng</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_weight">52gm</h5>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h5>Bộ nhớ</h5>
-                    </td>
-                    <td>
-                      <h5 id="pro_memory">GB</h5>
-                    </td>
-                  </tr>
-                 
-                </tbody>
-              </table>
-            </div>
+    
           </div>
           <div
             class="tab-pane fade"
@@ -349,54 +381,7 @@
                   @endforeach
                   
                   
-                  <!-- <div class="review_item">
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/review-2.png"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <h4>Blake Ruiz</h4>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
-                    </p>
-                  </div>
-                  <div class="review_item">
-                    <div class="media">
-                      <div class="d-flex">
-                        <img
-                          src="img/product/single-product/review-3.png"
-                          alt=""
-                        />
-                      </div>
-                      <div class="media-body">
-                        <h4>Blake Ruiz</h4>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
-                    </p>
-                  </div> -->
+              
                 </div>
               </div>
               <div class="col-lg-6">
@@ -463,72 +448,6 @@
                       <div>
 
                       </div>
-                      <!-- end sta -->
-
-
-
-
-
-                      <!-- <li>
-                        <a href="#">
-                          <i name="" class="fa fa-star"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-star"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-star"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-star"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fa fa-star"></i>
-                        </a>
-                      </li> -->
-                    </ul>
-
-                    <!-- <div class="col-md-12">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          name="name"
-                          placeholder="Họ và tên:"
-                        />
-                      </div>
-                    </div> -->
-                    <!-- <div class="col-md-12">
-                      <div class="form-group">
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="email"
-                          name="email"
-                          placeholder="Địa chỉ email:"
-                        />
-                      </div>
-                    </div> -->
-                    <!-- <div class="col-md-12">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="number"
-                          name="number"
-                          placeholder="Số điện thoại:"
-                        />
-                      </div>
-                    </div> -->
                     <div class="col-md-12">
                       <div class="form-group">
                         <textarea
@@ -568,44 +487,69 @@
       </div>
     </section>
 
+
+    <!--================End Product Description Area =================-->
+    {{-- bien the --}}
     <script type="text/javascript">
-      $(document).ready(function(){  
+      $(document).ready(function(){ 
         const pro_name= $('#pro_name').html();
-        const pro_price= $('#pro_price').html();
-        const pro_img= $('#pro_img');
-        const pro_color= $('#pro_color').html();
-        const pro_width= $('#pro_width').html();
-        const pro_hight= $('#pro_hight').html();
-        const pro_depth= $('#pro_depth').html();
-        const pro_weight= $('#pro_weight').html();
-        const pro_memoryt= $('#pro_memory').html();
-        $('.pro_var').click(function(){
-          
-          var pv_id=$(this).data('pvid');
-          
-          $.ajax({
-            url: '{{route('getVarItemByid')}}',
+        const pro_price= $('#pro_price').data('price'); 
+        const pro_id=$('#pro_id').val();
+        let pro_var_name=""
+        let pro_var_price=""
+        $('.pro_color').click(function(){
+            var color=$(this).html();
+            var image=$(this).data('image')
+            var color_price=$(this).data('price')
+            $('#pro_name').html(pro_name +color)
+            $('#pro_image').val(image)
+             pro_var_name= $('#pro_name').html();
+              $('#pro_price').html(pro_price+color_price);
+             pro_var_price= pro_price+color_price;
+             
+        });
+        $('.pro_mem').click(function(){
+            var memory=$(this).html();
+            var me_price=$(this).data('price')
+            if(pro_var_name){
+               $('#pro_name').html(pro_var_name +" " +memory)
+              
+            }else{
+              $('#pro_name').html(pro_name +" " +memory)
+            }
+
+            if(pro_var_price){
+              $('#pro_price').html(pro_var_price+me_price);
+            }else{
+               $('#pro_price').html(pro_price+me_price);
+            }
+        });
+
+        $('#addCart').click(function(){
+            const pro_name_cart=$('#pro_name').html()
+            const pro_image_cart=$('#pro_image').val()
+            const pro_price_cart=$('#pro_price').html()
+            const pro_qty_cart=$('#sst').val()
+
+            $.ajax({
+            url: '{{route('addCart')}}',
             method: 'post',
             data:{
               _token: "{{ csrf_token() }}",
-              pv_id:pv_id
+              pro_id:pro_id,
+              name:pro_name_cart,
+              image: pro_image_cart,
+              price:pro_price_cart,
+              qty:pro_qty_cart,
+              _method : "post"
+              
             },
             success:function(data){
-              console.log(data.color);
-              
-              $("#pro_name").html(pro_name +  data.color +" - " +data.memory +"GB");
-              $("#pro_price").html(data.price );
-              $("#pro_color").html(data.color );
-              $("#pro_width").html(data.width );
-              $("#pro_hight").html(data.hight );
-              $("#pro_depth").html(data.depth );
-              $("#pro_weight").html(data.weight );
-              $("#pro_memory").html(data.memory );
+              alert("Đã thêm sản phẩm vào giỏ hàng")
             }
-          })
+             
         });
       });
-    </script> 
-    <!--================End Product Description Area =================-->
-
+    });
+    </script>
 @endsection

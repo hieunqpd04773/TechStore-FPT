@@ -7,6 +7,9 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\ProVariants;
+use App\Models\ProDetails;
+use App\Models\ProMemory;
+use App\Models\ProColors;
 
 class ProductController extends Controller
 {
@@ -159,26 +162,49 @@ class ProductController extends Controller
         $pro->status=$r->status;
         $pro->save();
 
-        if(isset($r->color)){
-            $pro_var= new ProVariants();
-            if($r->has('file_upload_variants')){
-                $file=$r->file_upload_variants;
-                $file_upload_variants= date('YmdHi').$file->getClientOriginalName();
-                //dd($file_name);
-                $file->move(public_path('images/products'),$file_upload_variants);
-            }
-            $r->merge(['image'=>$file_upload_variants]);
+        $id_pro=$pro->id;
 
-            $pro_var->pro_id=$pro->id;
-            $pro_var->color=$r->color;
-            $pro_var->memory=$r->memory;
-            $pro_var->image=$r->file_upload_variants;
-            $pro_var->price=$r->price;
-            $pro_var->width=$r->width;
-            $pro_var->hight=$r->hight;
-            $pro_var->depth=$r->depth;
-            $pro_var->weight=$r->weight;
-            $pro_var->save();
+        if(isset($r->cpu)){
+            $pro_details= new ProDetails();
+            $pro_details->pro_id=$id_pro;
+            $pro_details->memory=$r->memory;
+            $pro_details->camera=$r->camera;
+            $pro_details->display=$r->display;
+            $pro_details->batery=$r->batery;
+            $pro_details->os=$r->os;
+            $pro_details->sub_camera=$r->sub_camera;
+            $pro_details->cpu=$r->cpu;
+            $pro_details->ram=$r->ram;
+            $pro_details->hight=$r->hight;
+            $pro_details->width=$r->width;
+            $pro_details->depth=$r->depth;
+            $pro_details->weight=$r->weight;
+            $pro_details->save();
+        }
+
+        if(isset($r->memory_var)){
+            $pro_memory= new ProMemory();
+            $pro_memory->pro_id=$id_pro;
+            $pro_memory->memory=$r->memory_var;
+            $pro_memory->ram=$r->ram_var;
+            $pro_memory->price=$r->price_memory;
+            $pro_memory->save();
+        }
+        if(isset($r->color)){
+            $pro_color= new ProColors();
+            if($r->has('file_image_color')){
+                $file=$r->file_image_color;
+                $file_image_color= date('YmdHi').$file->getClientOriginalName();
+                //dd($file_name);
+                $file->move(public_path('images/products'),$file_image_color);
+            }
+            $r->merge(['image_color'=>$file_image_color]);
+
+            $pro_color->pro_id=$id_pro;
+            $pro_color->color=$r->color;
+            $pro_color->image=$file_image_color;
+            $pro_color->price=$r->price_color;
+            $pro_color->save();
         }
 
         toastr()->success('Thành công', 'Thêm sản phẩm thành công');
@@ -191,15 +217,10 @@ class ProductController extends Controller
     {
         $pro=Products::find($id);
         $allCate=Categories::all();
-        $pro_vars=ProVariants::where('pro_id','=',$id)->get();
-        return view('admin.pages.products.variants',['pro'=>$pro,'allCate'=>$allCate,'pro_vars'=>$pro_vars]);
+        $pro_color=ProColors::where('pro_id','=',$id)->get();
+        $pro_memory=ProMemory::where('pro_id','=',$id)->get();
+        return view('admin.pages.products.variants')->with(compact('pro','allCate','pro_color','pro_memory'));
     }
-    // public function loadAddVariant($id)
-    // {
-    //     $pro=Products::find($id);
-    //     $allCate=Categories::all();
-    //     return view('admin.pages.products.addvariant',['pro'=>$pro,'allCate'=>$allCate]);
-    // }
     public function createVariant(Request $request)
     {
         $pro_var= new ProVariants();
@@ -243,34 +264,75 @@ class ProductController extends Controller
     public function loadEdit($id)
     {
         $pro=Products::find($id);
+        $pro_details=Products::find($id)->ProDetails;
         $allCate=Categories::all();
-        return view('admin.pages.products.edit',['pro'=>$pro,'allCate'=>$allCate]);
+        $allCateItems=CateItems::all();
+        return view('admin.pages.products.edit')->with(compact('pro', 'allCate','pro_details','allCateItems'));
     }
-    public function edit(Request $request)
+    public function edit(Request $r)
     {
-        $pro=Products::find($request->id);
+        $pro=Products::find($r->id);
 
-        if($request->file_upload==''){
-            $image=$request->input('image1');
+        if($r->file_upload==''){
+            $image=$r->input('image1');
         }
-        else if($request->has('file_upload')){
-            $file=$request->file_upload;
+        else if($r->has('file_upload')){
+            $file=$r->file_upload;
             $file_name= $file->getClientoriginalName();
             $file->move(public_path('images/products'),$file_name);
             $image=$file_name;
         }
 
-        $pro->name=$request->name;
-        $pro->cate_id=$request->cate_id;
-        $pro->price=$request->price;
-        $pro->discount=$request->discount;
+        $pro->name=$r->name;
+        $pro->cate_id=$r->cate_id;
+        $pro->price=$r->price;
+        $pro->discount=$r->discount;
         $pro->image=$image;
-       // $pro->date=$request->date;
-        $pro->quantity=$request->quantity;
-        $pro->detail=$request->detail;
-        $pro->hot=$request->hot;
-        $pro->status=$request->status;
+       // $pro->date=$r->date;
+        $pro->quantity=$r->quantity;
+        $pro->detail=$r->detail;
+        $pro->hot=$r->hot;
+        $pro->status=$r->status;
         $pro->save();
+
+        if(isset($r->cpu)){
+            $pro_details= ProDetails::where('pro_id', '=', $pro->id)->first();
+
+            if($pro_details){
+                $pro_details->pro_id=$pro->id;
+                $pro_details->memory=$r->memory;
+                $pro_details->camera=$r->camera;
+                $pro_details->display=$r->display;
+                $pro_details->batery=$r->batery;
+                $pro_details->os=$r->os;
+                $pro_details->sub_camera=$r->sub_camera;
+                $pro_details->cpu=$r->cpu;
+                $pro_details->ram=$r->ram;
+                $pro_details->hight=$r->hight;
+                $pro_details->width=$r->width;
+                $pro_details->depth=$r->depth;
+                $pro_details->weight=$r->weight;
+                $pro_details->save();
+            }else{
+                $pro_details= new ProDetails();
+                $pro_details->pro_id=$pro->id;
+                $pro_details->memory=$r->memory;
+                $pro_details->camera=$r->camera;
+                $pro_details->display=$r->display;
+                $pro_details->batery=$r->batery;
+                $pro_details->os=$r->os;
+                $pro_details->sub_camera=$r->sub_camera;
+                $pro_details->cpu=$r->cpu;
+                $pro_details->ram=$r->ram;
+                $pro_details->hight=$r->hight;
+                $pro_details->width=$r->width;
+                $pro_details->depth=$r->depth;
+                $pro_details->weight=$r->weight;
+                $pro_details->save();
+            }
+            
+        }
+
         toastr()->success('Thành công', 'Cập nhật sản phẩm thành công');
         return redirect(route('listPro'));
     }
@@ -280,5 +342,58 @@ class ProductController extends Controller
         $pro->delete();
         toastr()->success('Thành công', 'Xóa sản phẩm thành công');
         return redirect(route('listPro'));
+    }
+
+    /// Biến thể
+
+    public function deleteColor($id)
+    {
+        $pro_color=ProColors::find($id);
+        $pro_color->delete();
+        toastr()->success('Thành công', 'Xóa biến thể thành công');
+        return back();
+    }
+
+    public function createColor(Request $r)
+    {
+        $pro_color= new ProColors();
+        if($r->has('file_image_color')){
+            $file=$r->file_image_color;
+            $file_image_color= date('YmdHi').$file->getClientOriginalName();
+            //dd($file_name);
+            $file->move(public_path('images/products'),$file_image_color);
+        }
+        $r->merge(['image_color'=>$file_image_color]);
+
+        $pro_color->pro_id=$r->id;
+        $pro_color->color=$r->color;
+        $pro_color->image=$file_image_color;
+        $pro_color->price=$r->price_color;
+        $pro_color->save();
+
+        toastr()->success('Thành công', 'Thêm biến thể thành công');
+        return back();
+    }
+
+
+    public function createMemory(Request $r)
+    {
+        $pro_memory= new ProMemory();
+        $pro_memory->pro_id=$r->id;
+        $pro_memory->memory=$r->memory;
+        $pro_memory->ram=$r->ram;
+        $pro_memory->price=$r->price_memory;
+        $pro_memory->save();
+
+        toastr()->success('Thành công', 'Thêm biến thể thành công');
+        return back();
+    }
+
+    public function deleteMemory($id)
+    {
+        $pro_memory=ProMemory::find($id);
+        $pro_memory->delete();
+        toastr()->success('Thành công', 'Xóa biến thể thành công');
+        return back();
     }
 }

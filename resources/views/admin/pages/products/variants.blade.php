@@ -64,167 +64,160 @@
       </div>
     </div>
 </div>
-@php
-    $i=0;
-    
-@endphp
-@foreach ($pro_vars as $pv)
-@php
-    $i++;
-@endphp
 <div class="content-wrapper var">
   <div class="row">
-      <div class="col-12 grid-margin stretch-card" id="">
-          <input class="form-control" type="hidden" name="id">
-        <div class="card card-body">
-          <h4 class="card-title">Biến Thể {{$i}}</h4>
+    {{-- Màu Sắc --}}
+    <div class="col-6 grid-margin stretch-card" id="">
+       <div class="row">
+      @php
+          $i=0;   
+      @endphp
+      @foreach ($pro_color as $pc)
+      @php
+          $i++;
+      @endphp
+        <div class="col-12 mt-1">
+          <div class="card card-body">
+          <h4 class="card-title">Biến Thể Màu Sắc {{$i}}</h4>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="exampleSelectGender">Màu sắc</label>
-                <input type="text" name="color" disabled value="{{$pv->color}}" class="form-control amount" id="exampleInputName1" placeholder="">                         
+                <input type="text" name="color" disabled value="{{$pc->color}}" class="form-control amount" id="exampleInputName1" placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelectGender">Gía thêm </label>
+                <input type="text" name="price" disabled value="{{$pc->price}} Đ" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="exampleInputName1">Bộ nhớ</label>
-                <input type="number" name="memory" disabled value="{{$pv->memory}}" class="form-control amount" id="exampleInputName1" placeholder="Nhập dung lượng bộ nhớ(GB)">
+                <img src="{{asset('images/products/'.$pc->image)}}" width="65%" alt="ko cos anh">
                 <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="exampleSelectGender">Gía</label>
-                <input type="number" name="price" disabled value="{{$pv->price}}" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label>Hình Ảnh</label>
-                <img src="{{asset('images/products/'.$pv->image)}}" width="30%" alt="ko cos anh">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleSelectGender">Chiều dài</label>
-                <input type="text" name="width" disabled value="{{$pv->width}}" class="form-control " id="exampleInputName1" placeholder="Nhập chiều dài(mm)">                         
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Chiều rộng</label>
-                <input type="number" name="hight" disabled value="{{$pv->hight}}" class="form-control " id="exampleInputName1" placeholder="Nhập chiều rộng(mm)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Cân nặng</label>
-                <input type="number" name="weight" disabled value="{{$pv->weight}}" class="form-control " id="exampleInputName1" placeholder="Nhập cân nặng(gam)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Độ dày</label>
-                <input type="number" name="depth" disabled value="{{$pv->depth}}" class="form-control " id="exampleInputName1" placeholder="Nhập độ dày(mm)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-          </div>
-          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteVar',$pv->id)}}">Xóa</a></td>
-      </div>
-      
-    </div>
-  </div>
-</div>
-@endforeach
-
-
-<div class="content-wrapper var">
-  <div class="row">
-
-    <div class="col">
-      <div class="col-12 grid-margin stretch-card">
-        <form method="post" action="{{route('createVariant')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
-          @csrf
-          <input type="hidden" name="id" value="{{$pro->id}}" id="">
-        <div class="card card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="exampleSelectGender">Màu sắc</label>
-                <input type="text" name="color" class="form-control amount" id="exampleInputName1" placeholder="Nhập màu sắc">                         
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="exampleInputName1">Bộ nhớ</label>
-                <input type="number" name="memory" class="form-control amount" id="exampleInputName1" placeholder="Nhập dung lượng bộ nhớ(GB)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="exampleSelectGender">Gía</label>
-                <input type="number" name="price_var" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label>Hình Ảnh</label>
-                <input type="file" name="file_upload_var" class="form-control avatar">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleSelectGender">Chiều dài</label>
-                <input type="text" name="width" class="form-control " id="exampleInputName1" placeholder="Nhập chiều dài(mm)">                         
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Chiều rộng</label>
-                <input type="number" name="hight" class="form-control " id="exampleInputName1" placeholder="Nhập chiều rộng(mm)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Cân nặng</label>
-                <input type="number" name="weight" class="form-control " id="exampleInputName1" placeholder="Nhập cân nặng(gam)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="exampleInputName1">Độ dày</label>
-                <input type="number" name="depth" class="form-control " id="exampleInputName1" placeholder="Nhập độ dày(mm)">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
-            </div>
+          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteColor',$pc->id)}}">Xóa</a></td>
           </div>
         </div>
+         @endforeach
+
+         {{-- add color --}}
+         <div class="col-12 mt-1">
+          <form method="POST" action="{{route('createColor')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
+              @csrf
+              <input type="hidden" name="id" value="{{$pro->id}}">
+          <div class="card card-body">
+          <h4 class="card-title">Thêm Biến Thể Màu Sắc</h4>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Màu sắc</label>
+                <input type="text" name="color" class="form-control amount" id="exampleInputName1" placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+              <div class="form-group">
+                <label for="exampleSelectGender">Gía thêm </label>
+                <input type="text" name="price_color" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="">Hình ảnh</label>
+                <input type="file" name="file_image_color" class="form-control avatar">
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
+          </div>
+          </form>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
-      <button type="button" class="btn btn-light">Cancel</button>
-      </form>
+    </div>
+
+
+{{-- Bo Nho --}}
+    <div class="col-6 grid-margin stretch-card" id="">
+       <div class="row">
+      @php
+          $i=0;   
+      @endphp
+      @foreach ($pro_memory as $pm)
+      @php
+          $i++;
+      @endphp
+        <div class="col-md-12 mt-1">
+          <div class="card card-body">
+          <h4 class="card-title">Biến Thể Bộ Nhớ {{$i}}</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Bộ nhớ</label>
+                <input type="text" name="color" disabled value="{{$pm->memory}} GB" class="form-control amount" id="exampleInputName1" placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Ram</label>
+                <input type="text" name="color" disabled value="{{$pm->ram}} GB" class="form-control amount" id="exampleInputName1" placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Gía thêm </label>
+                <input type="text" name="price" disabled value="{{$pm->price}} Đ" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+          </div>
+          <a class="badge badge-danger rounded" style="width: 150px" onclick="return confirm('Xóa mục này?')" href="{{route('deleteColor',$pc->id)}}">Xóa</a></td>
+        </div>
+         </div>
+       @endforeach
+
+       <div class="col-md-12 mt-1">
+        <form method="POST" action="{{route('createMemory')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
+              @csrf
+              <input type="hidden" name="id" value="{{$pro->id}}">
+          <div class="card card-body">
+          <h4 class="card-title">Thêm Biến Thể Bộ Nhớ</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Bộ nhớ</label>
+                <input type="number" name="memory" class="form-control amount"  placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Ram</label>
+                <input type="number" name="ram" class="form-control amount" placeholder="">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="exampleSelectGender">Gía thêm </label>
+                <input type="text" name="price_memory"class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
+                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
+        </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

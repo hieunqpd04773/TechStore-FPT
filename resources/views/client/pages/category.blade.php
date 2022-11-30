@@ -13,11 +13,20 @@
                   <option value="2">Mặc định phân loại 01</option>
                   <option value="4">Mặc định phân loại 02</option>
                 </select>
-                <select class="show">
-                  <option value="1">Trình diễn 12</option>
-                  <option value="2">Trình diễn 14</option>
-                  <option value="4">Trình diễn 16</option>
-                </select>
+                
+                  <select class="show ">
+                    <option value="1">Trình diễn 12</option>
+                    <option value="2">Trình diễn 14</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                    <option value="4">Trình diễn 16</option>
+                  </select>
+               
                 @if (isset($MesSearch))
                 <div style="float: left; clear: both; padding: 6% 0% 1% 3%; margin: -3%;">
                     <h4 style="font-size: 130%;">{{$MesSearch}}</h4>
@@ -54,16 +63,16 @@
                         <h4>{{$pro->name}}</h4>
                       </a>
                       <div class="mt-3">
-                        <span class="mr-4">{{$pro->price-$pro->discount}} đ</span>
+                        <span class="mr-4">{{$pro->price - (($pro->price*$pro->discount)/100)}} đ</span>
                         @if($pro->discount > 0)
-                          <del>{{$pro->discount}} đ</del>
+                          <del>{{$pro->price}} đ</del>
                         @endif
                       </div>
                     </div>
                     @if($pro->discount != 0)
                     <div class="product-item">
                         <div class="product-item_sale">
-                            <div>Giảm giá</div>
+                            <div>Giảm {{$pro->discount}}%</div>
                         </div>
                     </div>
                     @endif 

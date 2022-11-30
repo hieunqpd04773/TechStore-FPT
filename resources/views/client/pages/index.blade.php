@@ -78,7 +78,7 @@
         </div>
         <div class="row">
             @foreach($homeTopPr as $pro)
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="single-product">
                     <div class="product-img">
                         <img class="img-fluid w-100" src="{{asset('images/products/'.$pro->image)}}" alt="" />
@@ -98,10 +98,10 @@
                         <a href="{{Route('getProById',$pro->id)}}" class="d-block">
                             <h4>{{$pro->name}}</h4>
                         </a>
-                        <div class="mt-3">
-                            <span class="mr-4">{{$pro->price}}</span>
+                        <div class="mt-2">
+                            <span class="mr-4"><h2>{{ number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.');}} VND</h2></span>
                             @if($pro->discount > 0)
-                                <del>{{$pro->discount}} đ</del>
+                                <del>{{ number_format($pro->price, 0, '.', '.')}} VND</del>
                             @endif
                         </div>
                     </div>
@@ -113,8 +113,8 @@
                     @if($pro->discount != 0)
                     <div class="product-item">
                         <div class="product-item_sale">
-                            <div>Giảm giá</div>
-                        </div>
+                        <div>Giảm {{$pro->discount}}%</div>       
+                    </div>
                     </div>
                     @endif
                 </div>
@@ -189,17 +189,17 @@
                                 <a href="{{Route('getProById',$homeNewPr[$i])}}" class="d-block">
                                     <h4>{{$homeNewPr[$i]->name}}</h4>
                                 </a>
-                                <div class="mt-3">
-                                    <span class="mr-4">{{$homeNewPr[$i]->price}}</span>
+                                <div class="mt-2">
+                                    <span class="mr-4"><h2>{{number_format($homeNewPr[$i]->price - (($homeNewPr[$i]->price*$homeNewPr[$i]->discount)/100), 0, '.', '.')}} VND</h2></span>
                                     @if($homeNewPr[$i]->discount > 0)
-                                        <del>{{$homeNewPr[$i]->discount}}</del>
+                                        <del>{{number_format($homeNewPr[$i]->price, 0, '.', '.')}} VND</del>
                                     @endif
                                 </div>
                             </div>
                             @if($homeNewPr[$i]->discount != 0)
                             <div class="product-item">
                                 <div class="product-item_sale">
-                                    <div>Giảm giá</div>
+                                <div>Giảm {{$homeNewPr[$i]->discount}}%</div>
                                 </div>
                             </div>
                             @endif
@@ -252,17 +252,17 @@
                         <a href="{{Route('getProById',$pro->id)}}" class="d-block">
                             <h4>{{$pro->name}}</h4>
                         </a>
-                        <div class="mt-3">
-                            <span class="mr-4">{{$pro->price}}</span>
+                        <div class="mt-2">
+                            <span class="mr-4"><h2>{{ number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.');}} VND</h2></span>
                             @if($pro->discount > 0)
-                                <del>{{$pro->discount}} đ</del>
+                                <del>{{ number_format($pro->price, 0, '.', '.')}} VND</del>
                             @endif
                         </div>
                     </div>
                     @if($pro->discount != 0)
                     <div class="product-item">
                         <div class="product-item_sale">
-                            <div>Giảm giá</div>
+                        <div>Giảm {{$pro->discount}}%</div>
                         </div>
                     </div>
                     @endif 

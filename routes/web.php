@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiscountsCodeController;
+use App\Http\Controllers\TintucController;
+
 
 
 
@@ -22,6 +24,8 @@ Route::prefix('/')->group(function () {
     Route::post('/getVarItemByid',[ClientController::class,'getVarItemByid'])->name('getVarItemByid');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    
+
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
@@ -45,7 +49,6 @@ Route::prefix('/')->group(function () {
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
-     
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
@@ -79,21 +82,17 @@ Route::prefix('/')->group(function () {
     Route::get('/checkout', function () {
         return view('client/checkout');
     });
-    Route::get('/cart', function () {
-        return view('client/cart');
-    });
-    Route::get('/single-blog', function () {
-        return view('client/single-blog');
-    });
-    Route::get('/single-product', function () {
-        return view('client/product');
-    });
+    
     Route::get('/dk', function () {
         return view('client/pages/register');
     });
-    Route::get('/tracking', function () {
-        return view('client/tracking');
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/index', [ClientController::class,'viewCart'] )->name('viewCart');
+        Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
+        Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
     });
+
 });
 
 
@@ -123,9 +122,12 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('variants/{id}',[ProductController::class,'showVariants'])->name('showVariants');
         // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
-        Route::get('deleteVar/{id}',[ProductController::class,'deleteVar'])->name('deleteVar');
 
+        Route::post('createColor',[ProductController::class,'createColor'])->name('createColor');
+        Route::get('deleteColor/{id}',[ProductController::class,'deleteColor'])->name('deleteColor');
 
+        Route::post('createMemory',[ProductController::class,'createMemory'])->name('createMemory');
+        Route::get('deleteMemory/{id}',[ProductController::class,'deleteMemory'])->name('deleteMemory');
     }); 
     Route::prefix('categories')->group(function () {
         Route::get('index', [CategoryController::class,'index'])->name('listCate');
@@ -169,10 +171,22 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}',[DiscountsCodeController::class,'destroy'])->name('deleteDiscount_code');
 
     });
+    Route::prefix('tintuc')->group(function () {
+        Route::get('index',[TintucController::class,'index'])->name('tintuc.index');
+        Route::get('create',[TintucController::class,'create'])->name('tintuc.create');
+        Route::post('store',[TintucController::class,'store'])->name('tintuc.store   ');
+        Route::get('show/{id}',[TintucController::class,'show'])->name('tintuc.show');
+        Route::get('edit/{id}',[TintucController::class,'edit'])->name('tintuc.edit');
+        Route::post('update/{id}', [TintucController::class,'update'])->name('tintuc.update');
+        Route::get('delete/{id}',[TintucController::class,'destroy'])->name('tintuc.delete');
+    });
+
 
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
