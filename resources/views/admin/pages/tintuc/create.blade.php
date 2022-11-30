@@ -7,13 +7,7 @@
                 <div class="col-sm-6">
                     <h1>Thêm bài viết</h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Bài viết</a></li>
-                        <li class="breadcrumb-item active">Thêm bài viết mới</li>
-                    </ol>
-                </div>
+                
             </div>
         </div><!-- /.container-fluid -->
     </section>
