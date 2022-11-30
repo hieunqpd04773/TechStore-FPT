@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiscountsCodeController;
+use App\Http\Controllers\TintucController;
+
 
 
 
@@ -169,10 +171,22 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}',[DiscountsCodeController::class,'destroy'])->name('deleteDiscount_code');
 
     });
+    Route::prefix('tintuc')->group(function () {
+        Route::get('index',[TintucController::class,'index'])->name('tintuc.index');
+        Route::get('create',[TintucController::class,'create'])->name('tintuc.create');
+        Route::post('store',[TintucController::class,'store'])->name('tintuc.store   ');
+        Route::get('show/{id}',[TintucController::class,'show'])->name('tintuc.show');
+        Route::get('edit/{id}',[TintucController::class,'edit'])->name('tintuc.edit');
+        Route::post('update/{id}', [TintucController::class,'update'])->name('tintuc.update');
+        Route::get('delete/{id}',[TintucController::class,'destroy'])->name('tintuc.delete');
+    });
+
 
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
