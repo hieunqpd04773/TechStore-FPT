@@ -254,7 +254,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="main_title">
-                    <h2><span>Laptop khuyến mãi</span></h2>
+                    <h2><span>Sản phẩm khuyến mãi</span></h2>
                 </div>
             </div>
         </div>
