@@ -6082,6 +6082,8 @@ button.close {
 }
 
 .carousel-inner {
+  border-radius: 8px;
+
     position: relative;
     width: 100%;
     overflow: hidden

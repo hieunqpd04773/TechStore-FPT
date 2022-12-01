@@ -202,10 +202,46 @@
 
 /* Slider */
 .carousel-item img{
-    height: 90vh;
+    /* height: 90vh; */
+    /* width: 100%; */
     object-fit: cover;
 }
 
 .navbar-right .nav-item{
     height: 80px !important;
+}
+
+.main_title {
+    background: #009981;
+    margin-bottom: 20px;
+    display: inline-block;
+    height: 31px;
+    overflow: hidden;
+}
+.main_title h2 {
+    /* font-size: 24px; */
+    /* color: #2a2a2a; */
+    /* margin-bottom: 30px; */
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 8px 60px 6px 35px;
+    margin: 0 0 0 60px;
+    background: #00483d;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.main_title h2 span:after {
+    content: " ";
+    border-top: 30px solid #00483d;
+    border-left: 30px solid #009981;
+    /* margin-left: 40px; */
+    position: absolute;
+    top: -7px;
+    left: -35px;
+}
+
+.quick-sales{
+    margin-bottom: 70px;
 }

@@ -3,7 +3,7 @@
 @section('content')
 <!--================Home Banner Area =================-->
 <section id="slider"><!--slider-->
-    <div id="demo" class="carousel slide" data-ride="carousel">
+    <div id="demo" class="carousel slide container" data-ride="carousel">
         <ul class="carousel-indicators">
           <li data-target="#demo" data-slide-to="0" class="active"></li>
           <li data-target="#demo" data-slide-to="1"></li>
@@ -15,9 +15,9 @@
             @if ($slide->image)
             <img src="{{asset('images/slider/'.$slide->image)}}" alt="slide1" width="110%" height="200px">
             @endif 
-            <div class="carousel-caption">
+            <!-- <div class="carousel-caption">
                 <a class="main_btn mt-40" href="#">Xem ngay</a>
-            </div>   
+            </div>    -->
           </div>
         @endforeach
         </div>
@@ -34,7 +34,7 @@
 <!-- Start feature Area -->
 <section class="feature-area section_gap_bottom_custom">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 25px">
             <div class="col-lg-3 col-md-6">
                 <div class="single-feature">
                     <a href="#" class="title">
@@ -79,6 +79,22 @@
 </section>
 <!-- End feature Area -->
 
+<div class="container">
+    <div class=" row quick-sales">
+        <div class="col-lg-3 item-img">
+            <img src="https://cdn.hoanghamobile.com/i/home/Uploads/2022/08/11/chuyen-trang-samssung-11.png" alt="">
+        </div>
+        <div class="col-lg-3 item-img">
+            <img src="https://cdn.hoanghamobile.com/i/home/Uploads/2022/11/10/sanphamhot-14.jpg" alt="">
+        </div>
+        <div class="col-lg-3 item-img">
+            <img src="https://cdn.hoanghamobile.com/i/home/Uploads/2022/11/01/sanphamhot-12-lite-1.jpg" alt="">
+        </div>
+        <div class="col-lg-3 item-img">
+            <img src="https://cdn.hoanghamobile.com/i/home/Uploads/2022/10/04/huawei-d14-banner-nho-01.jpg" alt="">
+        </div>
+    </div>
+</div>
 <!--================ Feature Product Area =================-->
 <section class="feature_product_area section_gap_bottom_custom">
     <div class="container">
@@ -93,8 +109,8 @@
             @foreach($homeTopPr as $pro)
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
-                    <div class="product-img">
-                        <img class="img-fluid w-100" src="{{asset('images/products/'.$pro->image)}}" alt="" />
+                    <div class="product-img bg-white d-flex align-items-center" style="height: 290px;">
+                        <img class="img-fluid w-100 p-4" src="{{asset('images/products/'.$pro->image)}}" alt="" />
                         <div class="p_icon">
                             <a href="#">
                                 <i class="ti-eye"></i>
@@ -184,8 +200,8 @@
                     @for($i=1;$i<count($homeNewPr);$i++)
                     <div class="col-lg-6 col-md-6">
                         <div class="single-product">
-                            <div class="product-img">
-                                <img class="img-fluid w-100" src="{{asset('images/products/'.$homeNewPr[$i]->image)}}" alt="" />
+                            <div class="product-img bg-white d-flex align-items-center" style="height: 290px;">
+                                <img class="img-fluid w-100 p-4" src="{{asset('images/products/'.$homeNewPr[$i]->image)}}" alt="" />
                                 <div class="p_icon">
                                     <a href="#">
                                         <i class="ti-eye"></i>
@@ -247,8 +263,8 @@
             @foreach($homeSalePr as $pro)
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
-                    <div class="product-img">
-                        <img class="img-fluid w-100" src="{{asset('images/products/'.$pro->image)}}" alt="" />
+                    <div class="product-img bg-white d-flex align-items-center" style="height: 290px;">
+                        <img class="img-fluid w-100 p-4" src="{{asset('images/products/'.$pro->image)}}" alt="" />
                         <div class="p_icon">
                             <a href="#">
                                 <i class="ti-eye"></i>

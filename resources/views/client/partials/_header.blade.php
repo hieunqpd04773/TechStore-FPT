@@ -89,7 +89,7 @@
                         }
                     </style>
                     <!-- search ân -->
-                        <div style="float: left; width: 66%; height:10px;" class="collapse" id="collapseExample">
+                        <div style="float: left; height:10px;" class="collapse" id="collapseExample">
                             <div style=" border: none; padding: 1.05rem;" class="card card-body" >
                                 <!-- code -->
                                 <form action="{{url('search')}}" method="GET">
@@ -146,15 +146,18 @@
                                         <h4 class="modal-title text-center">Đăng nhập</h4>
                                     </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('login') }}" method="POST">
+                                    <form action="{{ route('login') }}" method="POST" id="form-register">
                                         @csrf
                                         <div class="form-group">
                                         <label for="">Tài khoản</label>
-                                        <input type="text" class="form-control" name="email" id="" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                        <input type="text" class="form-control email" name="email" id="" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                        <span style="font-size: 15px; color: #f33a58;width: 100%; display:block; margin-top:4px;" class="form-message"></span>
                                         </div>
                                         <div class="form-group">
                                         <label for="">Mật khẩu</label>
-                                        <input type="password" name="password" class="form-control" id="" placeholder="Nhập mật khẩu">
+                                        <input type="password" name="password" class="form-control password" id="" placeholder="Nhập mật khẩu">
+                                        <span style="font-size: 15px; color: #f33a58;width: 100%; display:block; margin-top:4px;" class="form-message"></span>
+
                                         </div>
                                         <div class="form-check align-items-center">
                                         <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
@@ -200,3 +203,137 @@
         </div>
     </div>
 </header>
+<script>
+    
+function Validator(options){
+    var formElement = document.querySelector(options.form);
+    var selectorRules = {}
+// hàm thực hiện validate
+var selectorRules = {}
+function validate(inputElement, rule) {
+      var input =inputElement.parentElement.querySelector('.form-control')
+      var errorElement = inputElement.parentElement.querySelector('.form-message');
+      var errorMessage 
+      //
+        var rules = selectorRules[rule.selector]
+        
+        for(var i = 0; i < rules.length; ++i){
+          errorMessage = rules[i](inputElement.value)
+          if (errorMessage) break;
+        }
+        if (errorMessage) {
+          errorElement.innerText = errorMessage;
+          input.style.borderColor = '#f33a58'
+        }else{
+          errorElement.innerText = ''
+          input.style.borderColor = ''
+        }
+        return !errorMessage;
+    }
+    
+    // lấy element của form
+    if(formElement) {
+      formElement.onsubmit = function(e) {
+        
+
+        var isFormValid = true
+
+        options.rules.forEach( function(rule) {
+         
+          var inputElement = formElement.querySelector(rule.selector)
+          var isValid = validate(inputElement,rule)
+          if(!isValid) {
+            isFormValid = false
+          }
+        });
+        
+
+        if(isFormValid){
+          formElement.submit()
+        }else{
+          e.preventDefault();
+        }
+      }
+        // lặp qua mỗi rule và xửa lý sự kiện
+      options.rules.forEach( function(rule) {
+        //lu lai cac rules cho moi input
+        
+        if(Array.isArray(selectorRules[rule.selector])) {
+          selectorRules[rule.selector].push(rule.test)
+        }else{
+          selectorRules[rule.selector] = [rule.test]
+        }
+
+        var inputElement = formElement.querySelector(rule.selector)
+        var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
+        var input =inputElement.parentElement.querySelector('.form-control')
+
+          if(inputElement) {
+            inputElement.onblur = function() {
+              validate(inputElement,rule)
+            }
+           
+            inputElement.oninput = function() {
+              errorElement.innerHTML = ''
+              input.style.borderColor = ''
+            }
+          }
+      })
+    }
+}
+
+// Validator.isRequired = function (selector) {
+//     return {
+//       selector,
+//       test(value) {
+//         return value.trim() ? undefined : 'Vui lòng nhập tên'
+//       }
+//     }
+// }
+Validator.isPassword = function (selector) {
+  return {
+    selector,
+    test(value) {
+      return value ? undefined : 'Vui lòng nhập mật khẩu'
+    }
+  }
+}
+Validator.formEmail = function (selector) {
+    return {
+      selector,
+      test(value) {
+        return value ? undefined : 'Vui lòng nhập email'
+      }
+    }
+}
+Validator.isEmail= function (selector) {
+  return {
+      selector,
+      test(value) {
+          var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          return regex.test(value) ? undefined : 'Vui lòng nhập đúng định dạng email'
+      }
+        }
+}
+
+Validator.minLength = function (selector,min) {
+        return {
+            selector,
+            test(value) {
+                return value.length >= min ? undefined : `Vui lòng nhập tối đa ${min} ký tự`
+            }
+        }
+}
+
+
+   Validator({
+    form: '#form-register',
+    errorSelector: '.form-message',
+    rules: [
+      Validator.formEmail('.email'),
+      Validator.isEmail('.email'),
+      Validator.isPassword('.password'),
+      Validator.minLength('.password', 6),
+    ],
+  })
+</script>
