@@ -45,6 +45,7 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
+        session()->forget(['cart']);
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

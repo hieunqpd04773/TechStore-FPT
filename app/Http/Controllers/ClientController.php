@@ -230,7 +230,7 @@ class ClientController extends Controller
         }
         session()->put('cart', $cart); 
         $cart=session()->get('cart', []);
-        return response()->json(['success' => 'Setting successfully updated']);
+        return redirect()->back()->with('success','Đã thêm sản phẩm vào giỏ hàng');
     }
 
     public function viewCart()
@@ -342,6 +342,20 @@ class ClientController extends Controller
         $order->status=4;
         $order->save();
         return redirect()->back()->with('success', 'Hủy đơn hàng thành công');
+    }
+    
+    public function loginClient(Request $request)
+    {
+        $data = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($data)) {
+           return redirect()->back()->with('success', 'Đăng nhập thành công');
+        } else {
+            return redirect()->back()->with('error', 'Đăng nhập thất bại!');
+        }
     }
     
 }

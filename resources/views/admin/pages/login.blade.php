@@ -1,58 +1,61 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <img src="{{asset('images/logo.png')}}" alt="">
-            </a>
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+@include('Admin.partials.head')
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('adminLogin') }}">
-            @csrf
-            @if(session('thongBao'))
-                {{session('thongBao')}}
-            @endif
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email của bạn:')" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="{{asset('images/techstore.png')}}" alt="logo">
+              </div>
+              <h4>Bạn cần đăng nhập</h4>
+              <h6 class="font-weight-light">Sử dụng tài khoản quản trị để tiếp tục.</h6>
+              <form class="pt-3" method="POST" action="{{ route('adminLogin') }}">
+                @csrf
+                @error('err')
+                <p class="login-fail" >{{ $message }}</p>
+                @enderror
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control form-control-lg" id="" placeholder="Nhập Email của bạn">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mật khẩu">
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                </div>
+                <div class="my-2 d-flex justify-content-between align-items-center">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input">
+                      Ghi nhớ tài khoản
+                    </label>
+                  </div>
+                  <a href="#" class="auth-link text-black">Quên mật khẩu?</a>
+                </div>
+                
+              </form>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <!-- endinject -->
+</body>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Mật Khẩu:')" />
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Nhớ tài khoản') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Quên mật khẩu?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Đăng nhập') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
-
-
+</html>

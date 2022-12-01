@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\UserAddress;
 
 class RegisteredUserController extends Controller
 {
@@ -33,14 +34,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        //     'file_upload' => ['required', 'max:255'],
-        //     'address' => ['required', 'string', 'max:255'],
-        //     'phone' => ['required', 'numeric']
-        // ]);
         if($request->has('file_upload')){
             $file=$request->file_upload;
             $file_name= date('YmdHi').$file->getClientOriginalName();
@@ -57,11 +50,18 @@ class RegisteredUserController extends Controller
             'address'=>$request->address,
             'phone'=>$request->phone
         ]);
+        $adr = new UserAddress();
+        $adr->user_id = $user->id;
+        $adr->name = $request->name;
+        $adr->phone = $request->phone;
+        $adr->address = $request->address;
+        $adr->role = 1;
+        $adr -> save();
 
         event(new Registered($user));
 
         Auth::login($user);
-
+        toastr()->success('Thành công', 'Đăng ký thành công!');
         return redirect(RouteServiceProvider::HOME);
     }
 }

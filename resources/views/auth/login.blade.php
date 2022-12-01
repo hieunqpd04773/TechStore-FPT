@@ -8,7 +8,9 @@
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
-
+        @error('err')
+        <p style="color: red; font-size: 12px; text-align: center">{{ $message }}</p>
+        @enderror
         <form method="POST" action="{{ route('adminLogin') }}">
             @csrf
 

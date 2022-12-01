@@ -22,10 +22,10 @@ class UserController extends Controller
 
     public function adminLogin(Request $request){
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            return redirect('admin/index');
+            return redirect('admin/index')->with('success', 'Đăng nhập thành công');
         }
         else{
-            return redirect('login');
+            return redirect('adminlogin')->withErrors(['err' => 'Sai tài khoản hoặc mật khẩu']);;
         }
     }
     

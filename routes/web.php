@@ -31,6 +31,7 @@ Route::prefix('/')->group(function () {
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     
 
+    Route::post('/loginclient',[ClientController::class,'loginClient'])->name('loginClient');
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
@@ -111,7 +112,9 @@ Route::prefix('/')->group(function () {
 
 // Admin Login
 Route::post('adminLogin', [UserController::class,'adminLogin'])->name('adminLogin');
-
+Route::get('adminlogin', function () {
+        return view('admin.pages.login');
+    });
 
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
 // admin

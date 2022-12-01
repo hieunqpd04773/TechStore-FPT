@@ -117,7 +117,7 @@
                 </button>
               </div>
               <div class="card_area">
-                <a class="main_btn" id="addCart">Add to Cart</a>
+                <a class="main_btn" id="addCart">Thêm vào giỏ hàng</a>
                 <a class="icon_btn" href="#">
                   <i class="lnr lnr lnr-diamond"></i>
                 </a>
@@ -555,7 +555,10 @@
               
             },
             success:function(data){
-              alert("Đã thêm sản phẩm vào giỏ hàng")
+              window.location.reload();
+            },
+            error:function () {
+              alert('Vui lòng chọn biến thể');
             }
              
         });

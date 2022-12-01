@@ -121,7 +121,10 @@
                             <i class="ti-user" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{{route('manager')}}"><i class="fa fa-info" aria-hidden="true"></i>   Quản lý tài khoản</a>
+                            <a class="dropdown-item" href="{{route('manager')}}"><i class="fa fa-info" aria-hidden="true"></i> Quản lý tài khoản</a>
+                            @if (Auth::user()->role==1)
+                            <a class="dropdown-item" href="{{route('indexAdmin')}}" target="_blank"><i class="fa fa-wrench" aria-hidden="true"></i> Quản trị Website</a>
+                            @endif
                             <form action="/logout" method="post">
                                 @csrf
                                 <button class="dropdown-item btn-none"><i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -146,7 +149,7 @@
                                         <h4 class="modal-title text-center">Đăng nhập</h4>
                                     </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('login') }}" method="POST" id="form-register">
+                                    <form action="{{ route('loginClient') }}" method="POST" id="form-register">
                                         @csrf
                                         <div class="form-group">
                                         <label for="">Tài khoản</label>
@@ -168,7 +171,7 @@
                                     </form>                        
                                 </div>
                               <div class="modal-footer">
-                                <p class="m-0">Bạn chưa có tài khoản ? <a href="{{Route('signup')}}"  data-toggle="modal" data-target="#myModal">Đăng ký</a></p>
+                                <p class="m-0">Bạn chưa có tài khoản ? <a href="{{Route('signup')}}"  >Đăng ký</a></p>
                                 
                             </div>
                             </div>

@@ -23,12 +23,12 @@ class checkAdmin
                 return $next($request);
             }
             else{
-                return redirect('login');
+                return redirect('adminlogin');
             }
         }
         
         else{
-            return redirect('login');
+            return redirect('adminlogin');
         }
 
         

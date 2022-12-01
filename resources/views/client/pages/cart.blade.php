@@ -125,13 +125,15 @@
                       <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                     </div>
                     <div class="form-select" id="default-select">
+                      @if (isset($userAddress))
                       <select id="userAddress" name="user_address" style="display: none;">
-                        @if (isset($userAddress))
                           @foreach ($userAddress as $address)
                           <option value="{{$address->id}}">{{$address->address}},{{$address->name}},{{$address->phone}}</option>
                           @endforeach
-                        @endif
                       </select>
+                      @else
+                      <input type="text" name="name" disabled value="Vui lòng thêm địa chỉ giao hàng" class="single-input">
+                      @endif
                     </div>
                   </div>
                   </div>

@@ -129,10 +129,12 @@ use Illuminate\Support\Facades\Auth;
         <i class="mdi mdi-settings text-primary"></i>
         Cài đặt
       </a>
-      <a href="/logout" class="dropdown-item">
-        <i class="mdi mdi-logout text-primary"></i>
-        Đăng xuất
-      </a>
+      <form action="/logout" method="post">
+          @csrf
+          <button class="dropdown-item btn-none">
+            <i class="mdi mdi-logout text-primary"></i>
+              Đăng xuất</button>
+      </form>
     </div>
     @endif
   </li>
