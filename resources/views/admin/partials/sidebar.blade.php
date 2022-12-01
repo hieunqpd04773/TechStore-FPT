@@ -8,14 +8,15 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{route('listCate')}}">
-          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <i class="mdi mdi-format-list-bulleted menu-icon"></i>
           <span class="menu-title">Danh Mục</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <i class="mdi mdi-circle-outline menu-icon"></i>
-          <span class="menu-title">Sản phẩm</span>
+          <i class="mdi mdi-cellphone-iphone menu-icon"></i>
+          <span class="menu-title">
+            Sản phẩm</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic">
@@ -27,7 +28,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <i class="mdi mdi-sale menu-icon"></i>
           <span class="menu-title">Mã giảm giá</span>
           <i class="menu-arrow"></i>
         </a>
@@ -40,7 +41,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <i class="mdi mdi-collage menu-icon"></i>
           <span class="menu-title">Slider</span>
           <i class="menu-arrow"></i>
         </a>

@@ -254,3 +254,27 @@
 .dropdown-menu{
     box-shadow: 0 0 3px #b6b6b6 !important;
 }
+.banner_area .banner_inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 100px;
+    background: #f6f6f6;
+    z-index: 1;
+}
+
+.banner_area {
+    position: relative;
+    z-index: 1;
+    min-height: 120px;
+}
+
+.product_top_bar .left_dorp .show:after {
+    content: "\f0d7";
+    font: normal normal normal 14px/1 FontAwesome;
+    transform: rotate(0);
+    border: none;
+    color: #555555;
+    margin-top: -6px;
+    right: 8px;
+}
