@@ -39,10 +39,10 @@
               <div class="row">
                 @foreach ($listPro as $pro)
                 <div class="col-lg-4 col-md-6">
-                  <div class="single-product">
-                    <div class="product-img">
+                  <div class="single-product" >
+                    <div class="product-img bg-white d-flex align-items-center" >
                       <img
-                        class="card-img"
+                        class="card-img p-4"
                         src="{{asset('images/products/'.$pro->image)}}"
                         alt=""
                       />
