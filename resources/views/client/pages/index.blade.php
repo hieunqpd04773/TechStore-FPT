@@ -190,8 +190,8 @@
                     <div class="product-img">
                         <img class="img-fluid" src="{{asset('images/products/'.$homeNewPr[0]->image)}}" alt="" />
                     </div>
-                    <h4>{{ $homeNewPr[0]->price }}</h4>
-                    <a href="#" class="main_btn">Thêm vào giỏ hàng</a>
+                    <h4>{{ $homeNewPr[0]->price }} VNĐ</h4>
+                    <a href="{{Route('getProById',$homeNewPr[0])}}" class="main_btn">Xem chi tiết</a>
                 </div>
             </div>
          
