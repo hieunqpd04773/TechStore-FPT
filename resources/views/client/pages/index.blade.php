@@ -98,14 +98,14 @@
 <!--================ Feature Product Area =================-->
 <section class="feature_product_area section_gap_bottom_custom">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center list-pro">
             <div class="col-lg-12">
                 <div class="main_title">
                     <h2><span>Sản phẩm nổi bật</span></h2>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row list-pro">
             @foreach($homeTopPr as $pro)
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
@@ -182,7 +182,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row list-pro">
             <div class="col-lg-6">
                 <div class="new_product">
                     <h5 class="text-uppercase">{{ $homeNewPr[0]->Cate_items->name }}</h5>
@@ -190,13 +190,13 @@
                     <div class="product-img">
                         <img class="img-fluid" src="{{asset('images/products/'.$homeNewPr[0]->image)}}" alt="" />
                     </div>
-                    <h4>$120.70</h4>
+                    <h4>{{ $homeNewPr[0]->price }}</h4>
                     <a href="#" class="main_btn">Thêm vào giỏ hàng</a>
                 </div>
             </div>
          
             <div class="col-lg-6 mt-5 mt-lg-0">
-                <div class="row">
+                <div class="row ">
                     @for($i=1;$i<count($homeNewPr);$i++)
                     <div class="col-lg-6 col-md-6">
                         <div class="single-product">
@@ -259,7 +259,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row list-pro">
             @foreach($homeSalePr as $pro)
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">

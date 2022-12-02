@@ -36,7 +36,7 @@
             </div>
             
             <div class="latest_product_inner">
-              <div class="row">
+              <div class="row list-pro">
                 @foreach ($listPro as $pro)
                 <div class="col-lg-4 col-md-6">
                   <div class="single-product" >
