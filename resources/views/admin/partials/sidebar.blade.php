@@ -60,7 +60,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{Route('contact')}}">
-          <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+          <i class="mdi mdi-contact-mail menu-icon"></i>
           <span class="menu-title">Liên hệ</span>
         </a>
       </li>

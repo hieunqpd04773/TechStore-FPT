@@ -50,7 +50,7 @@
             </div>
             <div class="form-group mt-lg-3">
               <button type="submit" class="main_btn">Gửi tin nhắn.</button>
-              <button class="main_btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <button class="main_btn" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
                 Lịch sử liên hệ
               </button>
             </div>
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-      <div class="collapse" id="collapseExample">
+      <div class="collapse" id="collapseExample2">
         <div class="card card-body" style="border: none;">
           <section class="cart_area" style="padding-top: 0px; padding-bottom: 0px">
             <div class="container">
