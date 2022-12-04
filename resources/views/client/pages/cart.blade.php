@@ -70,7 +70,7 @@
                       >
                         <i class="lnr lnr-chevron-down"></i>
                       </button>
-                    </div> --}}
+                    </div>  --}}
                       <input
                         type="number"
                         name="qty"

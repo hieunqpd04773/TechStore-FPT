@@ -78,6 +78,19 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+          <i class="mdi mdi-account menu-icon"></i>
+          <span class="menu-title">Phương thức vận chuyển</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('CreateDelivery')}}"> Thêm mới</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('ListDelivery')}}"> Danh sách PTVC </a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="documentation/documentation.html">
           <i class="mdi mdi-file-document-box-outline menu-icon"></i>
           <span class="menu-title">Documentation</span>
