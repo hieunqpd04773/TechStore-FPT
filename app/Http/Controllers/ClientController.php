@@ -232,7 +232,22 @@ class ClientController extends Controller
         $cart=session()->get('cart', []);
         return redirect()->back()->with('success','Đã thêm sản phẩm vào giỏ hàng');
     }
-
+    public function updatCart(Request $r)
+    {
+        dd($r);
+        // $qty=$r->qty;
+        // $name =$r->proName;
+        // dd($name);
+        // $cart = session()->get('cart', []);
+        // if(isset($cart[$name])  ){
+        //     $cart[$name]['qty']=$qty;
+        //     dd( $cart[$name]['qty']);
+        // }
+        // else{
+        //     return redirect()->back()->with('error', 'Không tìm thấy sản phẩm');
+        // }
+        return redirect()->back()->with('success', 'Cập nhật thành công');
+    }
     public function viewCart()
     {
         if (Auth::check()){
@@ -299,7 +314,6 @@ class ClientController extends Controller
     public function insertOrder(Request $r)
     {
         // INSERT ORDER
-        dd($r->user_address);
         $order = new Orders();
         $order->user_id=$r->user_id;
         $order->user_address=$r->user_address;

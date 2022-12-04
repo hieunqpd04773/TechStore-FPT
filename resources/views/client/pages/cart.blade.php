@@ -46,7 +46,7 @@
                     <h5>{{ number_format($pro['price'], 0, '.', '.');}} VNĐ</h5>
                   </td>
                   <td>
-                    <div class="product_count">
+                    {{-- <div class="product_count">
                       <input
                         type="text"
                         name="qty"
@@ -70,7 +70,18 @@
                       >
                         <i class="lnr lnr-chevron-down"></i>
                       </button>
-                    </div>
+                    </div> --}}
+                      <input
+                        type="number"
+                        name="qty"
+                        maxlength="12"
+                        value={{$pro['qty']}}
+                        data-proName="{{$pro['name']}}"
+                        title="Quantity:"
+                        class="qty"
+                        style="width: 40px;"
+                        min="1"
+                      />
                   </td>
                   <td>
                     <h5 class="cart-total">{{ number_format($pro['total'], 0, '.', '.');}} VNĐ</h5>
@@ -100,7 +111,7 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table>          
            </div>
 
            {{-- Payment --}}
@@ -299,6 +310,25 @@
 
           }
          })
+      })
+
+      $('.qty').change(function(e){
+        e.preventDefault();
+          var qty=$(this).val();
+          var proName=$(this).attr('data-proName');
+          // alert(proName);
+          $.ajax({
+            url: '{{route('updateCart')}}',
+            method: 'POST',
+            data:{
+             _token: "{{ csrf_token() }}",
+              qty: qty
+              // proName: proName
+            },
+            success: function(data){
+              alert('ok')
+            }
+          })
       })
     })
 

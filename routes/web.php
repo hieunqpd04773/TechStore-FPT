@@ -98,6 +98,7 @@ Route::prefix('/')->group(function () {
         Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
         Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
         Route::post('/getAddressById',[ClientController::class,'getAddressById'])->name('getAddressById');
+        Route::post('/updateCart',[ClientController::class,'updatCart'])->name('updateCart');
     });
 
     Route::post('/paymentPage',[ClientController::class,'paymentPage'])->name('paymentPage');
@@ -203,6 +204,7 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('edit/{id}', [OrderController::class,'edit'])->name('edit');
         Route::get('delete/{id}', [OrderController::class,'delete'])->name('orderDelete');
         Route::post('/update', [OrderController::class,'update'])->name('orderUpdate');
+        Route::post('/orderByStatus', [OrderController::class,'orderByStatus'])->name('orderByStatus');
     });
 
 });

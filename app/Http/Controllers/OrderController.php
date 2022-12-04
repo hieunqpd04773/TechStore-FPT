@@ -60,4 +60,13 @@ class OrderController extends Controller
         $order->delete();
         return redirect('admin/order/index')->with('success', 'Xóa đơn hàng thành công');
     }
+
+    public function orderByStatus(Request $r)
+    {
+        if($r->status==5){
+            $orders = Orders::orderBy('id','desc')->get();
+        }
+        $orders = Orders::where('status', '=', $r->status)->orderBy('id','desc')->get();
+        return view('admin.pages.order.index', compact('orders'));
+    }
 }

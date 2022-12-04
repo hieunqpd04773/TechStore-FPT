@@ -5,7 +5,25 @@
       <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <p class="card-title">Order</p>
+            <p class="card-title">Đơn hàng</p>
+
+            {{-- Filter --}}
+            <div class="col-md-3" style="float: left">
+              <form class="card-title" action="{{route('orderByStatus')}}" method="POST">
+                @csrf
+                <div class="form-group">
+                  <select class="form-control show-cti form-select list"  name="status" id="cate" onchange="this.form.submit()">
+                    <option>Lọc theo tình trạng</option>
+                    <option value="5">Tất cả </option>
+                    <option value="0">Đang xử lý </option>
+                    <option value="1">Đã xác nhận </option>
+                    <option value="2">Đang giao hàng</option>
+                    <option value="3">Đã giao hàng</option>
+                    <option value="4">Đã hủy</option>   
+                  </select>
+                </div>
+              </form>
+            </div>
             <div class="table-responsive pt-3">
               <table id="recent-purchases-listing" class="table table-bordered">
                 <thead>
