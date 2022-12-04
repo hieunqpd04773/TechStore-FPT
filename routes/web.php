@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DiscountsCodeController;
 use App\Http\Controllers\SlideController;
@@ -204,6 +205,14 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}', [OrderController::class,'delete'])->name('orderDelete');
         Route::post('/update', [OrderController::class,'update'])->name('orderUpdate');
         Route::post('/orderByStatus', [OrderController::class,'orderByStatus'])->name('orderByStatus');
+    });
+    Route::prefix('delivery')->group(function () {
+        Route::get('index', [DeliveryController::class,'index'])->name('ListDelivery');
+        Route::get('create', [DeliveryController::class,'CreateDelivery'])->name('CreateDelivery');
+        Route::post('create_', [DeliveryController::class,'CreateDelivery_'])->name('CreateDelivery_');
+        Route::get('edit/{id}', [DeliveryController::class,'getedit'])->name('EditDelivery');
+        Route::post('edit', [DeliveryController::class,'edit'])->name('EditDelivery_');
+        Route::get('delete/{id}',[DeliveryController::class,'DeleteDelivery'])->name('DeleteDelivery');
     });
 
 });

@@ -46,7 +46,7 @@
                     <h5>{{ number_format($pro['price'], 0, '.', '.');}} VNĐ</h5>
                   </td>
                   <td>
-                    {{-- <div class="product_count">
+                    <div class="product_count">
                       <input
                         type="text"
                         name="qty"
@@ -70,17 +70,7 @@
                       >
                         <i class="lnr lnr-chevron-down"></i>
                       </button>
-                    </div> --}}
-                      <input
-                        type="number"
-                        name="qty"
-                        {{-- id="sst" --}}
-                        maxlength="12"
-                        value={{$pro['qty']}}
-                        title="Quantity:"
-                        class="qty"
-                        style="width: 40px;"
-                      />
+                    </div>
                   </td>
                   <td>
                     <h5 class="cart-total">{{ number_format($pro['total'], 0, '.', '.');}} VNĐ</h5>
@@ -309,11 +299,6 @@
 
           }
          })
-      })
-      $('.qty').change(function(e){
-        e.preventDefault();
-        alert('ok');
-        console.log('oko');
       })
     })
 
