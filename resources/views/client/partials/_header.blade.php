@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{Route('contact')}}">
+                        <a href="{{Route('contacts')}}">
                     Liên Hệ
                     </a>
     

@@ -18,6 +18,7 @@ use App\Models\Wishlist;
 use App\Models\Orders;
 use App\Models\OrderDetails;
 use DB;
+use App\Models\Contacts;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -42,7 +43,70 @@ class ClientController extends Controller
     }
     public function contact()
     {
-        return view('client.pages.contact');
+        if(isset(Auth::user()->id)){
+            $dataUser = Auth::user();
+            $viewContacts = Contacts::where('id_user','=', $dataUser->id)->get();
+            return view('client.pages.contact')->with(compact('dataUser', 'viewContacts'));
+        }else{
+            $dataUser = Auth::user();
+            return view('client.pages.contact')->with(compact('dataUser'));
+        }
+    }
+
+    public function addcontact(Request $request)
+    {
+        $contacts = new Contacts();
+        if(isset(Auth::user()->id)){
+            $contacts->id_user = Auth::user()->id;
+            $contacts->user_name = Auth::user()->name;
+            $contacts->user_email = Auth::user()->email;
+            $contacts->message = $request->message;
+        }else{
+            $contacts->id_user = 0;
+            $contacts->user_name = $request->name;
+            $contacts->user_email = $request->email;
+            $contacts->message = $request->message;
+        }
+        $contacts->save();
+        $dataUser = Auth::user();
+        toastr()->success('Thành công', 'Bạn đã gửi thành công');
+        return back();
+    }
+
+    public function showContact($id){
+        $contacts = Contacts::find($id);
+        $dataUser = Auth::user();
+        return view('client.pages.edit_contact')->with(compact('contacts', 'dataUser'));
+    }
+
+
+    public function editContact(Request $request)
+    {
+        $contacts = Contacts::find($request->id);
+        if(isset(Auth::user()->id)){
+            $contacts->id_user = $request->id_user;
+            $contacts->user_name = $request->user_name;
+            $contacts->user_email = $request->user_email;
+            $contacts->message = $request->message;
+        }else{
+            $contacts->id_user = $request->id_user;
+            $contacts->user_name = $request->name;
+            $contacts->user_email = $request->email;
+            $contacts->message = $request->message;
+        }
+        $contacts->save();
+        $dataUser = Auth::user();
+        toastr()->success('Thành công', 'Bạn đã cập nhật thành công');
+        return redirect()->action([ClientController::class,'contact']);
+    }
+
+    public function deletecontact($id)
+    {
+        
+        $contacts = Contacts::find($id);
+        $contacts -> delete();
+        toastr()->success('Thành công', 'Đã xóa tin nhắn liên hệ');
+        return back();
     }
     public function getProByCate($id)
     {

@@ -15,35 +15,46 @@
           <h2 class="contact-title">Liên hệ chúng tôi.</h2>
         </div>
         <div class="col-lg-8 mb-4 mb-lg-0">
-          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+          <form class="form-contact contact_form" action="/addcontact" method="post" id="contactForm" novalidate="novalidate">
+            @csrf
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Nhập tin nhắn..."></textarea>
+                    <textarea class="form-control w-100" name="message" id="" cols="30" rows="9" placeholder="Nhập tin nhắn..." required></textarea>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="name" id="name" type="text" placeholder="Nhập tên của bạn...">
+              @if(isset($dataUser))
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="name" id="" type="text" value="{{$dataUser->name}}" disabled>
+                  </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" placeholder="Nhập địa chỉ email...">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="email" id="" type="email" value="{{$dataUser->email}}" disabled>
+                  </div>
                 </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="subject" id="subject" type="text" placeholder="Nhập chủ đề....">
+              
+              @elseif(!isset($dataUser))
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="name" id="" type="text"  placeholder="Nhập tên của bạn..." required>
+                  </div>
                 </div>
-              </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="email" id="" type="email"  placeholder="Nhập địa chỉ email..." required>
+                  </div>
+                </div>
+              @endif
             </div>
             <div class="form-group mt-lg-3">
               <button type="submit" class="main_btn">Gửi tin nhắn.</button>
+              <button class="main_btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Lịch sử liên hệ
+              </button>
             </div>
           </form>
-
-
         </div>
 
         <div class="col-lg-4">
@@ -70,6 +81,76 @@
           </div>
         </div>
       </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body" style="border: none;">
+          <section class="cart_area" style="padding-top: 0px; padding-bottom: 0px">
+            <div class="container">
+              <div class="row">
+                <div class="cart_inner col-md-12">
+                  <div class="table-responsive">
+                    <table class="table cart-table">
+                      <thead>
+                        <tr>    
+                          <th class="col-md-2" scope="col">Tên người dùng </th>
+                          <th class="col-md-6" scope="col">Nội dung</th>
+                          <th class="col-md-2" scope="col">Thời gian</th>
+                          <th class="col-md-2" scope="col">Hành động</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        @if(isset($viewContacts) && count($viewContacts)>0)
+                        @foreach ($viewContacts as $viewCon)
+                        <tr>
+                          <td>{{$viewCon->user_name}}</td>
+                          <td>{{$viewCon->message}}</td>
+                          <td>{{$viewCon->created_at}}</td>
+                          
+                          <td>
+                            <a href="{{route('showContact',$viewCon->id)}}" class="genric-btn default-border radius delete-cart"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            @if ($viewCon->status==0)
+                              <a href="{{route('deletecontact',$viewCon->id)}}" onclick="confirm('Bạn chắc chắn xoá tin nhắn này')" class="genric-btn danger-border radius delete-cart"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            @endif
+                          </td>
+                        </tr>
+                        @endforeach
+                        @else
+                        <tr>
+                          <td colspan="5">
+                            <p class="no_cart">Bạn chưa có lịch sử liên hệ nào</p>
+                          </td>
+                        </tr>
+                        @endif
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+      <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      </div>
+      
       <div class= 'row' style="margin-bottom: 100px; ">
         <!-- <div class="d-none d-sm-block mb-5 pb-4  " style="height:300px"> -->
           <div class="col-lg-6">

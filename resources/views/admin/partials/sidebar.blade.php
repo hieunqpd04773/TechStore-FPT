@@ -59,6 +59,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{Route('contact')}}">
+          <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+          <span class="menu-title">Liên hệ</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{route('listCom')}}">
           <i class="mdi mdi-emoticon menu-icon"></i>
           <span class="menu-title">Bình luận</span>
