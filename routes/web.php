@@ -13,6 +13,8 @@ use App\Http\Controllers\DiscountsCodeController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\ContactsController;
+
 
 
 
@@ -27,7 +29,12 @@ Route::prefix('/')->group(function () {
     Route::get('/add/{id}', [ClientController::class,'add'])->name('addWish');
     Route::get('deleteWish/{id}', [ClientController::class,'delete'])->name('deleteWish');
     Route::get('wishcount', [ClientController::class,'showcount'])->name('wishlistcount');
-    Route::get('contact',[ClientController::class,'contact'] )->name('contact');
+    Route::get('contact',[ClientController::class,'contact'] )->name('contacts');
+    Route::post('/addcontact',[ClientController::class,'addcontact'] )->name('addcontact');
+    Route::get('/showContact/{id}',[ClientController::class,'showContact'])->name('showContact');
+    Route::post('editContact',[ClientController::class,'editContact'])->name('editContact');
+    Route::get('deletecontact/{id}', [ClientController::class,'deletecontact'])->name('deletecontact');
+
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     
 
@@ -167,6 +174,10 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('/index3',[CommentController::class,'index3'] )->name('search3');
 
     }); 
+    Route::prefix('contacts')->group(function () {
+        Route::get('index',[ContactsController::class,'index'])->name('contact');
+        Route::get('searchContact',[ContactsController::class,'searchContact'])->name('searchContact');
+    });
     Route::prefix('users')->group(function () {
         Route::get('index',[UserController::class,'index'])->name('listUser');
         Route::get('index5',[UserController::class,'index5'])->name('listUserAd');
