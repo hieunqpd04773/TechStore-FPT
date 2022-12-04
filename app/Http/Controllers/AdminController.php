@@ -25,7 +25,7 @@ class AdminController extends Controller
         $orders= Orders::count();
         $totalPro= OrderDetails::sum('number');
         $date = Carbon::now();
-
+        $orders = Orders::where('status', '=', 0)->orderBy('id','desc')->limit('5')->get();
         $cate= Categories::all();
         $chartPro=[];
         foreach ($cate as $key =>$c){

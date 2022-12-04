@@ -5,7 +5,7 @@
       <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <p class="card-title">Order</p>
+            <p class="card-title">Đơn hàng</p>
             <div class="table-responsive pt-3">
               <table id="recent-purchases-listing" class="table table-bordered">
                 <thead>

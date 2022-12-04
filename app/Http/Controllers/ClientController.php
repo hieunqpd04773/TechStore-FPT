@@ -299,7 +299,6 @@ class ClientController extends Controller
     public function insertOrder(Request $r)
     {
         // INSERT ORDER
-        dd($r->user_address);
         $order = new Orders();
         $order->user_id=$r->user_id;
         $order->user_address=$r->user_address;

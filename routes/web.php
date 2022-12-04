@@ -203,6 +203,7 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('edit/{id}', [OrderController::class,'edit'])->name('edit');
         Route::get('delete/{id}', [OrderController::class,'delete'])->name('orderDelete');
         Route::post('/update', [OrderController::class,'update'])->name('orderUpdate');
+        Route::post('/orderByStatus', [OrderController::class,'orderByStatus'])->name('orderByStatus');
     });
 
 });
