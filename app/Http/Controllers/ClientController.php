@@ -299,6 +299,7 @@ class ClientController extends Controller
     public function insertOrder(Request $r)
     {
         // INSERT ORDER
+        dd($r->user_address);
         $order = new Orders();
         $order->user_id=$r->user_id;
         $order->user_address=$r->user_address;
@@ -327,7 +328,7 @@ class ClientController extends Controller
 
     public function orders()
     {
-        $orders=Orders::where('user_id','=',Auth::id() )->get();
+        $orders=Orders::where('user_id','=',Auth::id() )->orderBy('id','desc')->get();
         return view('client.pages.orders',compact('orders'));
     }
     public function orderdetails($id)

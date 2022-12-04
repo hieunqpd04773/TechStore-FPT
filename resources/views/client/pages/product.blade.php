@@ -23,12 +23,6 @@
                     alt="" style="width:100%"/>
                 </li>
                 @endfor
-                  @for ($i = 0; $i < count($images); $i++)
-                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
-                    <img src="{{asset('images/products/'.$images[$i]->image)}}"
-                      alt="" style="width:100%"/>
-                  </li>
-                  @endfor
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">

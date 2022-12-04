@@ -33,7 +33,7 @@ class Orders extends Model
     }
     public function UserAddress()
     {
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\UserAddress','user_address','id');
     }
     public function Delivery()
     {
