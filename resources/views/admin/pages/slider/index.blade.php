@@ -38,8 +38,8 @@
                        }
                       ?>
                     </span></td>
-                    <td><a class="badge badge-info rounded" href="{{route('loadEditSlide',$slide->id)}}">Sửa</a>
-                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteSlide',$slide->id)}}">Xóa</a></td>
+                    <td><a class="badge badge-info rounded" href="{{route('loadEditSlide',$slide->id)}}"><i class="mdi mdi-wrench"></i></a>
+                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteSlide',$slide->id)}}"><i class="mdi mdi-delete"></i></a></td>
                   
                   <tr>
                   @endforeach                        

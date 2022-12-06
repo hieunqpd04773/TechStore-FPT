@@ -54,8 +54,8 @@
                         ?>
                     </td>
                     
-                    <td><a class="badge badge-info rounded" href="{{route('loadUpdateDiscount_code',$disc->id)}}">Sửa</a>
-                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteDiscount_code',$disc->id)}}">Xóa</a></td>
+                    <td><a class="badge badge-info rounded" href="{{route('loadUpdateDiscount_code',$disc->id)}}"><i class="mdi mdi-wrench"></i></a>
+                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteDiscount_code',$disc->id)}}"><i class="mdi mdi-delete"></i></a></td>
                 </tr>
                   @endforeach           
                 </tbody>

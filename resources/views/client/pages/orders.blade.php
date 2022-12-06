@@ -32,7 +32,7 @@
                   <th class="col-md-2" scope="col">Địa chỉ</th>
                   <th class="col-md-2" scope="col">Ngày tạo</th>
                   <th class="col-md-1" scope="col">Trạng thái</th>
-                  <th class="col-md-2" scope="col">Tổng tiền</th>
+                  <th class="col-md-2 text-center" scope="col">Tổng tiền</th>
                   <th class="col-md-2" scope="col">Hành động</th>
                 </tr>
               </thead>
@@ -42,25 +42,25 @@
                 @foreach ($orders as $order)
                 <tr>
                   <td>{{$order->id}}</td>
-                  <td>{{$order->UserAddress->name}}</td>
-                  <td>{{$order->UserAddress->address}}</td>
+                  <td class="text-primary">{{$order->UserAddress->name}}</td>
+                  <td  class="text-primary">{{$order->UserAddress->address}}</td>
                   <td>{{$order->created_at}}</td>
-                  <td>
+                  <td >
                     @if ($order->status==0)
-                        Đang xử lý
+                        <p class="processing">Đang xử lý</p>
                     @elseif($order->status==1)
-                        Đã xác nhận
+                       <p class="confirmed"> Đã xác nhận</p>
                     @elseif($order->status==2)
-                        Đang giao hàng
+                        <p class="progress">Đang giao hàng</p>
                     @elseif($order->status==3)
-                        Đã thanh toán
+                        <p class="paid">Đã thanh toán</p>
                     @elseif($order->status==4)
-                        Đã hủy
+                        <p class="cancelled">Đã hủy</p>
                     @endif
                   </td>
-                  <td>{{ number_format($order->total, 0, '.', '.');}} VNĐ</td>
+                  <td class="text-center">{{ number_format($order->total, 0, '.', '.');}} VNĐ</td>
                   <td>
-                    <a href="{{route('myOrderDetails',$order->id)}}" class="genric-btn default-border radius delete-cart"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a style="border: 1px solid #d3cdcd;" href="{{route('myOrderDetails',$order->id)}}" class="genric-btn default-border radius delete-cart"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     @if ($order->status==0)
                       <a href="{{route('cancelOrders',$order->id)}}" onclick="confirm('Bạn chắc chắn hủy đơn hàng này')" class="genric-btn danger-border radius delete-cart"><i class="fa fa-times" aria-hidden="true"></i></a>
                      @endif

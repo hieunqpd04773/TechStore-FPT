@@ -2,6 +2,21 @@
 @section('title','Sản phẩm chi tiết')
 @section('content')
 {{-- @include('client/_nav') --}}
+<section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h2>Chi Tiết Sản Phẩm</h2>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Trang chủ</a>
+              <a href="category.html">Đơn hàng</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
     <!--================Single Product Area =================-->
     <div class="product_image_area">
       <div class="container">
@@ -13,17 +28,6 @@
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
-                    <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
-                  </li>
-                  @for ($i = 0; $i < count($pro_colors); $i++)
-                  <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
-                  <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
-                    alt="" style="width:100%"/>
-                </li>
-                @endfor
-                </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img id="pro_img" class="d-block w-100" src="{{asset('images/products/'.$pro->image)}}" alt="First slide" />
@@ -39,6 +43,17 @@
                   </div>
                   @endforeach
                 </div>
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
+                    <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
+                  </li>
+                  @for ($i = 0; $i < count($pro_colors); $i++)
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
+                  <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
+                    alt="" style="width:100%"/>
+                </li>
+                @endfor
+                </ol>
               </div>
             </div>
           </div>

@@ -67,8 +67,8 @@
 
                     <td>
                         <a class="badge badge-danger rounded" onclick="return confirm('Thay đổi trạng thái mục này?')" href="{{route('blockUser',$user->id)}}">Trạng thái</a>
-                        <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteUser',$user->id)}}">Xóa</a>
-                        <a class="badge badge-danger rounded" onclick="return confirm('Sửa mục này?')" href="{{route('showUser',$user->id)}}">Sửa</a>
+                        <a class="badge badge-danger rounded" onclick="return confirm('Sửa mục này?')" href="{{route('showUser',$user->id)}}"><i class="mdi mdi-wrench"></i></a>
+                        <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteUser',$user->id)}}"><i class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
                   @endforeach           

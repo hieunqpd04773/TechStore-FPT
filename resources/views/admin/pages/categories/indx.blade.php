@@ -55,8 +55,8 @@
                           </div>
                         </td>
                         <td style="width: 15%">
-                            <a href="{{route('loadEditCate',$cate->id)}}"><button type="button" class="btn btn-primary">Sửa</button></a>
-                            <a href="{{route('deleteCate',$cate->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger">Xóa</button></a>
+                            <a href="{{route('loadEditCate',$cate->id)}}"><button type="button" class="btn btn-primary"><i class="mdi mdi-wrench"></i></button></a>
+                            <a href="{{route('deleteCate',$cate->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger"><i class="mdi mdi-delete"></i></button></a>
                         </td>
                       </tr>
                       @endforeach

@@ -90,9 +90,10 @@
                     <td><img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:90px; height: auto !important;"></td>
                     <td>{{ number_format($pro->price, 0, '.', '.');}} VND</td>
                     <td>{{$pro->created_at}}</td>
-                    <td><a class="badge badge-info rounded" href="{{route('loadEditPro',$pro->id)}}">Sửa</a>
-                      <a class="badge badge-info rounded" href="{{route('showVariants',$pro->id)}}">Biến thể</a>
-                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deletePro',$pro->id)}}">Xóa</a></td>
+                    <td>
+                    <a class="badge badge-info rounded" href="{{route('showVariants',$pro->id)}}">Biến thể</a>
+                    <a class="badge badge-info rounded" href="{{route('loadEditPro',$pro->id)}}"><i class="mdi mdi-wrench"></i></a>
+                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deletePro',$pro->id)}}"><i class="mdi mdi-delete"></i></a></td>
                 </tr>
                   @endforeach           
                 </tbody>
