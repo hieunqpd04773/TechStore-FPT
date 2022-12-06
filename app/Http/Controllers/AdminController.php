@@ -33,14 +33,8 @@ class AdminController extends Controller
             $name=$c->name;
             $chartPro[++$key]=[$name, $qty];
         }
-        // $users = OrderDetails::select("*", DB::raw("count(*) as pro_count"))
-        //                 ->groupBy(DB::raw("product_id"))
-        //                 ->get();
-  
-        // dd($users);
-
-        // $bigCate= Categories::all()->Products->max('quantity');
-        // dd($bigCate);
+        $higest_resolved=DB::select(DB::raw('SELECT product_id,SUM(number) as number_total,product_name FROM order_details GROUP by product_id ORDER by number_total DESC'));
+        // dd($higest_resolved);
         return view('admin.pages.index', compact('totalView','revenue','orders','totalPro','date', 'chartPro'));
         
     }
