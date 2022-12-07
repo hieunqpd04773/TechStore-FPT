@@ -49,13 +49,12 @@ class ClientController extends Controller
     }
     public function getProByCate($id)
     {
+       
         $listPro=Categories::find($id)->Products;
+      
         $cti_bar=Categories::find($id)->Cate_items;
-        $similar = Products::with(['categories'])
-        ->where('pro.cate_id',$pro->cate_id)
-        ->where('pro.id','!=',$id)
-        ->take(3)->get(); 
-        return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar,'similar'=>$similar,'pro'=>$pro]);
+      
+        return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
     }
     public function getProByCateItem($id)
     {
