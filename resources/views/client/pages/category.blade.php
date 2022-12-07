@@ -76,7 +76,6 @@
                         </div>
                     </div>
                     @endif 
-
                     @if($pro->hot == 1)
                     <div class="product-top">
                         <span class="product-top--text">HOT</span>
