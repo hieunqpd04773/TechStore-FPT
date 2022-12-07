@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="row">  
                                         <label for="examleInput">Tóm tắt (Ngắn) <span style="color: red"> *</span></label>
-                                        <textarea id="tomtat" name="tomtat" class="form-control" style="weight:10px" required></textarea>
+                                        <textarea id="summary" name="summary" class="form-control" style="weight:10px" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,7 +91,7 @@
                             <div class="row">
                                 <div class="col">         
                                     <label for="examleInput">Thêm hình ảnh <span style="color: red"> *</span></label>
-                                    <input type="file" id="hinhanh" name="hinhanh" class="form-control">
+                                    <input type="file" id="picture" name="picture" class="form-control">
                                 </div>
                                 <hr>
                                 <div class="col">      
@@ -102,10 +102,10 @@
                         </div>
                         <div class="form-group">
                             <label for="examleInput">Nội dung bài biết <span style="color: red"> *</span></label>
-                            <textarea id="summernote1" name="noidung" class="form-control" required></textarea>
+                            <textarea id="summernote1" name="content" class="form-control" required></textarea>
 
                         </div>
-                        <input type="hidden" id="tacgia" value="{{ Auth::user()->id }}" name="tacgia">
+                        <input type="hidden" id="author" value="{{ Auth::user()->id }}" name="author">
                     </div>
 
             </div>
@@ -193,20 +193,20 @@
             
             var title= $("#title").val();
             var slug= $("#slug").val();
-            var tomtat= $("#tomtat").val();
+            var summary= $("#summary").val();
             var danhmuc= $("#danhmuc").val();
             var thuoctinh= $("#thuoctinh").val();
             var tag= $("#tag").val();
-            var hinhanh= $("#hinhanh").val();
+            var picture= $("#picture").val();
             var video= $("#video").val();
-            var noidung= $("#summernote1").val();
-            var tacgia= $("#tacgia").val();
+            var content= $("#summernote1").val();
+            var author= $("#author").val();
             var _token  = $('input[name="_token"]').val();
 
             $.ajax({
                 type: "POST",
                 url: "{{ url('/taobaiviet') }}",
-                data: {title:title, slug:slug, tomtat:tomtat,danhmuc:danhmuc,thuoctinh:thuoctinh,tag:tag,hinhanh:hinhanh,video:video,noidung:noidung,_token:_token,tacgia:tacgia },
+                data: {title:title, slug:slug, summary:summary,danhmuc:danhmuc,thuoctinh:thuoctinh,tag:tag,picture:picture,video:video,content:content,_token:_token,author:author },
                 
                 success: function (data) {
                     $('#success').html(data);

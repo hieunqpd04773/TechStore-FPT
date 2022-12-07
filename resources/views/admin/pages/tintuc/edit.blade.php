@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label for="examleInput">Tóm tắt (Ngắn) <span style="color: red"> *</span></label>
-                                <textarea name="tomtat" class="form-control" style="weight:10px" required>{{ $tintuc->tomtat }}</textarea>
+                                <textarea name="summary" class="form-control" style="weight:10px" required>{{ $tintuc->summary }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -107,8 +107,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="examleInput">Thêm hình ảnh <span style="color: red"> *</span></label>
-                                    <input type="file" name="hinhanh" class="form-control">
-                                    <img src="{{ URL::to('public/uploads/tintuc/'.$tintuc->hinhanh) }}" width="100px" height="100px" alt="">
+                                    <input type="file" name="picture" class="form-control">
+                                    <img src="{{ URL::to('public/uploads/tintuc/'.$tintuc->picture) }}" width="100px" height="100px" alt="">
                                 </div>
                                 <hr>
                                 <div class="col">
@@ -119,10 +119,10 @@
                         </div>
                         <div class="form-group">
                             <label for="examleInput">Nội dung bài biết <span style="color: red"> *</span></label>
-                            <textarea id="summernote1" name="noidung" class="form-control" required>{{ $tintuc->noidung }}</textarea>
+                            <textarea id="summernote1" name="content" class="form-control" required>{{ $tintuc->content }}</textarea>
 
                         </div>
-                        <input type="hidden" value="{{ $tintuc->tacgia }}" name="tacgia">
+                        <input type="hidden" value="{{ $tintuc->author }}" name="author">
                     </div>
 
             </div>

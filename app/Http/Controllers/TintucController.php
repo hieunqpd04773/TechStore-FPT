@@ -20,7 +20,7 @@ class TintucController extends Controller
     {
         //
         $user = User::all();
-        $nguoivietbai = Tintuc::where('tacgia',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+        $nguoivietbai = Tintuc::where('author',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
 
         $tintuc = Tintuc::all();
         $tintucs = Tintuc::orderBy('id','DESC')->paginate(10);
@@ -54,8 +54,8 @@ class TintucController extends Controller
         //
         $data = $request->validate([
             'title' => 'required|unique:tintucs|max:255',
-            'tomtat' => 'required',
-            'noidung' => 'required',      
+            'summary' => 'required',
+            'content' => 'required',      
               
             'category' => 'required',      
             'tag' => 'required',      
@@ -64,8 +64,8 @@ class TintucController extends Controller
             'title.unique' => 'Tên bài viết đã tồn tại',
             'title.required' => 'Chưa nhập tên bài viết',
             'title.max' => 'Tên bài viết quá dài',
-            'tomtat.required' => 'Chưa nhập tóm tắt',
-            'noidung.required' => 'Chưa nhập nội dung',
+            'summary.required' => 'Chưa nhập tóm tắt',
+            'content.required' => 'Chưa nhập nội dung',
             'category.required' => 'Chưa chọn danh mục',
             'tag.required' => 'Chưa chọn tag',
            
@@ -73,21 +73,21 @@ class TintucController extends Controller
 
         $tintuc = new Tintuc();
         $tintuc->title = $data['title'];
-        $tintuc->tacgia = $request->tacgia;
+        $tintuc->author = $request->author;
         $tintuc->slug =  $request->slug;
         $tintuc->tag = $data['tag'];
-        $tintuc->tomtat = $data['tomtat'];
+        $tintuc->summary = $data['summary'];
         $tintuc->id_category = $request->category;
-        $tintuc->noidung = $data['noidung'];
+        $tintuc->content = $data['content'];
         $tintuc->video =  $request->video;
         
-        $get_image = $request->file('hinhanh');
+        $get_image = $request->file('picture');
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/tintuc',$new_image);
-            $tintuc->hinhanh = $new_image;
+            $tintuc->picture = $new_image;
 
             $tintuc->save();
             if($request->submit == null)
@@ -141,20 +141,20 @@ class TintucController extends Controller
     {
         $tintuc = Tintuc::find($id);
         $tintuc->title = $request->title;
-        $tintuc->tacgia = $request->tacgia;
+        $tintuc->author = $request->author;
         $tintuc->slug =  $request->slug;
         $tintuc->tag = $request->tag;
-        $tintuc->tomtat = $request->tomtat;
+        $tintuc->summary = $request->summary;
         $tintuc->id_category = $request->category;
-        $tintuc->noidung = $request->noidung;
+        $tintuc->content = $request->content;
         $tintuc->video =  $request->video;
-        $get_image = $request->file('hinhanh');
+        $get_image = $request->file('picture');
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/tintuc',$new_image);
-            $tintuc->hinhanh = $new_image;
+            $tintuc->picture = $new_image;
 
             $tintuc->save();
             
@@ -188,7 +188,7 @@ class TintucController extends Controller
         
 
         $user = User::all();
-        $nguoivietbai = Tintuc::where('tacgia',Auth::user()->id)->where('title','like','%'.$key.'%')->orderBy('created_at','DESC')->paginate(10);
+        $nguoivietbai = Tintuc::where('author',Auth::user()->id)->where('title','like','%'.$key.'%')->orderBy('created_at','DESC')->paginate(10);
 
         $tintuc = Tintuc::all();
         $tintucs = Tintuc::orderBy('created_at','DESC')->paginate(10);
@@ -223,19 +223,19 @@ class TintucController extends Controller
         $tintuc->slug = $data['slug'];
         $tintuc->id_category = $data['danhmuc'];
         $tintuc->id_properticategory = $data['thuoctinh'];
-        $tintuc->tomtat = $data['tomtat'];
+        $tintuc->summary = $data['summary'];
         $tintuc->tag = $data['tag'];
-        $tintuc->hinhanh = $data['hinhanh'];
+        $tintuc->picture = $data['picture'];
         $tintuc->video = $data['video'];
-        $tintuc->noidung = $data['noidung'];
-        $tintuc->tacgia = $data['tacgia'];
-        $get_image = $request->file('hinhanh');
+        $tintuc->content = $data['content'];
+        $tintuc->author = $data['author'];
+        $get_image = $request->file('picture');
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/tintuc',$new_image);
-            $tintuc->hinhanh = $new_image;
+            $tintuc->picture = $new_image;
 
             $tintuc->save();
             if($request->submit == null)

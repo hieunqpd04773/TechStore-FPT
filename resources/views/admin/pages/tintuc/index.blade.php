@@ -35,7 +35,7 @@
                                     <td>{{ $tin->title }}</td>
                                     <td>
                                         @foreach ($user as $u)
-                                            @if ($u->id == $tin->tacgia)
+                                            @if ($u->id == $tin->author)
                                                 {{ $u->name }}
                                             @endif
                                         @endforeach

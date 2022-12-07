@@ -12,6 +12,6 @@ class Tintuc extends Model
     protected $primary = 'id';
     public $timestamps= false;
     protected $fillable=[
-        'title','slug','tomtat','noidung', 'tacgia', 'ngayguibai', 'luotxem', 'danhgia', 'tag', 'hinhanh', 'video', 'trangthai', 'id_category '
+        'title','slug','summary','content', 'author', 'tag', 'picture', 'video', 'id_category '
     ];
 }

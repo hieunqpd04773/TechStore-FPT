@@ -42,7 +42,7 @@
                 </div>
 
                     <div class="card-body">
-                        <img src="{{ URL::to('public/uploads/tintuc/'.$tin->hinhanh) }}" width="100%" height="450px" alt="">
+                        <img src="{{ URL::to('public/uploads/tintuc/'.$tin->picture) }}" width="100%" height="450px" alt="">
                         <h4>{{ $tin->title }}</h4>
                         <span>@foreach($user as  $u)
                             @if($tin->tacgia == $u->id)
@@ -51,7 +51,7 @@
                         @endforeach</span>
                         <br>
                         <div>
-                            <p>{!! $tin->noidung !!}</p>
+                            <p>{!! $tin->content !!}</p>
                         </div>
                     </div>
 
