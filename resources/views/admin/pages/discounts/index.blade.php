@@ -38,7 +38,7 @@
                   @foreach ($allDisc as $disc)
                   <tr>
                     <td>{{$disc->id}}</td>
-                    <td>{{$disc->Products->name}}</td>
+                    <td></td>
                     <td>{{$disc->code}}</td>
                     <td>{{$disc->dicount}} VNĐ</td>
                     <td>{{$disc->quantity}}</td>

@@ -104,10 +104,13 @@
                   </td>
 
                   <td colspan="3">
+                    <form action="{{route('addcode')}}">
+                      @csrf
                     <div class="cupon_text">
-                      <input type="text" placeholder="Coupon Code" />
-                      <a class="main_btn apply_btn" href="#">Áp dụng</a>
+                      <input type="text" name="disc" placeholder="Coupon Code" />
+                      <button class="main_btn apply_btn">Áp dụng</button>
                     </div>
+                  </form>
                   </td>
                 </tr>
               </tbody>
@@ -248,7 +251,7 @@
             <br>
             <div class="payment_item">
               <p>Giỏ hàng: <span>VNĐ</span> <span data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
-              <p>Giảm Giá: <span>VNĐ</span> <span > 0 VNđ</span> </p>
+              <p>Giảm Giá: <span></span> <span > VNđ</span> </p>
 
             </div>
             <div class="payment_item payment_total">

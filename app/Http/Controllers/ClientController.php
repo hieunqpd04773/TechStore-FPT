@@ -17,8 +17,10 @@ use App\Models\Slider;
 use App\Models\Wishlist;
 use App\Models\Orders;
 use App\Models\OrderDetails;
+use App\Models\Discounts_code;
 use DB;
-use App\Models\Contacts;
+use Carbon\Carbon;
+use Session;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -43,81 +45,23 @@ class ClientController extends Controller
     }
     public function contact()
     {
-        if(isset(Auth::user()->id)){
-            $dataUser = Auth::user();
-            $viewContacts = Contacts::where('id_user','=', $dataUser->id)->get();
-            return view('client.pages.contact')->with(compact('dataUser', 'viewContacts'));
-        }else{
-            $dataUser = Auth::user();
-            return view('client.pages.contact')->with(compact('dataUser'));
-        }
-    }
-
-    public function addcontact(Request $request)
-    {
-        $contacts = new Contacts();
-        if(isset(Auth::user()->id)){
-            $contacts->id_user = Auth::user()->id;
-            $contacts->user_name = Auth::user()->name;
-            $contacts->user_email = Auth::user()->email;
-            $contacts->message = $request->message;
-        }else{
-            $contacts->id_user = 0;
-            $contacts->user_name = $request->name;
-            $contacts->user_email = $request->email;
-            $contacts->message = $request->message;
-        }
-        $contacts->save();
-        $dataUser = Auth::user();
-        toastr()->success('Thành công', 'Bạn đã gửi thành công');
-        return back();
-    }
-
-    public function showContact($id){
-        $contacts = Contacts::find($id);
-        $dataUser = Auth::user();
-        return view('client.pages.edit_contact')->with(compact('contacts', 'dataUser'));
-    }
-
-
-    public function editContact(Request $request)
-    {
-        $contacts = Contacts::find($request->id);
-        if(isset(Auth::user()->id)){
-            $contacts->id_user = $request->id_user;
-            $contacts->user_name = $request->user_name;
-            $contacts->user_email = $request->user_email;
-            $contacts->message = $request->message;
-        }else{
-            $contacts->id_user = $request->id_user;
-            $contacts->user_name = $request->name;
-            $contacts->user_email = $request->email;
-            $contacts->message = $request->message;
-        }
-        $contacts->save();
-        $dataUser = Auth::user();
-        toastr()->success('Thành công', 'Bạn đã cập nhật thành công');
-        return redirect()->action([ClientController::class,'contact']);
-    }
-
-    public function deletecontact($id)
-    {
-        
-        $contacts = Contacts::find($id);
-        $contacts -> delete();
-        toastr()->success('Thành công', 'Đã xóa tin nhắn liên hệ');
-        return back();
+        return view('client.pages.contact');
     }
     public function getProByCate($id)
     {
         $listPro=Categories::find($id)->Products;
         $cti_bar=Categories::find($id)->Cate_items;
-        return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
+        $similar = Products::with(['categories'])
+        ->where('pro.cate_id',$pro->cate_id)
+        ->where('pro.id','!=',$id)
+        ->take(3)->get(); 
+        return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar,'similar'=>$similar,'pro'=>$pro]);
     }
     public function getProByCateItem($id)
     {
         $listPro=CateItems::find($id)->Products;
         $cti_bar=CateItems::where('cate_id','=',$id)->get();
+
         return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
     }
     public function getProById($id)
@@ -129,6 +73,10 @@ class ClientController extends Controller
         $pro_details=Products::find($id)->ProDetails;
         $pro_colors=Products::find($id)->ProColors;
         $pro_memory=Products::find($id)->ProMemory;
+        $similar = Products::with(['categories'])
+        ->where('products.cate_id',$pro->cate_id)
+        ->where('products.id','!=',$id)
+        ->take(4)->get(); 
         
         $coutall = DB::table('comments')->where('pro_id','=',$pro->id)->count();
         $cout5 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 5)->count();
@@ -141,11 +89,11 @@ class ClientController extends Controller
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round,'similar'=>$similar]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1,'similar'=>$similar]);
         }
     }
 
@@ -296,22 +244,7 @@ class ClientController extends Controller
         $cart=session()->get('cart', []);
         return redirect()->back()->with('success','Đã thêm sản phẩm vào giỏ hàng');
     }
-    public function updatCart(Request $r)
-    {
-        dd($r);
-        // $qty=$r->qty;
-        // $name =$r->proName;
-        // dd($name);
-        // $cart = session()->get('cart', []);
-        // if(isset($cart[$name])  ){
-        //     $cart[$name]['qty']=$qty;
-        //     dd( $cart[$name]['qty']);
-        // }
-        // else{
-        //     return redirect()->back()->with('error', 'Không tìm thấy sản phẩm');
-        // }
-        return redirect()->back()->with('success', 'Cập nhật thành công');
-    }
+
     public function viewCart()
     {
         if (Auth::check()){
@@ -406,7 +339,7 @@ class ClientController extends Controller
 
     public function orders()
     {
-        $orders=Orders::where('user_id','=',Auth::id() )->orderBy('id','desc')->get();
+        $orders=Orders::where('user_id','=',Auth::id() )->get();
         return view('client.pages.orders',compact('orders'));
     }
     public function orderdetails($id)
@@ -434,6 +367,40 @@ class ClientController extends Controller
            return redirect()->back()->with('success', 'Đăng nhập thành công');
         } else {
             return redirect()->back()->with('error', 'Đăng nhập thất bại!');
+        }
+    }
+    public function discountCode(Request $request)
+    {
+        $today = Carbon::today();
+        $data = $request->code;
+        $coupon = Discounts_code::where('code','=',$data)->where('quantity')->whereDate('start_time','<',$today)->whereDate('end_time','>',$today)->first();
+        if($coupon){
+            $coupon = $coupon->count();
+            if($coupon>0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session==true){
+                    $is_avaiable = 0;
+                    if($is_avaiable = 0){
+                        $cou[] = array(
+                            'code' => $coupon->code,
+                            'quantity' => $coupon->quantity,
+                            'discount' => $coupon->discount,
+                        );
+                        Session::put('coupon',$cou);
+                    }
+                }else{
+                    $cou[] = array(
+                        'code' => $coupon->code,
+                        'quantity' => $coupon->quantity,
+                        'discount' => $coupon->discount,
+                    );
+                    Session::put('coupon',$cou);
+                }
+                Session::save();
+                return redirect()->back()->with('success','Them ma giam gia thanh cong');
+            }
+        }else{
+            return redirect()->back()->with('error','Mã giảm giá không đúng');
         }
     }
     

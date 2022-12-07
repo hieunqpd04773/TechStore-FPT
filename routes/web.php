@@ -35,6 +35,7 @@ Route::prefix('/')->group(function () {
     Route::get('/showContact/{id}',[ClientController::class,'showContact'])->name('showContact');
     Route::post('editContact',[ClientController::class,'editContact'])->name('editContact');
     Route::get('deletecontact/{id}', [ClientController::class,'deletecontact'])->name('deletecontact');
+    Route::get('coupon', [ClientController::class,'discountCode'])->name('addcode');
 
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
     
