@@ -10,8 +10,9 @@
               <h2>Chi Tiết Sản Phẩm</h2>
             </div>
             <div class="page_link">
-              <a href="index.html">Trang chủ</a>
-              <a href="category.html">Đơn hàng</a>
+              <a href="{{Route('index')}}">Trang chủ</a>
+              <a href="#">Danh mục</a>
+              <a href="#">Chi tiết sản phẩm</a>
             </div>
           </div>
         </div>
@@ -21,7 +22,7 @@
     <div class="product_image_area">
       <div class="container">
         <div class="row s_product_inner">
-          <div class="col-lg-6">
+          <div class="col-lg-6 flex justify-center align-items-center">
             <div class="s_product_img">
               <div
                 id="carouselExampleIndicators"
@@ -45,12 +46,12 @@
                 </div>
                 <ol class="carousel-indicators">
                   <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
-                    <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
+                    <img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:100%; height:100%; padding: 8px;"/>
                   </li>
                   @for ($i = 0; $i < count($pro_colors); $i++)
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
                   <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
-                    alt="" style="width:100%"/>
+                    alt="" style="width:100%; height:100%; padding: 8px;"/>
                 </li>
                 @endfor
                 </ol>

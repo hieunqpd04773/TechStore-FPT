@@ -215,9 +215,8 @@
 
 /* Slider */
 .carousel-item img{
-    /* height: 90vh; */
-    /* width: 100%; */
-    object-fit: cover;
+        height: 450px;
+        object-fit: contain;
 }
 
 .navbar-right .nav-item{
@@ -377,4 +376,22 @@
     display: flex;
     align-items: center;
     margin-top: 0;
+}
+
+/* chi tiet sp */
+
+.s_product_img .carousel .carousel-indicators {
+    margin: 0px;
+    right: 20px;
+    width: auto;
+    left: auto;
+    bottom: 30px;
+    width: 450px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+.active {
+    color: #c0baba;
 }

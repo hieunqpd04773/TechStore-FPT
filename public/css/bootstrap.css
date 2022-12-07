@@ -6074,7 +6074,7 @@ button.close {
 
 .popover-body {
     padding: .5rem .75rem;
-    color: #212529
+    color: #212529;
 }
 
 .carousel {
@@ -6083,10 +6083,10 @@ button.close {
 
 .carousel-inner {
   border-radius: 8px;
-
     position: relative;
     width: 100%;
-    overflow: hidden
+    overflow: hidden;
+    margin-bottom: 25px;
 }
 
 .carousel-item {
@@ -6256,10 +6256,10 @@ button.close {
 }
 
 .carousel-indicators {
-    position: absolute;
+    /* /* position: absolute;
     right: 0;
     bottom: 10px;
-    left: 0;
+    /* left: 0; */
     z-index: 15;
     display: -ms-flexbox;
     display: flex;
