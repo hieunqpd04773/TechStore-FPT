@@ -215,8 +215,8 @@
 
 /* Slider */
 .carousel-item img{
-        height: 450px;
-        object-fit: contain;
+        height: 550px;
+        object-fit: cover;
 }
 
 .navbar-right .nav-item{
