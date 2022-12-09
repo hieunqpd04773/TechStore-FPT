@@ -28,7 +28,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Địa chỉ</label>
-                    <input type="text" value="{{$user->address}}" name="address" class="form-control price" id="exampleInputName1" placeholder="Nhập địa chỉ">
+                    <input type="text" value="{{$user->address}}" name="address" class="form-control address" id="exampleInputName1" placeholder="Nhập địa chỉ">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -37,14 +37,14 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputName1">Email</label>
-                    <input type="email" value="{{$user->email}}" name="email" class="form-control price" id="exampleInputName1" placeholder="Nhập email">
+                    <input type="email" value="{{$user->email}}" name="email" class="form-control email" id="exampleInputName1" placeholder="Nhập email">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputName1">Số điện thoại</label>
-                    <input type="text" value="{{$user->phone}}" name="phone" class="form-control discount" id="exampleInputName1" placeholder="Nhập số điện thoại">
+                    <input type="text" value="{{$user->phone}}" name="phone" class="form-control myPhone" id="exampleInputName1" placeholder="Nhập số điện thoại">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -180,7 +180,6 @@ function validate(inputElement, rule) {
         
         var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
         var input =inputElement.parentElement.querySelector('.form-control')
-        console.log(input)
 
           if(inputElement) {
             inputElement.onblur = function() {
@@ -199,99 +198,61 @@ Validator.isRequired = function (selector) {
     return {
       selector,
       test(value) {
-        return value.trim() ? undefined : 'Vui lòng nhập tên sản phẩm'
+        return value.trim() ? undefined : 'Vui lòng nhập tên người dùng'
       }
     }
 }
-Validator.isList = function(selector) {
+Validator.isAddress = function(selector) {
   return {
       selector,
       test(value) {
-        return value ? undefined : 'Vui lòng chọn danh mục'
+        return value ? undefined : 'Vui lòng nhập địa chỉ'
       }
     }
 }
 
-Validator.isFirm = function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng chọn hãng'
-      }
-    }
+
+Validator.isPhone = function (selector,min, message) {
+        return {
+            selector,
+            test(value) {
+                return value.length >= min ? undefined :`Vui lòng nhập tối thiểu ${min} số `
+            }
+        }
 }
-Validator.isPrice= function(selector) {
-  return {
+
+Validator.formEmail = function (selector) {
+    return {
       selector,
       test(value) {
-        return value ? undefined : 'Vui lòng nhập giá'
-      }
-    }
-}
-Validator.isDiscount= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng nhập % giảm giá'
-      }
-    }
-}
-Validator.isDate= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng chọn ngày'
-      }
-    }
-}
-Validator.isAmount= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng nhập số lượng'
-      }
-    }
-}
-Validator.isStatus= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng nhập số lượng'
+        return value ? undefined : 'Vui lòng nhập địa chỉ email'
       }
     }
 }
 
-Validator.isDescribe = function (selector) {
+
+Validator.isEmail= function (selector) {
   return {
-    selector,
-    test(value) {
-      return value ? undefined : 'Vui lòng nhập mô tả sản phẩm'
-    }
-  }
+      selector,
+      test(value) {
+          var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          return regex.test(value) ? undefined : 'Vui lòng nhập đúng định dạng email'
+      }
+        }
 }
 
-// Validator.isAvatar = function (selector) {
-//   return {
-//     selector,
-//     test(value) {
-//       return value ? undefined : 'Vui lòng chọn ảnh'
-//     }
-//   }
-// }
+
 
    Validator({
     form: '#form-edit-user',
     errorSelector: '.form-message',
     rules: [
       Validator.isRequired('.fullname'),
-      Validator.isList('.list'),
-      Validator.isFirm('.firm'),
-      Validator.isPrice('.price'),
-      Validator.isDiscount('.discount'),
-      Validator.isDate('.date'),
-      Validator.isAmount('.amount'),
-      Validator.isStatus('.status'),
-      Validator.isDescribe('.describe'),
+      Validator.isAddress('.address'),
+      Validator.formEmail('.email'),
+      Validator.isEmail('.email'),
+      Validator.isPhone('.myPhone',10),
+
       // Validator.isAvatar('.avatar')
     ],
   })

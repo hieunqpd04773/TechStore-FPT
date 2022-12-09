@@ -250,7 +250,6 @@ function validate(inputElement, rule) {
         
         var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
         var input =inputElement.parentElement.querySelector('.form-control')
-        console.log(input)
 
           if(inputElement) {
             inputElement.onblur = function() {

@@ -5,7 +5,7 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Thêm mã giảm giá</h4>
+            <h4 class="card-title">Sửa mã giảm giá</h4>
             <p class="card-description">
               Nhập thông tin
             </p>

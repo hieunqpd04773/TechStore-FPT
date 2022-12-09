@@ -15,12 +15,13 @@
           <h2 class="contact-title">Liên hệ chúng tôi.</h2>
         </div>
         <div class="col-lg-8 mb-4 mb-lg-0">
-          <form class="form-contact contact_form" action="/addcontact" method="post" id="contactForm" novalidate="novalidate">
+          <form class="form-contact" action="/addcontact" method="post" id="contactForm form-disc" novalidate="novalidate">
             @csrf
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                    <textarea class="form-control w-100" name="message" id="" cols="30" rows="9" placeholder="Nhập tin nhắn..." required></textarea>
+                    <textarea class="form-control w-100 postage" name="message" id="" cols="30" rows="9" placeholder="Nhập tin nhắn..." required></textarea>
+                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                 </div>
               </div>
               @if(isset($dataUser))
@@ -185,14 +186,13 @@
               });
             }
           
-            
           </script>
           <script src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2236.1374988314938!2d108.16966138988002!3d16.07428885033731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218e6e07b1c3f%3A0x459e4bf5a2af323e!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYyDEkMOgIE7hurVuZw!5e0!3m2!1svi!2s!4v1664677507528!5m2!1svi!2s"></script>
         <!-- </div> -->
       </div>
     </div>
-
   </section>
 <!--================ End Blog Area =================-->
 
 @endsection
+
