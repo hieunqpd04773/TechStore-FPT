@@ -142,10 +142,7 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}',[ProductController::class,'delete'])->name('deletePro');
         Route::get('edit/{id}',[ProductController::class,'loadEdit'])->name('loadEditPro');
         Route::post('edit',[ProductController::class,'edit'])->name('editPro');
-
-        // Route::get('variant{id}',[ProductController::class,'loadAddVariant'])->name('loadAddVariant');
         Route::get('variants/{id}',[ProductController::class,'showVariants'])->name('showVariants');
-        // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
 
         Route::post('createColor',[ProductController::class,'createColor'])->name('createColor');
