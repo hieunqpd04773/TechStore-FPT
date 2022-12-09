@@ -189,7 +189,6 @@ class UserController extends Controller
         $user->email_verified_at=$request->email_verified_at;
         $user->password=$request->password;
         $user->image=$image;
-       // $pro->date=$request->date;
         $user->remember_token=$request->remember_token;
 
         $user->address=$request->address;
@@ -242,7 +241,7 @@ class UserController extends Controller
     {
         $user= User::find($id);
         $user->delete();
-        toastr()->success('Thành công', 'Xóa bình luận thành công');
+        toastr()->success('Thành công', 'Xóa người dùng thành công');
         return back();
     }
 }
