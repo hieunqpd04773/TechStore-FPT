@@ -3,7 +3,7 @@
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div style="margin-top: 20px;" class="col-sm-6">
                 <h1>Chi tiết viết</h1>
             </div>
 
