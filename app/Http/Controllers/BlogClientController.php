@@ -21,7 +21,7 @@ class BlogClientController extends Controller
         $user = User::all();
         $nguoivietbai = Blog::where('author',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         $blog = Blog::all();
-        $blogs = Blog::orderBy('id','DESC')->paginate(10);
+        $blogs = Blog::orderBy('id','DESC')->paginate(4);
         return view('client.pages.blogindex',compact('allCate','blog','blogs'));
     }
 

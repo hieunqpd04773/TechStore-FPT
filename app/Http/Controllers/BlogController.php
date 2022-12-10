@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Categories;
 use App\Models\PropertiCategory;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -21,9 +21,8 @@ class BlogController extends Controller
         //
         $user = User::all();
         $nguoivietbai = Blog::where('author',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-
         $blog = Blog::all();
-        $blogs = Blog::orderBy('id','DESC')->paginate(10);
+        $blogs = Blog::orderBy('id','DESC')->paginate(8);
         // $category = Categories::where('chubien',Auth::user()->id)->get();
 
         return view('admin.pages.blog.index',compact('nguoivietbai','user','blogs'));
