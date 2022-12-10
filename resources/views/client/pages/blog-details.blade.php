@@ -1,18 +1,59 @@
 @extends('client.master')
 @section('title','TechStore')
 @section('content')
-<div class="box" style="margin:0 160px">
-	<div class="blog-post-area">
-		<div class="single-blog-post">
-			<h1 style="font-size: 35px;text-align: center;">{{$blogs->title}}</h1>
-			<div class="post-meta" id="{{$blogs->id}}" style='display:inline-block'>
-					<span style="float:left"><img width="250px" style="padding-bottom: 400px;" src="{{ asset('public/uploads/blog') }}/{{$blogs->picture}}" alt=""></span>
-					
-					<p style="font-size:15px;margin-left:280px">{{$blogs->content}}</p>				
+
+<section class="banner_area">
+	<div class="banner_inner d-flex align-items-center">
+		<div class="container">
+			<div class="banner_content d-md-flex justify-content-between align-items-center">
+				<div class="mb-3 mb-md-0">
+					<h2>Tin tức nổi bật</h2>
+					<p>Luôn được cập nhật liên tục</p>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
+<section class="blog_area section_gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mb-5 mb-lg-0">
+				<div class="blog_left_sidebar">
+					<article class="blog_item">
+						<div class="blog_item_img">
+							<img class="card-img rounded-0" src="{{ asset('public/uploads/blog') }}/{{$blogs->picture}}" alt="">
+						</div>
+						<div class="blog_details">
+							<a class="d-inline-block" href="single-blog.html">
+								<h2>{{$blogs->title}}</h2>
+							</a>
+							<p>{{$blogs->content}}</p>
+						</div>
+					</article>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="blog_right_sidebar" style="margin-top: 30px;">
+					<aside class="single_sidebar_widget popular_post_widget">
+						<h3 class="widget_title">Bài viết khác</h3>
+						@foreach($blogs as $value)
+						<div class="media post_item">
+							<img style="width:100px; height:70px;border-radius:3%" src="{{ asset('public/uploads/blog') }}/{{$blogs->picture}}" alt="post">
+							<div class="media-body">
+								<a href="{{url('blogs/details')}}/{{$blogs->id}}">
+									<h3>{{$blogs->title}}</h3>
+								</a>
+							</div>
+						</div>
+						@endforeach
+				</div>
+				</aside>
+
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
 
 
 @endsection
