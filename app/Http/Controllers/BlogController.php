@@ -22,7 +22,7 @@ class BlogController extends Controller
         $user = User::all();
         $nguoivietbai = Blog::where('author',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         $blog = Blog::all();
-        $blogs = Blog::orderBy('id','DESC')->paginate(8);
+        $blogs = Blog::orderBy('id','DESC')->paginate(7);
         // $category = Categories::where('chubien',Auth::user()->id)->get();
 
         return view('admin.pages.blog.index',compact('nguoivietbai','user','blogs'));

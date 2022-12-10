@@ -77,15 +77,7 @@
 
                                 </select>
                             </div>
-                            <div class="col">
-                                <label for="examleInput" class="">Thuộc tính danh Mục <span style="color: red"> *</span></label>
-                                <select name="properticategory" id="thuoctinh" class="form-control thuoctinh">
-
-
-
-                                </select>
-
-                            </div>
+                            
 
                         </div>
                         <div class="form-group">
@@ -118,7 +110,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer">
-            <button type="submit" name="submit" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" name="submit" class="btn btn-warning">Cập nhật</button>
 
         </div>
         </form>
