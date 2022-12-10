@@ -20,7 +20,7 @@ class BlogClientController extends Controller
         $allCate=Categories::all();
         $user = User::all();
         $blog = Blog::all();
-        $blogs = Blog::orderBy('id','DESC')->paginate();
+        $blogs = Blog::orderBy('id','DESC')->paginate(5);
         return view('client.pages.blogindex',compact('allCate','blog','blogs'));
     }
 
