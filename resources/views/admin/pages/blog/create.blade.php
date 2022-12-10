@@ -102,9 +102,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer clearfix">
-                <button type="submit" name="submit" class="btn btn-primary">Thêm</button>
-                <button type="submit" name="submit" id="tao" value="1" class="btn btn-outline-info"><i class="mdi mdi-save"></i>
-                    Lưu và tiếp tục thêm</button>
+                <button type="submit" name="submit" class="btn btn-warning">Thêm</button>
             </div>
             </form>
         </div>
