@@ -38,7 +38,7 @@
 
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{url('admin/tintuc/store')}}" enctype="multipart/form-data" id="formtao">
+                <form method="POST" action="{{url('admin/blog/store')}}" enctype="multipart/form-data" id="formtao">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -71,17 +71,7 @@
                                         @endforeach
 
                                     </select>
-                                </div>
-                                <div class="col">
-                                    <label for="examleInput" class="">Thuộc tính danh Mục <span style="color: red"> *</span></label>
-                                    <select name="properticategory" id="thuoctinh" class="form-control thuoctinh">
-                                       
-                                       
-
-                                    </select>
-                                    
-                                </div>
-
+                                </div>           
                             </div>
                             <div class="form-group">
                                 <label for="examleInput">Thêm tag cho bài viết <span style="color: red"> *</span></label>

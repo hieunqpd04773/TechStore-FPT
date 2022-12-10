@@ -78,7 +78,10 @@
                             @endforeach
                         </ul>
                         @endforeach
+                        <li class="nav-item submenu dropdown">
+                        <a href="{{url('blogs')}}" class="nav-link dropdown-toggle">Tin Tức</a>
                     </ul>
+                    
                     </div>
     
                 <div class="col-lg-5 pr-0">

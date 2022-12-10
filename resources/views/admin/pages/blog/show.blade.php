@@ -42,7 +42,7 @@
                 </div>
 
                     <div class="card-body">
-                        <img src="{{ URL::to('public/uploads/tintuc/'.$tin->picture) }}" width="100%" height="450px" alt="">
+                        <img src="{{ URL::to('public/uploads/blog/'.$tin->picture) }}" width="100%" height="450px" alt="">
                         <h4>{{ $tin->title }}</h4>
                         <span>@foreach($user as  $u)
                             @if($tin->tacgia == $u->id)
@@ -59,7 +59,7 @@
             <!-- /.card-body -->
             
             <div class="card-footer">
-                <a href="{{ route('tintuc.index') }}" type="submit" name="submit" class="btn btn-warning">Quay lại</a>
+                <a href="{{ route('blog.index') }}" type="submit" name="submit" class="btn btn-warning">Quay lại</a>
 
             </div>
         </div>

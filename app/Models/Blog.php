@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tintuc extends Model
+class Blog extends Model
 {
     use HasFactory;
-    protected $table = 'tintucs';
+    protected $table = 'blogs';
     protected $primary = 'id';
     public $timestamps= false;
     protected $fillable=[
