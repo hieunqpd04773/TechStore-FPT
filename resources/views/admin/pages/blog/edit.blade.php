@@ -44,7 +44,7 @@
 
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form  method="POST"  action="{{ url('admin/tintuc/update', ['Id' => $tintuc->id]) }}" enctype="multipart/form-data">
+                <form  method="POST"  action="{{ url('admin/blog/update', ['Id' => $blog->id]) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -52,12 +52,12 @@
                                 <div class="col">
                                     <label>Tên bài viết <span style="color: red"> *</span></label>
                                     <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="Nhập tên bài viết" value="{{ $tintuc->title }}"
+                                        placeholder="Nhập tên bài viết" value="{{ $blog->title }}"
                                         onkeyup="ChangeToSlug();">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Slug <span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" value="{{ $tintuc->slug }}" id="slug"
+                                    <input type="text" class="form-control" value="{{ $blog->slug }}" id="slug"
                                         name="slug" placeholder="slug">
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label for="examleInput">Tóm tắt (Ngắn) <span style="color: red"> *</span></label>
-                                <textarea name="summary" class="form-control" style="weight:10px" required>{{ $tintuc->summary }}</textarea>
+                                <textarea name="summary" class="form-control" style="weight:10px" required>{{ $blog->summary }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -77,7 +77,7 @@
                                         <option value="0" selected>-- Chọn danh mục -- </option>
                                         @foreach ($category as $cat)
                                             <option value="{{ $cat->id }}"
-                                                @foreach ($properti as $pro) @if ($tintuc->id_properticategory)
+                                                @foreach ($properti as $pro) @if ($blog->id_properticategory)
                                                         @if ($pro->id_category == $cat->id)
                                                         selected
                                                         @endif
@@ -101,28 +101,28 @@
                             </div>
                             <div class="form-group">
                                 <label for="examleInput">Thêm tag cho bài viết <span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" value="{{ $tintuc->tag }}" name="tag" data-role="tagsinput">
+                                <input type="text" class="form-control" value="{{ $blog->tag }}" name="tag" data-role="tagsinput">
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col">
                                     <label for="examleInput">Thêm hình ảnh <span style="color: red"> *</span></label>
                                     <input type="file" name="picture" class="form-control">
-                                    <img src="{{ URL::to('public/uploads/tintuc/'.$tintuc->picture) }}" width="100px" height="100px" alt="">
+                                    <img src="{{ URL::to('public/uploads/blog/'.$blog->picture) }}" width="100px" height="100px" alt="">
                                 </div>
                                 <hr>
                                 <div class="col">
                                     <label for="examleInput">Thêm video(Không bắt buộc)</label>
-                                    <input type="text" value="{{ $tintuc->video }}" name="video" class="form-control">
+                                    <input type="text" value="{{ $blog->video }}" name="video" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="examleInput">Nội dung bài biết <span style="color: red"> *</span></label>
-                            <textarea id="summernote1" name="content" class="form-control" required>{{ $tintuc->content }}</textarea>
+                            <textarea id="summernote1" name="content" class="form-control" required>{{ $blog->content }}</textarea>
 
                         </div>
-                        <input type="hidden" value="{{ $tintuc->author }}" name="author">
+                        <input type="hidden" value="{{ $blog->author }}" name="author">
                     </div>
 
             </div>

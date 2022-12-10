@@ -15,6 +15,8 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogClientController;
 
 
 
@@ -223,8 +225,22 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::post('edit', [DeliveryController::class,'edit'])->name('EditDelivery_');
         Route::get('delete/{id}',[DeliveryController::class,'DeleteDelivery'])->name('DeleteDelivery');
     });
+    Route::prefix('blog')->group(function () {
+        Route::get('index', [BlogController::class,'index'])->name('blog.index');
+        Route::get('create', [BlogController::class,'create']);
+        Route::post('store', [BlogController::class,'store']);
+        Route::get('show/{id}', [BlogController::class,'show']);
+        Route::get('edit/{id}', [BlogController::class,'edit']);
+        Route::post('update/{id}', [BlogController::class,'update']);
+        Route::get('delete/{id}',[BlogController::class,'destroy']);
+    });
+   
 
 });
+
+Route::get('blogs',[BlogClientController::class,'index']);
+Route::get('blogs/details/{id}',[BlogClientController::class,'show']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

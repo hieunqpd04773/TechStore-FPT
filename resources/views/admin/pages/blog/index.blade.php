@@ -15,7 +15,7 @@
 
             <div class="card">
             <div class="card-header">
-                    <a href="{{url('admin/tintuc/create')}}" class="btn btn-success">Thêm bài viết mới mới</a>
+                    <a href="{{url('admin/blog/create')}}" class="btn btn-success">Thêm bài viết mới mới</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -29,9 +29,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tintucs as $tin)
+                            @foreach ($blogs as $tin)
                                 <tr>
-                                    <td>{{$tintucs->firstItem() + $loop -> index }}</td>
+                                    <td>{{$blogs->firstItem() + $loop -> index }}</td>
                                     <td>{{ $tin->title }}</td>
                                     <td>
                                         @foreach ($user as $u)
@@ -42,9 +42,9 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{url('admin/tintuc/show',['Id'=>$tin->id])}}" ><button type="button" class="btn btn-primary">Xem</button></a>
-                                            <a href="{{url('admin/tintuc/edit',['Id'=>$tin->id])}}" ><button type="button" class="btn btn-primary2">Sửa</button></a>
-                                            <a href="{{ url('admin/tintuc/delete', ['Id' => $tin->id]) }}" ><button type="button" class="btn btn-primary3">Xóa</button></a>
+                                            <a href="{{url('admin/blog/show',['Id'=>$tin->id])}}" ><button type="button" class="btn btn-primary">Xem</button></a>
+                                            <a href="{{url('admin/blog/edit',['Id'=>$tin->id])}}" ><button type="button" class="btn btn-primary2">Sửa</button></a>
+                                            <a href="{{ url('admin/blog/delete', ['Id' => $tin->id]) }}" ><button type="button" class="btn btn-primary3">Xóa</button></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -55,7 +55,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
-                        {{ $tintucs ->links('pagination::bootstrap-4') }}
+                        {{ $blogs ->links('pagination::bootstrap-4') }}
                     </ul>
                 </div>
             </div>
