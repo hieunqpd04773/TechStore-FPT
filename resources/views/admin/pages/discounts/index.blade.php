@@ -24,13 +24,11 @@
                 <thead>
                   <tr>
                       <th>Id</th>
-                      <th>Sản phẩm</th>
                       <th>Mã giảm giá</th>
                       <th>Số tiền giảm</th>
                       <th>Số lượng</th>
                       <th>Ngày bắt đầu</th>
                       <th>Ngày kết thức</th>
-                      <th>Phạm vi</th>
                       <th>Hành động</th>
                   </tr>
                 </thead>
@@ -38,22 +36,11 @@
                   @foreach ($allDisc as $disc)
                   <tr>
                     <td>{{$disc->id}}</td>
-                    <td>{{$disc->Products->name}}</td>
                     <td>{{$disc->code}}</td>
                     <td>{{$disc->dicount}} VNĐ</td>
                     <td>{{$disc->quantity}}</td>
                     <td>{{$disc->start_time}}</td>
                     <td>{{$disc->end_time}}</td>
-                    <td>
-                        <?php 
-                            if($disc->type == 0){
-                                echo 'Áp dụng cho: '.$disc->Products->name;
-                            }else{
-                                echo 'Áp dụng cho tất cả sản phẩm.';
-                            }
-                        ?>
-                    </td>
-                    
                     <td><a class="badge badge-info rounded" href="{{route('loadUpdateDiscount_code',$disc->id)}}"><i class="mdi mdi-wrench"></i></a>
                     <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteDiscount_code',$disc->id)}}"><i class="mdi mdi-delete"></i></a></td>
                 </tr>

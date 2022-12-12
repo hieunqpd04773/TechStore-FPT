@@ -38,8 +38,6 @@ class DiscountsCodeController extends Controller
         $disc->quantity=$request->quantity;
         $disc->start_time=$request->start_time;
         $disc->end_time=$request->end_time;
-        $disc->pro_id=$request->pro_id;
-        $disc->type=$request->type;
         $disc->save();
 
         toastr()->success('Thành công', 'Thêm mã giảm giá thành công');
@@ -89,8 +87,6 @@ class DiscountsCodeController extends Controller
         $disc->quantity=$request->quantity;
         $disc->start_time=$request->start_time;
         $disc->end_time=$request->end_time;
-        $disc->pro_id=$request->pro_id;
-        $disc->type=$request->type;
         $disc->save();
 
         toastr()->success('Thành công', 'Thêm mã giảm giá thành công');

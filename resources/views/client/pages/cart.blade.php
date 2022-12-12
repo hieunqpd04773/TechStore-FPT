@@ -4,7 +4,11 @@
 @include('client/partials/_nav')
 @php
   $cart_total=0;
+  if (Session::has('coupon')){
+    $disc=Session::get('coupon');
+  }
 @endphp
+
     <!--================Cart Area =================-->
     <section class="cart_area">
       <div class="container">
@@ -46,31 +50,6 @@
                     <h5>{{ number_format($pro['price'], 0, '.', '.');}} VNĐ</h5>
                   </td>
                   <td>
-                    {{-- <div class="product_count">
-                      <input
-                        type="text"
-                        name="qty"
-                        id="sst"
-                        maxlength="12"
-                        value={{$pro['qty']}}
-                        title="Quantity:"
-                        class="input-text qty update-cart"
-                      />
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                        class="increase items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-up"></i>
-                      </button>
-                      <button
-                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                        class="reduced items-count"
-                        type="button"
-                      >
-                        <i class="lnr lnr-chevron-down"></i>
-                      </button>
-                    </div>  --}}
                       <input
                         type="number"
                         name="qty"
@@ -105,8 +84,15 @@
 
                   <td colspan="3">
                     <div class="cupon_text">
-                      <input type="text" placeholder="Coupon Code" />
-                      <a class="main_btn apply_btn" href="#">Áp dụng</a>
+                      <form action="{{route('discountCode')}}" method="post">
+                        @csrf
+                        
+                        <input type="text" 
+                            @if (isset($disc[0]))
+                            value="{{$disc[0]['code']}}"
+                            @endif  name="discountCode" placeholder="Mã giảm giá" />
+                        <button type="submit" class="main_btn apply_btn">Áp dụng</button>
+                      </form>
                     </div>
                   </td>
                 </tr>
@@ -128,6 +114,9 @@
                     <label for="">Khách hàng</label>
                     <input type="text" name="name" disabled value="{{Auth::user()->name}}" class="single-input">
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                    @if (isset($disc[0]))
+                      <input type="hidden" name="discount" value="{{$disc[0]['discount']}}">
+                    @endif
                   </div>
                   <div class="mt-5">
                     <label for="">Chọn địa chỉ giao hàng</label>
@@ -200,7 +189,9 @@
                 <div class="col-3">
                   <div class="element">
                     <h3>Giảm giá: <i class="fa fa-download" aria-hidden="true"></i></h3>
-                    <p><span id="payment-discount"></span><span> Đ</span></p>
+                    <p><span id="payment-discount"> @if (isset($disc[0]))
+                            {{$disc[0]['discount']}}
+                            @endif</span><span> Đ</span></p>
                   </div>
                 </div>
                 <div class="col-3">
@@ -248,11 +239,15 @@
             <br>
             <div class="payment_item">
               <p>Giỏ hàng: <span>VNĐ</span> <span data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
-              <p>Giảm Giá: <span>VNĐ</span> <span > 0 VNđ</span> </p>
+              <p>Giảm Giá: <span>VNĐ</span> <span > @if (isset($disc[0])) {{number_format($disc[0]['discount'], 0, '.', '.')}} @endif</span> </p>
 
             </div>
             <div class="payment_item payment_total">
+              @if (isset($disc[0])) 
+              <p>Tổng tiền <span>VNĐ</span ><span data-total="{{$cart_total}}">{{ number_format($cart_total - $disc[0]['discount'], 0, '.', '.');}}</span></p>
+              @else
               <p>Tổng tiền <span>VNĐ</span ><span data-total="{{$cart_total}}">{{ number_format($cart_total, 0, '.', '.');}}</span></p>
+              @endif
             </div>
             @if(Auth::check())
             <a href="#" class="btn_pay">Tiến hành thanh toán</a>
@@ -275,11 +270,12 @@
       let ship_value =$('#ship_value').html()
       let cart_total=$('#cart-total-price').html()
       discount=$('#payment-discount').html()
+      $('#payment-discount').html(format_currency($('#payment-discount').html()))
       total=$('#order-total')
       totalInput=$('#order-total-input')
       $('#cart-total-price').html(format_currency($('#cart-total-price').html()))
       $('#ship_value').html(format_currency(ship_select))
-      total.html(Number(ship_select)+ Number(cart_total) + Number(discount))
+      total.html(Number(ship_select)+ Number(cart_total) - Number(discount))
       totalInput.val(total.html())
       total.html(format_currency(total.html()))
       $('#ship_select').change(function( e){
@@ -287,7 +283,7 @@
         ship_select=$('#ship_select').find(':selected').attr('data-value');
         $('#ship_value').html(format_currency(ship_select))
         $('#ship_price').html(ship_select)
-        total.html(Number(cart_total) + Number( ship_select))
+        total.html(Number(cart_total) + Number( ship_select) - Number(discount))
         totalInput.val(total.html())
         total.html(format_currency(total.html()))
       })
