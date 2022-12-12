@@ -54,8 +54,9 @@ class BlogClientController extends Controller
     public function show($id)
     {
         $allCate=Categories::all();
-        $blogs = Blog::find($id);
-        return view('client.pages.blog-details',compact('allCate','blogs'));
+        $blog = Blog::find($id);
+        $blogs = Blog::all();
+        return view('client.pages.blog-details',compact('allCate','blogs','blog'));
     }
 
     /**

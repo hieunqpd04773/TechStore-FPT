@@ -106,7 +106,6 @@
             </div>
             </form>
         </div>
-        </div>
     </section>
     <!-- /.content -->
 @endsection
