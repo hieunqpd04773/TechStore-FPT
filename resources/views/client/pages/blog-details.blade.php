@@ -21,13 +21,13 @@
 				<div class="blog_left_sidebar">
 					<article class="blog_item">
 						<div class="blog_item_img">
-							<img class="card-img rounded-0" src="{{ asset('public/uploads/blog') }}/{{$blogs->picture}}" alt="">
+							<img class="card-img rounded-0" src="{{ asset('public/uploads/blog') }}/{{$blog->picture}}" alt="">
 						</div>
 						<div class="blog_details">
 							<a class="d-inline-block" href="single-blog.html">
-								<h2>{{$blogs->title}}</h2>
+								<h2>{{$blog->title}}</h2>
 							</a>
-							<p>{{$blogs->content}}</p>
+							<p>{{$blog->content}}</p>
 						</div>
 					</article>
 				</div>
@@ -36,12 +36,12 @@
 				<div class="blog_right_sidebar" style="margin-top: 30px;">
 					<aside class="single_sidebar_widget popular_post_widget">
 						<h3 class="widget_title">Bài viết khác</h3>
-						@foreach($blogs as $value)
+						@foreach($blogs as $blog)
 						<div class="media post_item">
-							<img style="width:100px; height:70px;border-radius:3%" src="{{ asset('public/uploads/blog') }}/{{$blogs->picture}}" alt="post">
+							<img style="width:100px; height:70px;border-radius:3%" src="{{ asset('public/uploads/blog') }}/{{$blog->picture}}" alt="post">
 							<div class="media-body">
-								<a href="{{url('blogs/details')}}/{{$blogs->id}}">
-									<h3>{{$blogs->title}}</h3>
+								<a href="{{url('blogs/details')}}/{{$blog->id}}">
+									<h3>{{$blog->title}}</h3>
 								</a>
 							</div>
 						</div>
