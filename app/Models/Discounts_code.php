@@ -15,7 +15,7 @@ class Discounts_code extends Model
         
     ];
     protected $fillable = [
-        'code','dicount','quantity','start_time','end_time','pro_id','type'
+        'code','dicount','quantity','start_time','end_time'
     ];
     public function Products()
     {

@@ -17,6 +17,9 @@ use App\Models\Slider;
 use App\Models\Wishlist;
 use App\Models\Orders;
 use App\Models\OrderDetails;
+use App\Models\Discounts_code;
+use Carbon\Carbon;
+use Session;
 use DB;
 use App\Models\Contacts;
 use Illuminate\Support\Facades\Auth;
@@ -382,6 +385,7 @@ class ClientController extends Controller
         $order->user_id=$r->user_id;
         $order->user_address=$r->user_address;
         $order->deli_id=$r->deli_id;
+        $order->discount=$r->discount;
         $order->total=$r->total;
         $order->status=0;
         $order->note=$r->note;
@@ -399,7 +403,7 @@ class ClientController extends Controller
             $order_detail->price=$pro['price'];
             $order_detail->save();
         }
-        session()->forget(['cart']);
+        session()->forget(['cart','coupon']);
         return redirect()->back()->with('success', 'Tạo đơn hàng thành công');
 
     }
@@ -436,5 +440,28 @@ class ClientController extends Controller
             return redirect()->back()->with('error', 'Đăng nhập thất bại!');
         }
     }
-    
+    public function discountCode(Request $request)
+    {
+        $today = Carbon::today();
+        $data = $request->discountCode;
+        // dd($data);
+        $coupon = Discounts_code::where('code','=',$data)->where('quantity','>',0)->whereDate('start_time','<',$today)->whereDate('end_time','>',$today)->first();
+        
+        if($coupon){
+            $coupon_session = Session::get('coupon');
+                $cou[] = array(
+                    'code' => $coupon->code,
+                    'quantity' => $coupon->quantity,
+                    'discount' => $coupon->dicount,
+                ); 
+            Session::put('coupon',$cou);
+            Session::save();
+            $coupon->quantity=$coupon->quantity-1;
+            $coupon->save();
+            return redirect()->back()->with('success','Áp dụng mã giảm giá thành công');
+        }else{
+            return redirect()->back()->with('error','Mã giảm giá không đúng hoặc hết hạn');
+        }
+        
+        }
 }

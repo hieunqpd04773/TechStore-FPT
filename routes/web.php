@@ -115,7 +115,7 @@ Route::prefix('/')->group(function () {
     Route::get('/orderdetails/{id}',[ClientController::class,'orderdetails'])->name('myOrderDetails');
     Route::get('/cancelOrders/{id}',[ClientController::class,'cancelOrders'])->name('cancelOrders');
 
-
+    Route::post('/discountCode',[ClientController::class,'discountCode'])->name('discountCode');
 });
 
 
