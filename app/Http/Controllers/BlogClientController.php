@@ -55,7 +55,7 @@ class BlogClientController extends Controller
     {
         $allCate=Categories::all();
         $blog = Blog::find($id);
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('id', 'desc')->limit('5')->get();
         return view('client.pages.blog-details',compact('allCate','blogs','blog'));
     }
 
