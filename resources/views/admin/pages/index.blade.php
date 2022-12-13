@@ -274,4 +274,25 @@
         chart.draw(data, options);
       }
     </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.order-status').change(function (e) { 
+        e.preventDefault();
+         status=$(this).find(':selected').val();
+         order_id=$(this).attr('data-order_id')
+         $.ajax({
+          url: '{{route('orderUpdate')}}',
+            method: 'post',
+            data:{
+              _token: "{{ csrf_token() }}",
+              order_id:order_id,
+              status: status
+            },
+            success:function(data){
+              window.location.reload();
+            }
+         })
+      });
+     })
+  </script>
 @endsection
