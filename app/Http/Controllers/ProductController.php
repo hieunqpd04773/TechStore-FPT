@@ -15,14 +15,14 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $allPro=Products::all();
+        $allPro=Products::orderBy('id', 'desc')->get();
         view()->share('allPro', $allPro);
     }
     public function index()
     {
         $allCate = CateItems::all();
-        $allPro = Products::all();
-        $allPro1=Products::all();
+        $allPro = Products::orderBy('id', 'desc')->get();
+        $allPro1=Products::orderBy('id', 'desc')->get();
 
         return view('admin.pages.products.index')->with(compact('allCate', 'allPro','allPro1'));
     }

@@ -33,9 +33,9 @@ class AdminController extends Controller
             $name=$c->name;
             $chartPro[++$key]=[$name, $qty];
         }
-        $higest_resolved=DB::select(DB::raw('SELECT product_id,SUM(number) as number_total,product_name 
-        FROM order_details GROUP by product_id ORDER by number_total DESC'));
-        return view('admin.pages.index', compact('totalView','revenue','orders','totalPro','date', 'chartPro'));
+        $higest_resolved=DB::select(DB::raw('SELECT product_id,SUM(number) as number_total,product_name, price
+        FROM order_details GROUP by product_id ORDER by number_total DESC limit 10'));
+        return view('admin.pages.index', compact('totalView','revenue','orders','totalPro','date', 'chartPro','higest_resolved'));
         
     }
 

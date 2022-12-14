@@ -69,20 +69,11 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleSelectGender">Ngày Đăng</label>
-                    <input type="date" value="{{$pro->created_at}}" name="date" class="form-control date" id="exampleInputEmail3" placeholder="Nhập ngày đăng">
-                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
                     <label for="exampleInputName1">Số lượng</label>
                     <input type="number" value="{{$pro->quantity}}" name="quantity" class="form-control amount" id="exampleInputName1" placeholder="Nhập số lượng">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Hot</label>
@@ -98,6 +89,10 @@
                       </select>
                   </div>
                 </div>
+              </div>
+              
+              <div class="row">
+                
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Trạng thái</label>

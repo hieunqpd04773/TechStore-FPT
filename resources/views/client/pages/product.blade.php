@@ -64,7 +64,7 @@
               <input type="hidden" value="{{$pro->id}}" id="pro_id">
               <input type="hidden" value="{{$pro->image}}" id="pro_image">
                 <div class="d-flex">
-                  <h2 class="pr-2 "><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{ number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.');}}</span> <span>VND</span></h2>
+                  <h2 class="pr-2 "><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{ $pro->price - (($pro->price*$pro->discount)/100)}}</span> <span>VND</span></h2>
                   @if($pro->discount > 0)
                     <del class="disnone">{{number_format($pro->price, 0, '.', '.')}} </span> <span>VND</span></h2></del>
                   @endif
