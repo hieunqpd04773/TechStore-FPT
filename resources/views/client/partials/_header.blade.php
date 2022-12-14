@@ -188,7 +188,7 @@
                 @if (Auth::check())
                     <li class="nav-item">
                         @php
-                        $wishlistcount = (App\Models\Wishlist::count());
+                        $wishlistcount = (App\Models\Wishlist::where('user_id',Auth::user()->id)->count());
                         @endphp
                         <a href="{{route('listWish')}}" class="icons" style="height: 50%">
                             <i class="ti-heart" aria-hidden="true">
