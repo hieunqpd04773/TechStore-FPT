@@ -174,6 +174,7 @@
                                     </form>                        
                                 </div>
                               <div class="modal-footer">
+                                <a href="{{route('forgotpassword')}}">Quên mật khẩu?</a>
                                 <p class="m-0">Bạn chưa có tài khoản ? <a href="{{Route('signup')}}"  >Đăng ký</a></p>
                                 
                             </div>

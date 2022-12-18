@@ -85,8 +85,6 @@
 </div>
 
 <script>
-    
-
 function Validator(options){
     var formElement = document.querySelector(options.form);
     var selectorRules = {}
@@ -99,7 +97,7 @@ function validate(inputElement, rule) {
       //
         var rules = selectorRules[rule.selector]
         
-        for(var i = 0; i < rules.length; ++i){
+        for(var i = 0; i <script rules.length; ++i){
           errorMessage = rules[i](inputElement.value)
           if (errorMessage) break;
         }

@@ -154,7 +154,7 @@
                 </div>
               </div>
               <div class="col-6">
-                @if (isset($userAddress))
+                @if (isset($userAddress[0]))
                   <div class="mt-10">
                     <label for="">Địa chỉ nhận hàng</label>
                     <input type="text" id="addressChange" name="address" disabled value="{{$userAddress[0]->address}}" class="single-input">

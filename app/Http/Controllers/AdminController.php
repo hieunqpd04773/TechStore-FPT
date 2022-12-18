@@ -45,17 +45,41 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function inventoryStatistics()
     {
-        //
+       $cate= Categories::all();
+        $chartPro=[];
+        foreach ($cate as $key =>$c){
+            $qty= $c->Products->sum('quantity');
+            $price= $c->Products->sum('price');
+            $name=$c->name;
+            $id=$c->id;
+            $chartPro[++$key]=[$id, $name, $qty, $price];
+        }
+        $totalQuantityPro = Products::all()->sum('quantity');
+        $totalPricePro = Products::all()->sum('price');
+        $topQuantityPro = Products::orderBy('quantity', 'DESC')->limit(5)->get();
+        $botQuantityPro = Products::orderBy('quantity', 'ASC')->limit(5)->get();
+        return view('admin.pages.inventory.index', compact('chartPro','totalQuantityPro','totalPricePro', 'topQuantityPro','botQuantityPro'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function inventoryByCate($id)
+    {
+        $cateItems= CateItems::where('cate_id',$id)->get();
+        $totalProduct = Categories::where('id',$id)->first()->Products->sum('quantity');
+        $totalPrice = Categories::where('id',$id)->first()->Products->sum('price');
+        $topQuantityPro = Products::orderBy('quantity', 'DESC')->limit(5)->get();
+        $botQuantityPro = Products::orderBy('quantity', 'ASC')->limit(5)->get();
+        return view('admin.pages.inventory.cateItems', compact('cateItems','totalProduct', 'totalPrice', 'topQuantityPro','botQuantityPro'));
+    }
+
+    public function inventoryByPro($id)
+    {
+        $products= Products::where('cate_id',$id)->get();
+        $topQuantityPro = Products::orderBy('quantity', 'DESC')->limit(5)->get();
+        $botQuantityPro = Products::orderBy('quantity', 'ASC')->limit(5)->get();
+        return view('admin.pages.inventory.products', compact('products', 'topQuantityPro','botQuantityPro'));
+    }
     public function show($id)
     {
         //

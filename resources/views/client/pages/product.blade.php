@@ -110,6 +110,7 @@
                   value="1"
                   title="Quantity:"
                   class="input-text qty"
+                  min="2"
                 />
                 <button
                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"

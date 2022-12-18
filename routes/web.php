@@ -234,6 +234,13 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::post('update/{id}', [BlogController::class,'update']);
         Route::get('delete/{id}',[BlogController::class,'destroy']);
     });
+
+    Route::prefix('statics')->group(function () {
+        Route::get('inventory', [AdminController::class,'inventoryStatistics'])->name('statics.inventory');
+        Route::get('inventory/cateItems/{id}', [AdminController::class,'inventoryByCate'])->name('inventoryByCate');
+        Route::get('inventory/products/{id}', [AdminController::class,'inventoryByPro'])->name('inventoryByPro');
+
+    });
    
 
 });
