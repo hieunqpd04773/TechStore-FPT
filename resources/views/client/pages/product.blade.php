@@ -505,6 +505,47 @@
             </div>
           </div>
         </div>
+
+        <br>
+        <h2 style="font-size:30px; color:black; text-align: center; margin-top: 50px">Sản phẩm tương tự</h2>
+        <br>
+        <div class="latest_product_inner container" >
+          <div class="row list-pro">
+            @foreach ($similar as $sml)
+            <div class="col-lg-3 col-md-6">
+              <div class="single-product" >
+                <div class="product-img bg-white d-flex align-items-center" >
+                  <img
+                    class="card-img p-4" style="width: 300px;margin-left:30px"
+                    src="{{asset('images/products/'.$sml->image)}}"
+                    alt=""
+                  />
+                  <div class="p_icon">
+                    <a href="{{route('getProById',$sml->id)}}">
+                      <i class="ti-eye"></i>
+                    </a>
+                    <a href="{{route('addWish',$sml->id)}}">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a href="#">
+                      <i class="ti-shopping-cart"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="product-btm">
+                  <a href="{{route('getProById',$sml->id)}}" class="d-block">
+                    <h4>{{$sml->name}}</h4>
+                  </a>
+                  <div class="mt-3">
+                    <span class="mr-4">{{number_format($sml->price - (($pro->price*$pro->discount)/100), 0, '.', '.')}} đ</span>             
+                      <del>{{$sml->price}} đ</del>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
       </div>
     </section>
 

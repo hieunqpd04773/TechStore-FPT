@@ -139,16 +139,22 @@ class ClientController extends Controller
         $cout3 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 3)->count();
         $cout2 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 2)->count();
         $cout1 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 1)->count();
+
+        $similar = Products::with(['categories'])
+        ->where('products.cate_id',$pro->cate_id)
+        ->where('products.id','!=',$id)
+        ->take(4)->get(); 
+
         
         if($coutall>0){
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round,'similar'=>$similar]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'similar'=>$similar]);
         }
     }
 
