@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -14,7 +16,10 @@ class PasswordResetLinkController extends Controller
      * @return \Illuminate\View\View
      */
     public function create()
+    
     {
+        $allCate=Categories::all();
+        view()->share('allCate', $allCate);
         return view('auth.forgot-password');
     }
 
