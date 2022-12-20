@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,8 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
+        $allCate=Categories::all();
+        view()->share('allCate', $allCate);
         return view('auth.reset-password', ['request' => $request]);
     }
 
