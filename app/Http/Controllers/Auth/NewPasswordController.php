@@ -51,8 +51,9 @@ class NewPasswordController extends Controller
                 $user->forceFill([
                     'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
+                    
                 ])->save();
-
+                toastr()->success('Vui lòng đăng nhập lại','Đổi mật khẩu thành công');
                 event(new PasswordReset($user));
             }
         );
@@ -60,6 +61,7 @@ class NewPasswordController extends Controller
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
+        // toastr()->success('');
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('index')->with('status', __($status))
                     : back()->withInput($request->only('email'))
