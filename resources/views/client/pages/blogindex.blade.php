@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','TechStore')
+@section('title','Tin tức')
 @section('content')
 
 <div class="container">
@@ -22,14 +22,14 @@
                     @foreach($blogs as $value)
                     <div class="col-4">
                         <a>
-                            <img src="{{ URL::to('public/uploads/blog/'.$value->picture) }}" style="width:400px; height:300px;border-radius:3%;">
+                            <img src="{{ URL::to('public/uploads/blog/'.$value->picture) }}">
                         </a>
                         <br>
                     </div>
                     <div class="col-8">
-                        <h3 style="font-size: 20px;">{{$value->title}}</h3>
+                        <a href="{{url('blogs/details')}}/{{$value->id}}"></a><h3 style="font-size: 20px;">{{$value->title}}</h3>
                         <p>{{$value->summary}}</p>
-                        <a style="color: blue;" href="{{url('blogs/details')}}/{{$value->id}}">Đọc tiếp...</a><br></br>
+                        <a style="color: #1d7c45;" href="{{url('blogs/details')}}/{{$value->id}}">Đọc tiếp...</a><br></br>
                     </div>
                     @endforeach
                 </div>

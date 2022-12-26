@@ -250,9 +250,9 @@
               @endif
             </div>
             @if(Auth::check())
-            <a href="#" class="btn_pay">Tiến hành thanh toán</a>
+            <a href="#" class="btn_pay"  data-toggle="modal" data-target="#exampleModal" >Tiến hành thanh toán</a>
             @else
-            <a href="#" class="btn_pay">Đăng nhập để thanh toán</a>
+            <a href="#" class="btn_pay" data-toggle="modal" data-target="#myModal">Đăng nhập để thanh toán</a>
             @endif
           </div>
         </div>

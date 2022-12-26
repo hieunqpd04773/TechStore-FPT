@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','Danh mục')
+@section('title','Liên hệ')
 @section('content')
 <!--================Home Banner Area =================-->
 <section class="section_gap">
@@ -83,9 +83,9 @@
         </div>
       </div>
       <div class="collapse" id="collapseExample2">
-        <div class="card card-body" style="border: none;">
+        <div class="card card-body p-0 m-0" style="border: none;">
           <section class="cart_area" style="padding-top: 0px; padding-bottom: 0px">
-            <div class="container">
+            <div class="container p-0">
               <div class="row">
                 <div class="cart_inner col-md-12">
                   <div class="table-responsive">

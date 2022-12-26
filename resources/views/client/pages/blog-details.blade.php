@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','TechStore')
+@section('title'){{$blog->title}}@endsection
 @section('content')
 
 <section class="banner_area">
