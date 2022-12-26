@@ -8,13 +8,6 @@
     <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Tạo tài khoản</h4>
       <p class="text-center">Bắt đầu với tài khoản miễn phí của bạn</p>
-      <p>
-        <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Đăng nhập với Twitter</a>
-        <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>    Đăng nhập với facebook</a>
-      </p>
-      <p class="divider-text">
-            <span class="bg-light">hoặc</span>
-        </p>
     <form method="POST" action="{{ route('register') }}" id ="formRegister" enctype="multipart/form-data">
             @csrf
       <div class="form-group input-group">

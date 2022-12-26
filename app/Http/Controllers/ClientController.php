@@ -39,9 +39,9 @@ class ClientController extends Controller
     }
     public function index()
     {
-        $homeTopPr = Products::where('hot','=','1')->limit(4)->get();
-        $homeNewPr = Products::orderBy('id','desc')->limit(5)->get();
-        $homeSalePr = Products::orderBy('discount','desc')->limit(6)->get();
+        $homeTopPr = Products::where('hot','=','1')->where('status', '=', '0')->limit(4)->get();
+        $homeNewPr = Products::where('status', '=', '0')->orderBy('id','desc')->limit(5)->get();
+        $homeSalePr = Products::where('status', '=', '0')->orderBy('discount','desc')->limit(6)->get();
         return view('client.pages.index',['homeTopPr'=>$homeTopPr,'homeNewPr'=>$homeNewPr,'homeSalePr'=>$homeSalePr]);
     }
     public function contact()
@@ -113,13 +113,13 @@ class ClientController extends Controller
     }
     public function getProByCate($id)
     {
-        $listPro=Categories::find($id)->Products;
+        $listPro=Categories::find($id)->Products->where('status', '=', '0');
         $cti_bar=Categories::find($id)->Cate_items;
         return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
     }
     public function getProByCateItem($id)
     {
-        $listPro=CateItems::find($id)->Products;
+        $listPro=CateItems::find($id)->Products->where('status', '=', '0');
         $cti_bar=CateItems::where('cate_id','=',$id)->get();
         return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
     }

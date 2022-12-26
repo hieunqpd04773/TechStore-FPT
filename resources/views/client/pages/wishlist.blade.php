@@ -52,10 +52,10 @@
                 <h5 class="cart-total">{{number_format($item->products->price)}} VNĐ</h5>
               </td>
               <td>
-                <a href="{{route('deleteWish',$item->id)}}" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="{{route('getProById',$item->products->id)}}" class="main_btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
               </td>
               <td>
-                <a href="{{route('getProById',$item->products->id)}}" class="main_btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                <a href="{{route('deleteWish',$item->id)}}" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>
               </td>
             </tr>
              @endforeach
