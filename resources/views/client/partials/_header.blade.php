@@ -144,7 +144,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title text-center">Đăng nhập</h4>
+                                        <h4 class="modal-title text-center" style="font-weight: bold; font-size: 24px">Đăng nhập</h4>
                                     </div>
                                 <div class="modal-body">
                                     <form action="{{ route('loginClient') }}" method="POST" id="form-register">

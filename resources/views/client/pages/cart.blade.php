@@ -269,7 +269,7 @@
               @endif
             </div>
             @if(Auth::check())
-            <a href="#" class="btn_pay">Tiến hành thanh toán</a>
+            <a href="#" class="btn_pay">Vui lòng thanh toán</a>
             @else
             <a href="#" class="btn_pay">Đăng nhập để thanh toán</a>
             @endif

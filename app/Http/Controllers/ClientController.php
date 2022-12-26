@@ -32,10 +32,10 @@ class ClientController extends Controller
         $allCate=Categories::all();
         view()->share('allCate', $allCate);
         //slider
-        $allslide = Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
+        $allslide = Slider::where('slide_status','=',1)->orderBy('id','DESC')->take(3)->get();
         view()->share('allslide', $allslide);
-        $slider = Slider::orderBy('id','DESC')->where('slide_status',1)->take(3)->get();
-        view()->share('slider', $slider);
+        // $slider = Slider::orderBy('id','DESC')->where('slide_status',1)->take(3)->get();
+        // view()->share('slider', $slider);
     }
     public function index()
     {
@@ -365,7 +365,7 @@ class ClientController extends Controller
         $pro_wish=Wishlist::where('pro_id','=',$pro_id,)->where('user_id', '=', Auth::id())->first();
         if($pro_wish){
             toastr()->success('Thành công', 'Thêm vào yêu thích thành công');
-            return redirect(route('listWish')); 
+            return back(); 
         }else{
             Wishlist::insert([
                 'user_id' => Auth::id(),
@@ -373,7 +373,7 @@ class ClientController extends Controller
             ]);
         }
         toastr()->success('Thành công', 'Thêm vào yêu thích thành công');
-        return redirect(route('listWish'));
+        return back();
     }
     public function delete($id)
     {

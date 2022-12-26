@@ -192,14 +192,6 @@ Validator.isDicount= function(selector) {
       }
     }
 }
-Validator.isQuantity= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng nhập số lượng'
-      }
-    }
-}
 Validator.isStart_time= function(selector) {
   return {
       selector,
@@ -226,18 +218,29 @@ Validator.isType = function (selector) {
     }
   }
 }
+Validator.timeRes = function(selector, getDate) {
+  return {
+    selector,
+    test(value) {
+      var firstDate = new Date(value);
+      var lastDate = new Date(getDate())
+      return firstDate.getTime() > lastDate.getTime()  ? undefined : 'Vui lòng chọn ngày kết thúc lớn hơn ngày bắt đầu'
+    }
+  }
+}
 
    Validator({
     form: '#form-disc',
     errorSelector: '.form-message',
     rules: [
       Validator.isCode('.code'),
-      Validator.isPro_id('.pro_id'),
       Validator.isDicount('.dicount'),
-      Validator.isQuantity('.quantity'),
       Validator.isStart_time('.start_time'),
       Validator.isEnd_time('.end_time'),
-      Validator.isType('.type')
+      Validator.timeRes('.end_time', function getDate(){
+              return document.querySelector('#form-disc .start_time').value
+            }),
+            Validator.isType('.type')
     ],
   })
 </script>

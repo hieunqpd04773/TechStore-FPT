@@ -37,7 +37,6 @@ class RegisteredUserController extends Controller
         if($request->has('file_upload')){
             $file=$request->file_upload;
             $file_name= date('YmdHi').$file->getClientOriginalName();
-            //dd($file_name);
             $file->move(public_path('images/users'),$file_name);
         }
         $request->merge(['image'=>$file_name]);
