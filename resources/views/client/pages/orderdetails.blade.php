@@ -1,7 +1,22 @@
 @extends('client.master')
 @section('title','Giỏ hàng')
 @section('content')
-@include('client/partials/_nav')
+<section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h2>Chi tiết đơn hàng</h2>
+            </div>
+            <div class="page_link">
+              <a href="{{Route('index')}}">Trang chủ</a>
+              <a href="#">Đơn hàng</a>
+              <a href="#">Chi tiết</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
 
     <!--================Cart Area =================-->
     <section class="cart_area">
@@ -38,7 +53,7 @@
                     <p>{{$detail->number}}</p>
                   </td>
                   <td>
-                    <h5 class="cart-total">{{ number_format($detail->price, 0, '.', '.');}} VNĐ</h5>
+                    <h5 class="cart-total">{{ number_format($detail->price * $detail->number, 0, '.', '.');}} VNĐ</h5>
                   </td>
                 </tr>
                  @endforeach

@@ -19,22 +19,6 @@
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName1">Sản phẩm áp dụng</label>
-                        <select class="form-control show-cti form-select pro_id"  name="pro_id" id="cate">
-                            <option value="">Chọn sản phẩm</option>
-                            @foreach ($allPro as $pro)
-                                <option data-id="{{$pro->id}}" value="{{$pro->id}}">{{$pro->name}}</option>
-                            @endforeach
-                        </select>
-                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputName1">Số tiền giảm giá</label>
@@ -42,16 +26,7 @@
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName1">Số lượng</label>
-                        <input type="number" name="quantity" class="form-control quantity" id="exampleInputName1" placeholder="Nhập số lượng">
-                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                    </div>
-                </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -68,19 +43,13 @@
                   </div>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-sm-9">
-                  <div class="form-group">
-                    <label for="exampleInputName1">Áp dụng </label>
-                        <select class="form-control show-cti form-select type"  name="type" id="cate">
-                            <option value="">Chọn khoảng áp dụng</option>
-
-                            <option value="0">Áp dụng cho sản phẩn được chọn</option>
-                            <option value="1">Áp dụng tất cả sản phẩm</option>
-                        </select>
-                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                  </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Số lượng</label>
+                        <input type="number" name="quantity" class="form-control quantity" id="exampleInputName1" placeholder="Nhập số lượng">
+                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+                    </div>
                 </div>
             </div>
               <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>

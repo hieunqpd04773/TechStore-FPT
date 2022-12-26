@@ -48,19 +48,31 @@
       </ul>
           </div>
         <div class="footer__col">
-            <div class="f-social">
+            <div class="ml-2 f-social">
                 <a href="#" class="link-fb">
                     <i class="fa fa-facebook"></i>
                     3759.5k Fan
                 </a>
-                <a href="#" class="link-ytb">
+                <a href="#" class="ml-2 link-ytb">
                     <i class="fa fa-youtube"></i>
                     848k Đăng ký
                 </a>
+                <a href="#" class="ml-2 link-ytb">
+                  <i class="fa fa-twitter"></i>
+                    625k Đăng ký
+                </a>
             </div>
-            <div class="f-certify">
-                <a class="_ncsc" rel="nofollow" href="https://tinnhiemmang.vn/danh-ba-tin-nhiem/thegioididongcom-1632835473" title="Chung nhan Tin Nhiem Mang" target="_blank">
-                    <img class="lazy lazyload" data-original="https://tinnhiemmang.vn/handle_cert?id=thegioididong.com" data-src="https://tinnhiemmang.vn/handle_cert?id=thegioididong.com" width="150" alt="Chung nhan Tin Nhiem Mang">
+            <div class="pay">
+              <h4>Thanh toán miễn phí</h4>
+              <div class="payment-png">
+                <img class="ml-3" src="{{asset('images/visa.png')}}" width="50px" alt="">
+                <img class="ml-3" src="{{asset('images/jcb.jpg')}}" width="50px"  alt="">
+                <img class="ml-3" src="{{asset('images/vnpay.png')}}" width="50px" alt="">
+              </div>
+            </div>
+            <div class="f-certify" style="margin-left: 50px">
+                <a style="width:150px; display:block;" class="_ncsc" rel="nofollow" href="https://tinnhiemmang.vn/danh-ba-tin-nhiem/thegioididongcom-1632835473" title="Chung nhan Tin Nhiem Mang" target="_blank">
+                    <img class="lazy lazyload" src="{{asset('images/techstore.png')}}" data-original="https://tinnhiemmang.vn/handle_cert?id=thegioididong.com" data-src="https://tinnhiemmang.vn/handle_cert?id=thegioididong.com" width="150" alt="Chung nhan Tin Nhiem Mang">
                 </a>
                 <a class="_ncsc" rel="nofollow" href="https://tinnhiemmang.vn/danh-ba-tin-nhiem/thegioididongcom-1632835473" title="Chung nhan Tin Nhiem Mang" target="_blank">
                   <img class="lazy lazyload" data-original="https://tinnhiemmang.vn/handle_cert?id=thegioididong.com" data-src="https://chautongfishfarm.com/wp-content/uploads/2018/09/20150827110756-dathongbao-1024x388.png" width="200" alt="">

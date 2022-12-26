@@ -5,7 +5,7 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Thêm mã giảm giá</h4>
+            <h4 class="card-title">Sửa mã giảm giá</h4>
             <p class="card-description">
               Nhập thông tin
             </p>
@@ -16,31 +16,11 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputName1">Mã giảm giá</label>
-                        <input type="number" value="{{$allDisc->code}}"  name="code" class="form-control code" id="exampleInputName1" placeholder="Nhập mã giảm giá">
+                        <input type="text" value="{{$allDisc->code}}"  name="code" class="form-control code" id="exampleInputName1" placeholder="Nhập mã giảm giá">
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName1">Sản phẩm áp dụng</label>
-                        <select class="form-control show-cti form-select pro_id"  name="pro_id" id="cate">
-                            <option value="">Chọn sản phẩm</option>
-                            @foreach ($allPro as $pro)
-                                @if ($pro->id==$allDisc->Products->id)
-                                    <option data-id="{{$pro->id}}" selected value="{{$pro->id}}">{{$pro->name}}</option>
-                                @else
-                                    <option data-id="{{$pro->id}}" value="{{$pro->id}}">{{$pro->name}}</option>
-                                @endif
-
-                            @endforeach
-                        </select>
-                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputName1">Số tiền giảm giá</label>
@@ -48,16 +28,8 @@
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName1">Số lượng</label>
-                        <input type="number" name="quantity" value="{{$allDisc->quantity}}"  class="form-control quantity" id="exampleInputName1" placeholder="Nhập số lượng">
-                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                    </div>
-                </div>
+                
             </div>
-
             <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -74,23 +46,13 @@
                   </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-9">
-                  <div class="form-group">
-                    <label for="exampleInputName1">Áp dụng </label>
-                        <select class="form-control show-cti form-select type"  name="type" id="cate">
-                            <option value="{{$allDisc->type}}">Chọn khoảng áp dụng</option>
-                            @if ($allDisc->type==0)
-                                <option value="0" selected>Áp dụng cho sản phẩn được chọn</option>
-                                <option value="1">Áp dụng tất cả sản phẩm</option>
-                            @else
-                                <option value="0" >Áp dụng cho sản phẩn được chọn</option>
-                                <option value="1" selected>Áp dụng tất cả sản phẩm</option>
-                            @endif
-                        </select>
-                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                  </div>
+             <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Số lượng</label>
+                        <input type="number" name="quantity" value="{{$allDisc->quantity}}"  class="form-control quantity" id="exampleInputName1" placeholder="Nhập số lượng">
+                        <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+                    </div>
                 </div>
             </div>
               <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>

@@ -17,7 +17,7 @@ class CommentController extends Controller
     {
         // $allCom = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->join('products', 'products.id', '=', 'comments.pro_id')
         // ->select('comments.*', 'users.name', 'products.name')->get();
-        $allCom=Comments::all();
+        $allCom=Comments::orderBy('id','DESC')->get();
         view()->share('allCom', $allCom);
     }
     /**
@@ -29,7 +29,7 @@ class CommentController extends Controller
     {
         $allPro=Products::all();
         $allUser=User::all();
-        $allCom1 = Comments::all();
+        $allCom1 = Comments::orderBy('id','DESC')->get();
         return view('admin.pages.comments.index')->with(compact('allPro' ,'allCom1', 'allUser'));
     }
 
@@ -44,7 +44,7 @@ class CommentController extends Controller
         $allPro=Products::all();
         $allUser=User::all();
         $allCom = Comments::where('pro_id','=', $keywords)->get();
-        $allCom1 = Comments::all();
+        $allCom1 = Comments::orderBy('id','DESC')->get();
         
         if(count($allCom)!=0){
             $cate1 = Products::where('id','=', $keywords)->select('name')->get();

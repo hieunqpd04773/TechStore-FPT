@@ -17,6 +17,9 @@ use App\Models\Slider;
 use App\Models\Wishlist;
 use App\Models\Orders;
 use App\Models\OrderDetails;
+use App\Models\Discounts_code;
+use Carbon\Carbon;
+use Session;
 use DB;
 use App\Models\Contacts;
 use Illuminate\Support\Facades\Auth;
@@ -136,16 +139,22 @@ class ClientController extends Controller
         $cout3 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 3)->count();
         $cout2 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 2)->count();
         $cout1 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 1)->count();
+
+        $similar = Products::with(['categories'])
+        ->where('products.cate_id',$pro->cate_id)
+        ->where('products.id','!=',$id)
+        ->take(4)->get(); 
+
         
         if($coutall>0){
             $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
             $Round =  round($tong, 1);
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round,'similar'=>$similar]);
         }
         else{
             $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+            return view('client.pages.product',['pro'=>$pro,'pro_details'=>$pro_details,'pro_colors'=>$pro_colors,'pro_memory'=>$pro_memory,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'similar'=>$similar]);
         }
     }
 
@@ -296,21 +305,26 @@ class ClientController extends Controller
         $cart=session()->get('cart', []);
         return redirect()->back()->with('success','Đã thêm sản phẩm vào giỏ hàng');
     }
-    public function updatCart(Request $r)
+    public function updateCart(Request $r)
     {
-        dd($r);
-        // $qty=$r->qty;
-        // $name =$r->proName;
-        // dd($name);
-        // $cart = session()->get('cart', []);
-        // if(isset($cart[$name])  ){
-        //     $cart[$name]['qty']=$qty;
-        //     dd( $cart[$name]['qty']);
-        // }
-        // else{
-        //     return redirect()->back()->with('error', 'Không tìm thấy sản phẩm');
-        // }
-        return redirect()->back()->with('success', 'Cập nhật thành công');
+        $qty=$r->qty;
+        $name =$r->proName;
+        $cart = session()->get('cart');
+        if(isset($cart[$name])  ){
+            $cart[$name]=[
+                'id'=>$cart[$name]['id'],
+                'name'=>$cart[$name]['name'],
+                'image'=>$cart[$name]['image'],
+                'price'=>$cart[$name]['price'],
+                'qty'=>$qty,
+                'total'=>$qty*$cart[$name]['price']
+            ];
+            session()->put('cart', $cart); 
+        }
+        else{
+            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm');
+        }
+        return redirect()->back()->with('success','Đã cập nhật giỏ hàng');
     }
     public function viewCart()
     {
@@ -382,6 +396,7 @@ class ClientController extends Controller
         $order->user_id=$r->user_id;
         $order->user_address=$r->user_address;
         $order->deli_id=$r->deli_id;
+        $order->discount=$r->discount;
         $order->total=$r->total;
         $order->status=0;
         $order->note=$r->note;
@@ -399,7 +414,7 @@ class ClientController extends Controller
             $order_detail->price=$pro['price'];
             $order_detail->save();
         }
-        session()->forget(['cart']);
+        session()->forget(['cart','coupon']);
         return redirect()->back()->with('success', 'Tạo đơn hàng thành công');
 
     }
@@ -436,5 +451,35 @@ class ClientController extends Controller
             return redirect()->back()->with('error', 'Đăng nhập thất bại!');
         }
     }
-    
+    public function discountCode(Request $request)
+    {
+        $today = Carbon::today();
+        $data = $request->discountCode;
+        // dd($data);
+        $coupon = Discounts_code::where('code','=',$data)->where('quantity','>',0)->whereDate('start_time','<=',$today)->whereDate('end_time','>',$today)->first();
+        
+        if($coupon){
+            $coupon_session = Session::get('coupon');
+                $cou[] = array(
+                    'code' => $coupon->code,
+                    'quantity' => $coupon->quantity,
+                    'discount' => $coupon->dicount,
+                ); 
+            Session::put('coupon',$cou);
+            Session::save();
+            $coupon->quantity=$coupon->quantity-1;
+            $coupon->save();
+            return redirect()->back()->with('success','Áp dụng mã giảm giá thành công');
+        }else{
+            return redirect()->back()->with('error','Mã giảm giá không đúng hoặc hết hạn');
+        }
+        
+    }
+
+    public function cancelCode()
+    {
+        session()->forget(['coupon']);
+        return redirect()->back()->with('success','Bạn đã hủy áp dụng mã giảm giá');
+
+    }
 }

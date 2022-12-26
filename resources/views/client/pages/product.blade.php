@@ -2,28 +2,33 @@
 @section('title','Sản phẩm chi tiết')
 @section('content')
 {{-- @include('client/_nav') --}}
+<section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h2>Chi Tiết Sản Phẩm</h2>
+            </div>
+            <div class="page_link">
+              <a href="{{Route('index')}}">Trang chủ</a>
+              <a href="#">Danh mục</a>
+              <a href="#">Chi tiết sản phẩm</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
     <!--================Single Product Area =================-->
     <div class="product_image_area">
       <div class="container">
         <div class="row s_product_inner">
-          <div class="col-lg-6">
+          <div class="col-lg-6 flex justify-center align-items-center">
             <div class="s_product_img">
               <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
-                    <img src="{{asset('images/products/'.$pro->image)}}" alt=""style="width:100%"/>
-                  </li>
-                  @for ($i = 0; $i < count($pro_colors); $i++)
-                  <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
-                  <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
-                    alt="" style="width:100%"/>
-                </li>
-                @endfor
-                </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img id="pro_img" class="d-block w-100" src="{{asset('images/products/'.$pro->image)}}" alt="First slide" />
@@ -39,6 +44,17 @@
                   </div>
                   @endforeach
                 </div>
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators"data-slide-to="0"class="active">
+                    <img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:100%; height:100%; padding: 8px;"/>
+                  </li>
+                  @for ($i = 0; $i < count($pro_colors); $i++)
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{$i+1}}">
+                  <img src="{{asset('images/products/'.$pro_colors[$i]->image)}}"
+                    alt="" style="width:100%; height:100%; padding: 8px;"/>
+                </li>
+                @endfor
+                </ol>
               </div>
             </div>
           </div>
@@ -48,7 +64,7 @@
               <input type="hidden" value="{{$pro->id}}" id="pro_id">
               <input type="hidden" value="{{$pro->image}}" id="pro_image">
                 <div class="d-flex">
-                  <h2 class="pr-2 "><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{ number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.');}}</span> <span>VND</span></h2>
+                  <h2 class="pr-2 "><span id='pro_price' data-price="{{$pro->price-$pro->discount}}">{{ $pro->price - (($pro->price*$pro->discount)/100)}}</span> <span>VND</span></h2>
                   @if($pro->discount > 0)
                     <del class="disnone">{{number_format($pro->price, 0, '.', '.')}} </span> <span>VND</span></h2></del>
                   @endif
@@ -94,6 +110,7 @@
                   value="1"
                   title="Quantity:"
                   class="input-text qty"
+                  min="2"
                 />
                 <button
                   onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
@@ -112,10 +129,7 @@
               </div>
               <div class="card_area">
                 <a class="main_btn" id="addCart">Thêm vào giỏ hàng</a>
-                <a class="icon_btn" href="#">
-                  <i class="lnr lnr lnr-diamond"></i>
-                </a>
-                <a class="icon_btn" href="#">
+                <a class="icon_btn" href="{{route('addWish',$pro->id)}}">
                   <i class="lnr lnr lnr-heart"></i>
                 </a>
               </div>
@@ -486,6 +500,47 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <br>
+        <h2 style="font-size:30px; color:black; text-align: center; margin-top: 50px">Sản phẩm tương tự</h2>
+        <br>
+        <div class="latest_product_inner container" >
+          <div class="row list-pro">
+            @foreach ($similar as $sml)
+            <div class="col-lg-3 col-md-6">
+              <div class="single-product" >
+                <div class="product-img bg-white d-flex align-items-center" >
+                  <img
+                    class="card-img p-4" style="width: 300px;margin-left:30px"
+                    src="{{asset('images/products/'.$sml->image)}}"
+                    alt=""
+                  />
+                  <div class="p_icon">
+                    <a href="{{route('getProById',$sml->id)}}">
+                      <i class="ti-eye"></i>
+                    </a>
+                    <a href="{{route('addWish',$sml->id)}}">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a href="#">
+                      <i class="ti-shopping-cart"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="product-btm">
+                  <a href="{{route('getProById',$sml->id)}}" class="d-block">
+                    <h4>{{$sml->name}}</h4>
+                  </a>
+                  <div class="mt-3">
+                    <span class="mr-4">{{number_format($sml->price - (($pro->price*$pro->discount)/100), 0, '.', '.')}} đ</span>             
+                      <del>{{$sml->price}} đ</del>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
           </div>
         </div>
       </div>

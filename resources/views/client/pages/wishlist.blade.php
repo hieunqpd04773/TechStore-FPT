@@ -49,7 +49,7 @@
                 </div>
               </td>
               <td>
-                <h5>{{$item->products->price}} VNĐ</h5>
+                <h5 class="cart-total">{{number_format($item->products->price)}} VNĐ</h5>
               </td>
               <td>
                 <a href="{{route('deleteWish',$item->id)}}" class="genric-btn danger-border radius delete-cart"><i class="fa fa-trash" aria-hidden="true"></i></a>

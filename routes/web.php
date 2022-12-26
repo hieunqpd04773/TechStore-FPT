@@ -15,6 +15,8 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogClientController;
 
 
 
@@ -106,7 +108,7 @@ Route::prefix('/')->group(function () {
         Route::post('/addCart',[ClientController::class,'addCart'])->name('addCart');
         Route::get('/deleteItemCart/{name}',[ClientController::class,'deleteItemCart'])->name('deleteItemCart');
         Route::post('/getAddressById',[ClientController::class,'getAddressById'])->name('getAddressById');
-        Route::post('/updateCart',[ClientController::class,'updatCart'])->name('updateCart');
+        Route::post('/updateCart',[ClientController::class,'updateCart'])->name('updateCart');
     });
 
     Route::post('/paymentPage',[ClientController::class,'paymentPage'])->name('paymentPage');
@@ -115,7 +117,8 @@ Route::prefix('/')->group(function () {
     Route::get('/orderdetails/{id}',[ClientController::class,'orderdetails'])->name('myOrderDetails');
     Route::get('/cancelOrders/{id}',[ClientController::class,'cancelOrders'])->name('cancelOrders');
 
-
+    Route::post('/discountCode',[ClientController::class,'discountCode'])->name('discountCode');
+    Route::get('/cancelCode',[ClientController::class,'cancelCode'])->name('cancelCode');
 });
 
 
@@ -142,10 +145,7 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}',[ProductController::class,'delete'])->name('deletePro');
         Route::get('edit/{id}',[ProductController::class,'loadEdit'])->name('loadEditPro');
         Route::post('edit',[ProductController::class,'edit'])->name('editPro');
-
-        // Route::get('variant{id}',[ProductController::class,'loadAddVariant'])->name('loadAddVariant');
         Route::get('variants/{id}',[ProductController::class,'showVariants'])->name('showVariants');
-        // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
 
         Route::post('createColor',[ProductController::class,'createColor'])->name('createColor');
@@ -226,8 +226,34 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::post('edit', [DeliveryController::class,'edit'])->name('EditDelivery_');
         Route::get('delete/{id}',[DeliveryController::class,'DeleteDelivery'])->name('DeleteDelivery');
     });
+    Route::prefix('blog')->group(function () {
+        Route::get('index', [BlogController::class,'index'])->name('blog.index');
+        Route::get('create', [BlogController::class,'create']);
+        Route::post('store', [BlogController::class,'store']);
+        Route::get('show/{id}', [BlogController::class,'show']);
+        Route::get('edit/{id}', [BlogController::class,'edit']);
+        Route::post('update/{id}', [BlogController::class,'update']);
+        Route::get('delete/{id}',[BlogController::class,'destroy']);
+    });
+
+    Route::prefix('statics')->group(function () {
+        Route::get('inventory', [AdminController::class,'inventoryStatistics'])->name('statics.inventory');
+        Route::get('inventory/cateItems/{id}', [AdminController::class,'inventoryByCate'])->name('inventoryByCate');
+        Route::get('inventory/products/{id}', [AdminController::class,'inventoryByPro'])->name('inventoryByPro');
+
+        Route::get('revenue', [AdminController::class,'revenue'])->name('revenue');
+        Route::get('revenue-by-week', [AdminController::class,'revenueByWeek'])->name('revenueByWeek');
+        Route::get('revenue-by-month', [AdminController::class,'revenueByMonth'])->name('revenueByMonth');
+        Route::get('revenue-by-day', [AdminController::class,'revenueByDay'])->name('revenueByDay');
+
+    });
+   
 
 });
+
+Route::get('blogs',[BlogClientController::class,'index']);
+Route::get('blogs/details/{id}',[BlogClientController::class,'show']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

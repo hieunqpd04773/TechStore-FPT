@@ -15,7 +15,7 @@
       <p class="divider-text">
             <span class="bg-light">hoặc</span>
         </p>
-    <form method="POST" action="{{ route('register') }}" id ="form-register" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('register') }}" id ="formRegister" enctype="multipart/form-data">
             @csrf
       <div class="form-group input-group">
         <div class="input-group-prepend">
@@ -78,11 +78,10 @@
     </form>
     </article>
     </div> <!-- card.// -->
-    
     </div> 
     <!--container end.//-->
-    </main>
 </section>
+</main>
 
 
 <script>
@@ -254,23 +253,24 @@ Validator.isAvatar = function (selector) {
   }
 }
 
-   Validator({
-    form: '#form-register',
-    errorSelector: '.form-message',
-    rules: [
-      Validator.isRequired('.fullname'),
-      Validator.formEmail('.email'),
-      Validator.isEmail('.email'),
-      Validator.isPassword('.password'),
-      Validator.minLength('.password', 6),
-      Validator.setMess('.password_confirmation'),
-      Validator.isComfirmed('.password_confirmation', function() {
-                return document.querySelector('#form-register .password').value
-              }, 'Mật khẩu nhập lại không chính xác'),
-      Validator.isAddress('.address', 'Vui lòng nhập địa chỉ'),
-      Validator.isPhone('.myPhone',10),
-      Validator.isAvatar('.avatar')
-    ],
-  })
+Validator({
+  form: '#formRegister',
+  errorSelector: '.form-message',
+  rules: [
+    Validator.isRequired('.fullname'),
+    Validator.formEmail('.email'),
+    Validator.isEmail('.email'),
+    Validator.isPassword('.password'),
+    Validator.minLength('.password', 6),
+    Validator.setMess('.password_confirmation'),
+    Validator.isComfirmed('.password_confirmation', function() {
+              return document.querySelector('#form-register .password').value
+            }, 'Mật khẩu nhập lại không chính xác'),
+    Validator.isAddress('.address', 'Vui lòng nhập địa chỉ'),
+    Validator.isPhone('.myPhone',10),
+    Validator.isAvatar('.avatar')
+  ],
+})
+ 
 </script>
 @endsection

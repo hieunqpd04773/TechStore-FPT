@@ -12,7 +12,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">Liên hệ chúng tôi.</h2>
+          <h2 class="contact-title">.</h2>
         </div>
         <div class="col-lg-8 mb-4 mb-lg-0">
           <form class="form-contact contact_form" action="{{route('editContact')}}" method="POST" id="contactForm" >

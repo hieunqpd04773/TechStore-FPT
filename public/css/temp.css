@@ -215,9 +215,8 @@
 
 /* Slider */
 .carousel-item img{
-    /* height: 90vh; */
-    /* width: 100%; */
-    object-fit: cover;
+        height: 450px;
+        object-fit: cover;
 }
 
 .navbar-right .nav-item{
@@ -288,8 +287,111 @@
     margin-top: -6px;
     right: 8px;
 }
+
 .list-pro{
     align-items: stretch !important;
-}.list-pro .col-md-6{
+}
+
+.list-pro .col-md-6{
     padding-bottom: 50px;
+}
+
+.cart_area {
+    padding-top: 26px;
+}
+
+/* Don hang */
+.table thead tr{
+    background-color: #41964b;
+}
+
+.table thead tr th {
+    color: #fff;
+}
+
+.cart_inner .table tbody tr .processing,
+.cart_inner .table tbody tr .confirmed,
+.cart_inner .table tbody tr .progress,
+.cart_inner .table tbody tr .paid,
+.cart_inner .table tbody tr .cancelled {
+    padding: 5px; 
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    width: 109px;
+    height: 35px;
+    font-size: 14px;
+}
+
+.cart_inner .table tbody tr .processing{
+    background-color: #ffc100;
+}
+
+.cart_inner .table tbody tr .confirmed{
+    background-color: #686868;
+    padding: 5px; 
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+}
+
+.cart_inner .table tbody tr .progress{
+    background-color: #4d83ff;
+    height: 35px;
+    font-size: 14px;
+}
+
+.cart_inner .table tbody tr .paid{
+    background-color: #71c016;
+}
+
+.cart_inner .table tbody tr .cancelled{
+    background-color: #ff4747;
+}
+
+.genric-btn.default-border:hover {
+    color: #08ca6b;
+    background-color: #f6f6f6;
+    border: 1px solid transparent;
+}
+
+.table-responsive {
+    box-shadow: 0 0 8px #cccccc;
+    border-radius: 0.4em;
+}
+
+.pay{
+    margin: 30px;
+}
+
+.pay h4{
+    font-size: 14px;
+    color: #fff;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.payment-png{
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+}
+
+/* chi tiet sp */
+
+.s_product_img .carousel .carousel-indicators {
+    margin: 0px;
+    right: 20px;
+    width: auto;
+    left: auto;
+    bottom: 30px;
+    width: 450px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+.active {
+    color: #c0baba;
 }

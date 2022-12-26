@@ -95,7 +95,7 @@
                   <p class="card-title">Thống kê kho hàng</p>
                   <div id="chart_div"></div>
                   @foreach ($chartPro as $pro)
-                      <p>{{$pro[0]}}: {{$pro[1]}} sản phẩm</p>
+                      <p><b>{{$pro[0]}}:</b> {{$pro[1]}} sản phẩm</p>
                   @endforeach
                 </div>
               </div>
@@ -103,8 +103,45 @@
             <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Total sales</p>
-                  <div id="curve_chart" style="width: 700px; height: 500px"></div>
+                  <p class="card-title">Sản phẩm bán ra</p>
+                  <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>
+                            Top
+                          </th>
+                          <th>
+                            Sản phẩm
+                          </th>
+                          <th>
+                            Số lượng
+                          </th>
+                          <th>
+                            Doanh thu
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($higest_resolved as $key => $item)
+                        <tr>
+                          <td>
+                            {{$key +1}}
+                          </td>
+                          <td>
+                            {{$item->product_name}}
+                          </td>
+                          <td>
+                            {{$item->number_total}}
+                          </td>
+                          <td>
+                            {{number_format($item->number_total*$item->price, 0, '.', '.')}} VNĐ
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
               </div>
             </div>
           </div>
@@ -274,4 +311,25 @@
         chart.draw(data, options);
       }
     </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.order-status').change(function (e) { 
+        e.preventDefault();
+         status=$(this).find(':selected').val();
+         order_id=$(this).attr('data-order_id')
+         $.ajax({
+          url: '{{route('orderUpdate')}}',
+            method: 'post',
+            data:{
+              _token: "{{ csrf_token() }}",
+              order_id:order_id,
+              status: status
+            },
+            success:function(data){
+              window.location.reload();
+            }
+         })
+      });
+     })
+  </script>
 @endsection

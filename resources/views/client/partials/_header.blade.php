@@ -13,11 +13,6 @@
                 <div class="float-right">
                     <ul class="right_side">
                     <li>
-                        <a href="cart.html">
-                        gift card
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{Route('myOrders')}}">
                         Đơn Hàng
                         </a>
@@ -78,7 +73,10 @@
                             @endforeach
                         </ul>
                         @endforeach
+                        <li class="nav-item submenu dropdown">
+                        <a href="{{url('blogs')}}" class="nav-link dropdown-toggle">Tin Tức</a>
                     </ul>
+                    
                     </div>
     
                 <div class="col-lg-5 pr-0">
@@ -171,6 +169,7 @@
                                     </form>                        
                                 </div>
                               <div class="modal-footer">
+                                <a href="{{route('password.request')}}">Quên mật khẩu?</a>
                                 <p class="m-0">Bạn chưa có tài khoản ? <a href="{{Route('signup')}}"  >Đăng ký</a></p>
                                 
                             </div>
@@ -185,7 +184,7 @@
                 @if (Auth::check())
                     <li class="nav-item">
                         @php
-                        $wishlistcount = (App\Models\Wishlist::count());
+                        $wishlistcount = (App\Models\Wishlist::where('user_id',Auth::user()->id)->count());
                         @endphp
                         <a href="{{route('listWish')}}" class="icons" style="height: 50%">
                             <i class="ti-heart" aria-hidden="true">

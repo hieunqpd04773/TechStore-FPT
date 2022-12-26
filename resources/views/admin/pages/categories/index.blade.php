@@ -61,24 +61,14 @@
                           <a href="{{route('getCateItems',$cate->id)}}">{{$cate->name}}</a>
                         </td>
                         <td>
-                          <?php 
-                            $a = App\Models\Products::where('cate_id','=',$cate->id)->select('id')->get();
-                            $count = count($a);
-                            $theoCte = (($count/$coutAllPro) * 100);
-                          ?>
-                          <div class="ldBar"
-                            style="width:100%;height:60px",
-                            data-stroke="data:ldbar/res,gradient(0,1,#9df,#9fd,#df9,#fd9)",
-                            data-path="M10 20Q20 15 30 20Q40 25 50 20Q60 15 70 20Q80 25 90 20",
-                            data-value="{{$theoCte}}">
-                          </div>
+                          {{count($cate->Products)}}
                           <br>
                         </td>
                           
 
                         <td style="width: 15%">
-                            <a href="{{route('loadEditCate',$cate->id)}}"><button type="button" class="btn btn-primary">Sửa</button></a>
-                            <a href="{{route('deleteCate',$cate->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger">Xóa</button></a>
+                            <a href="{{route('loadEditCate',$cate->id)}}"><button type="button" class="btn btn-primary"><i class="mdi mdi-wrench"></i></button></a>
+                            <a href="{{route('deleteCate',$cate->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger"><i class="mdi mdi-delete"></i></button></a>
                         </td>
 
                       </tr>
@@ -95,8 +85,6 @@
 </div>
 
 <script>
-    
-
 function Validator(options){
     var formElement = document.querySelector(options.form);
     var selectorRules = {}
@@ -109,7 +97,7 @@ function validate(inputElement, rule) {
       //
         var rules = selectorRules[rule.selector]
         
-        for(var i = 0; i < rules.length; ++i){
+        for(var i = 0; i <script rules.length; ++i){
           errorMessage = rules[i](inputElement.value)
           if (errorMessage) break;
         }

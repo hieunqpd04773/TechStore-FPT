@@ -6,9 +6,8 @@
               <h2>Danh Mục Sản Phẩm</h2>
             </div>
             <div class="page_link">
-              <a href="index.html">Home</a>
-              <a href="category.html">Shop</a>
-              <a href="category.html">Women Fashion</a>
+              <a href="{{Route('index')}}">Trang chủ</a>
+              <a href="#">Danh mục</a>
             </div>
           </div>
         </div>

@@ -59,13 +59,11 @@
                           {{$ct->name}}
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="20"></div>
-                          </div>
+                          {{count($ct->Products)}}
                         </td>
                         <td style="width: 15%">
-                            <a href="{{route('loadEditCateItem',$ct->id)}}"><button type="button" class="btn btn-primary">Sửa</button></a>
-                            <a href="{{route('deleteCateItem',$ct->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger">Xóa</button></a>
+                            <a href="{{route('loadEditCateItem',$ct->id)}}"><button type="button" class="btn btn-primary"><i class="mdi mdi-wrench"></i></button></a>
+                            <a href="{{route('deleteCateItem',$ct->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger"><i class="mdi mdi-delete"></i></button></a>
                         </td>
                       </tr>
                       @endforeach

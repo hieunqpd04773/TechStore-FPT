@@ -51,7 +51,7 @@
             <p>Giao hàng:</p><span>{{ number_format($order->Delivery->value, 0, '.', '.');}} VNĐ</span>
           </div>
           <div class="info-user-content">
-            <p>Giảm giá</p><span>0 vnđ</span>
+            <p>Giảm giá</p><span>{{ number_format($order->discount, 0, '.', '.');}} VNĐ</span>
           </div>
           <div class="info-user-content ipt">
             <p>Tổng tiền</p><span>{{ number_format($order->total, 0, '.', '.');}} VNĐ</span>

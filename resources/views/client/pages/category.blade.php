@@ -63,9 +63,9 @@
                         <h4>{{$pro->name}}</h4>
                       </a>
                       <div class="mt-3">
-                        <span class="mr-4">{{$pro->price - (($pro->price*$pro->discount)/100)}} đ</span>
+                        <span class="mr-4">{{number_format($pro->price - (($pro->price*$pro->discount)/100), 0, '.', '.')}} đ</span>
                         @if($pro->discount > 0)
-                          <del>{{$pro->price}} đ</del>
+                          <del>{{ number_format($pro->price, 0, '.', '.')}} đ</del>
                         @endif
                       </div>
                     </div>
@@ -76,7 +76,6 @@
                         </div>
                     </div>
                     @endif 
-
                     @if($pro->hot == 1)
                     <div class="product-top">
                         <span class="product-top--text">HOT</span>

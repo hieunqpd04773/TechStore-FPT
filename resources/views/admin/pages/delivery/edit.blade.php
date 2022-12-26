@@ -14,9 +14,9 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <input type="hidden" name="id" class="form-control value" id="exampleInputName1" placeholder="Nhập cước phí"  value="{{$allDeli->id}}" >
+                        <!-- <input type="hidden" name="id" class="form-control postage" id="exampleInputName1" placeholder="Nhập cước phí"  value="{{$allDeli->id}}" > -->
                         <label for="exampleInputName1">Cước phí</label>
-                        <input type="text" name="value" class="form-control value" id="exampleInputName1" placeholder="Nhập cước phí"  value="{{$allDeli->value}}" >
+                        <input type="text" name="value" class="form-control postage" id="exampleInputName1" placeholder="Nhập cước phí"  value="{{$allDeli->value}}" >
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
@@ -145,15 +145,6 @@ function validate(inputElement, rule) {
     }
 }
 
-
-Validator.isName= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui nhập chi nhánh'
-      }
-    }
-}
 Validator.isValue= function(selector) {
   return {
       selector,
@@ -163,12 +154,21 @@ Validator.isValue= function(selector) {
     }
 }
 
+Validator.isName= function(selector) {
+  return {
+      selector,
+      test(value) {
+        return value ? undefined : 'Vui nhập phương thức vận chuyển'
+      }
+    }
+  }
+
    Validator({
     form: '#form-disc',
     errorSelector: '.form-message',
     rules: [
+      Validator.isValue('.postage'),
       Validator.isName('.name'),
-      Validator.isValue('.value'),
     ],
   })
 </script>

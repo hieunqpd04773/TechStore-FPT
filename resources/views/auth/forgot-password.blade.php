@@ -27,11 +27,10 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <x-primary-button class="btn btn-lg btn-block btn-form">
+                        {{-- <x-primary-button class="btn btn-lg btn-block btn-form">
                             {{ __('Gửi liên kết qua email') }}
-                        </x-primary-button>
-<!--                         <input name="recover-submit" class="btn btn-lg btn-block btn-form" value="Đặt lại mật khẩu của bạn" type="submit">
- -->                      </div>
+                        </x-primary-button> --}}
+                      <input name="recover-submit" class="btn btn-lg btn-block btn-form" value="Đặt lại mật khẩu của bạn" type="submit">                    </div>
                       
                       <input type="hidden" class="hide" name="token" id="token" value=""> 
                     </form>

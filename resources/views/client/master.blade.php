@@ -65,6 +65,7 @@
   <script src="{{ URL::asset('js/mail-script.js')}}"></script>
   <script src="{{ URL::asset('js/theme.js')}}"></script>
   <script></script>
+  
 </body>
 
 </html>
