@@ -24,7 +24,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputName1">Số tiền giảm giá</label>
-                        <input type="number" name="dicount" value="{{$allDisc->dicount}}"  class="form-control dicount" id="exampleInputName1" placeholder="Nhập số tiền giảm giá">
+                        <input type="number" name="dicount" value="{{$allDisc->dicount}}"  class="form-control discount" id="exampleInputName1" placeholder="Nhập số tiền giảm giá">
                         <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                     </div>
                 </div>
@@ -175,23 +175,16 @@
     return {
         selector,
         test(value) {
-            return value ? undefined : 'Vui nhập mã giảm giá'
+            return value ? undefined : 'Vui lòng nhập mã giảm giá'
         }
         }
     }
-    Validator.isPro_id= function(selector) {
-    return {
-        selector,
-        test(value) {
-            return value ? undefined : 'Vui lòng chọn sản phẩm'
-        }
-        }
-    }
+   
     Validator.isDicount= function(selector) {
     return {
         selector,
         test(value) {
-            return value ? undefined : 'Vui lòng nhập só tiền giảm giá'
+            return value ? undefined : 'Vui lòng nhập số tiền giảm giá'
         }
         }
     }
@@ -221,26 +214,30 @@
     }
     }
 
-    Validator.isType = function (selector) {
-    return {
-        selector,
-        test(value) {
-        return value ? undefined : 'Vui lòng chọn khoảng áp dụng'
-        }
+Validator.timeRes = function(selector, getDate) {
+  return {
+    selector,
+    test(value) {
+      var firstDate = new Date(value);
+      var lastDate = new Date(getDate())
+      return firstDate.getTime() > lastDate.getTime()  ? undefined : 'Vui lòng chọn ngày kết thúc lớn hơn ngày bắt đầu'
     }
-    }
+  }
+}
+    
 
     Validator({
         form: '#form-disc',
         errorSelector: '.form-message',
         rules: [
         Validator.isCode('.code'),
-        Validator.isPro_id('.pro_id'),
-        Validator.isDicount('.dicount'),
+        Validator.isDicount('.discount'),
         Validator.isQuantity('.quantity'),
         Validator.isStart_time('.start_time'),
+        Validator.timeRes('.end_time', function getDate(){
+        return document.querySelector('#form-disc .start_time').value
+      }),
         Validator.isEnd_time('.end_time'),
-        Validator.isType('.type')
         ],
     })
 </script>

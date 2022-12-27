@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','Danh mục')
+@section('title','Liên hệ')
 @section('content')
 <!--================Home Banner Area =================-->
 <section class="section_gap">

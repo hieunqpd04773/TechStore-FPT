@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','TechStore')
+@section('title','Tin tức')
 @section('content')
 
 <section class="banner_area">

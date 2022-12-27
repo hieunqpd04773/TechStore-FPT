@@ -147,12 +147,9 @@ function validate(inputElement, rule) {
         }else{
           selectorRules[rule.selector] = [rule.test]
         }
-
         var inputElement = formElement.querySelector(rule.selector)
-        
         var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
         var input =inputElement.parentElement.querySelector('.form-control')
-        console.log(input)
 
           if(inputElement) {
             inputElement.onblur = function() {
@@ -176,19 +173,19 @@ Validator.isCode= function(selector) {
       }
     }
 }
-Validator.isPro_id= function(selector) {
-  return {
-      selector,
-      test(value) {
-        return value ? undefined : 'Vui lòng chọn sản phẩm'
-      }
-    }
-}
 Validator.isDicount= function(selector) {
   return {
       selector,
       test(value) {
         return value ? undefined : 'Vui lòng nhập só tiền giảm giá'
+      }
+    }
+}
+Validator.isQuantity= function(selector) {
+  return {
+      selector,
+      test(value) {
+        return value ? undefined : 'Vui lòng nhập số lượng'
       }
     }
 }
@@ -210,14 +207,6 @@ Validator.isEnd_time = function (selector) {
   }
 }
 
-Validator.isType = function (selector) {
-  return {
-    selector,
-    test(value) {
-      return value ? undefined : 'Vui lòng chọn khoảng áp dụng'
-    }
-  }
-}
 Validator.timeRes = function(selector, getDate) {
   return {
     selector,
@@ -228,7 +217,6 @@ Validator.timeRes = function(selector, getDate) {
     }
   }
 }
-
    Validator({
     form: '#form-disc',
     errorSelector: '.form-message',
@@ -238,10 +226,11 @@ Validator.timeRes = function(selector, getDate) {
       Validator.isStart_time('.start_time'),
       Validator.isEnd_time('.end_time'),
       Validator.timeRes('.end_time', function getDate(){
-              return document.querySelector('#form-disc .start_time').value
-            }),
-            Validator.isType('.type')
+        return document.querySelector('#form-disc .start_time').value
+      }),
+      Validator.isQuantity('.quantity'),
     ],
   })
+
 </script>
 @endsection
